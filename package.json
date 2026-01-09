@@ -1,0 +1,19 @@
+{
+  "name": "claude-code-telegram-bridge",
+  "version": "2.0.0",
+  "description": "Telegram MCP integration for Claude Code",
+  "type": "module",
+  "main": "mcp-server/server.js",
+  "scripts": {
+    "install-telegram": "node install.js",
+    "status": "node install.js --status"
+  },
+  "dependencies": {
+    "node-telegram-bot-api": "^0.66.0",
+    "ws": "^8.18.0",
+    "dotenv": "^16.4.5"
+  },
+  "keywords": ["telegram", "claude-code", "mcp", "automation"],
+  "author": "Claude Code User",
+  "license": "MIT"
+}

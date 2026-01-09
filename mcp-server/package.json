@@ -1,0 +1,14 @@
+{
+  "name": "telegram-mcp-server",
+  "version": "1.0.0",
+  "description": "MCP server for Telegram integration with Claude Code",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0",
+    "node-telegram-bot-api": "^0.66.0"
+  }
+}

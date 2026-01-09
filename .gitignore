@@ -1,0 +1,27 @@
+# Dependencies
+node_modules/
+
+# Sensitive configuration (contains API keys)
+.mcp.json
+
+# Local Claude settings
+.claude/settings.local.json
+
+# Queue files
+queue.json
+
+# OS files
+.DS_Store
+Thumbs.db
+nul
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.env

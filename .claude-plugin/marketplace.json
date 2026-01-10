@@ -1,0 +1,23 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "telegram-integration",
+  "description": "Bidirectional Telegram messaging for Claude Code with remote permission control",
+  "owner": {
+    "name": "remingtonspaz",
+    "email": ""
+  },
+  "plugins": [
+    {
+      "name": "telegram",
+      "description": "Bidirectional Telegram messaging for Claude Code. Send messages, images, and receive commands remotely. Includes auto-enter and remote permission control via Telegram.",
+      "version": "1.0.0",
+      "author": {
+        "name": "Satrio"
+      },
+      "source": ".",
+      "category": "productivity",
+      "tags": ["telegram", "messaging", "remote-control", "automation"],
+      "homepage": "https://github.com/remingtonspaz/claude-code-telegram"
+    }
+  ]
+}

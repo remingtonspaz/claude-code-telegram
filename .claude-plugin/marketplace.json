@@ -14,7 +14,10 @@
       "author": {
         "name": "Satrio"
       },
-      "source": ".",
+      "source": {
+        "source": "url",
+        "url": "https://github.com/remingtonspaz/claude-code-telegram.git"
+      },
       "category": "productivity",
       "tags": ["telegram", "messaging", "remote-control", "automation"],
       "homepage": "https://github.com/remingtonspaz/claude-code-telegram"

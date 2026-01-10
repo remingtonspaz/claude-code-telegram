@@ -196,15 +196,15 @@ async function install() {
     log('MCP server dependencies already installed', 'success');
   }
 
-  // Verify MCP config
+  // Check MCP config (optional - credentials can be in project .mcp.json)
   if (!checkMcpConfig()) {
-    log('.mcp.json not found - please create it with your Telegram credentials', 'error');
-    console.log('\nExample .mcp.json:');
+    log('No .mcp.json in plugin directory (this is OK for plugin installs)', 'info');
+    console.log('\nAdd the MCP server to your PROJECT\'s .mcp.json:');
     console.log(JSON.stringify({
       mcpServers: {
         telegram: {
           command: 'node',
-          args: ['./mcp-server/server.js'],
+          args: [path.join(__dirname, 'mcp-server', 'server.js')],
           env: {
             TELEGRAM_BOT_TOKEN: 'YOUR_BOT_TOKEN',
             TELEGRAM_USER_ID: 'YOUR_USER_ID',
@@ -212,9 +212,9 @@ async function install() {
         },
       },
     }, null, 2));
-    process.exit(1);
+  } else {
+    log('.mcp.json configuration found', 'success');
   }
-  log('.mcp.json configuration found', 'success');
 
   // Verify hook config
   if (!checkHookConfig()) {

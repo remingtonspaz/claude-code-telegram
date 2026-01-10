@@ -1,28 +1,7 @@
 {
   "name": "telegram",
-  "displayName": "Telegram Integration",
   "description": "Bidirectional Telegram messaging for Claude Code with remote permission control",
-  "version": "1.0.0",
-  "author": "Satrio",
-  "repository": "https://github.com/remingtonspaz/claude-code-telegram",
-  "license": "MIT",
-  "platforms": ["win32"],
-  "components": {
-    "mcp": true,
-    "hooks": true,
-    "skills": true
-  },
-  "hooks": {
-    "UserPromptSubmit": "hooks/telegram-context.js",
-    "PermissionRequest": "hooks/permission-telegram.cjs",
-    "SessionStart": "hooks/session-start.js"
-  },
-  "skills": ["telegram"],
-  "scripts": {
-    "postInstall": "node scripts/post-install.js"
-  },
-  "setup": {
-    "required": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_USER_ID"],
-    "instructions": "Run the setup wizard or manually configure .mcp.json with your Telegram bot token and user ID"
+  "author": {
+    "name": "Satrio"
   }
 }

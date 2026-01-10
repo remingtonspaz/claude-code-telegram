@@ -9,6 +9,11 @@ import TelegramBot from 'node-telegram-bot-api';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
+import { fileURLToPath } from 'url';
+import { spawn, execSync } from 'child_process';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Configuration from environment
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
@@ -43,6 +48,103 @@ const bot = new TelegramBot(TELEGRAM_BOT_TOKEN, { polling: true });
 // Log to stderr (stdout is reserved for MCP protocol)
 function log(message) {
   console.error(`[telegram-mcp] ${message}`);
+}
+
+// Find the Claude Code window PID by walking up process tree
+function findClaudeWindowPid() {
+  if (os.platform() !== 'win32') {
+    log('Auto-watcher only supported on Windows');
+    return null;
+  }
+
+  try {
+    let currentPid = process.pid;
+
+    // Walk up the process tree looking for cmd.exe
+    for (let i = 0; i < 10; i++) { // Max 10 levels to prevent infinite loop
+      const result = execSync(
+        `wmic process where ProcessId=${currentPid} get ParentProcessId /format:value`,
+        { encoding: 'utf-8', windowsHide: true }
+      );
+
+      const match = result.match(/ParentProcessId=(\d+)/);
+      if (!match) break;
+
+      const parentPid = parseInt(match[1], 10);
+      if (parentPid <= 0) break;
+
+      // Check if parent is cmd.exe
+      try {
+        const nameResult = execSync(
+          `wmic process where ProcessId=${parentPid} get Name /format:value`,
+          { encoding: 'utf-8', windowsHide: true }
+        );
+
+        if (nameResult.includes('cmd.exe')) {
+          log(`Found Claude window: cmd.exe (PID: ${parentPid})`);
+          return parentPid;
+        }
+      } catch (e) {
+        // Process might not exist anymore
+      }
+
+      currentPid = parentPid;
+    }
+
+    log('Could not find cmd.exe ancestor');
+    return null;
+  } catch (e) {
+    log(`Error finding Claude window PID: ${e.message}`);
+    return null;
+  }
+}
+
+// Spawn the enter watcher script with target PID
+function spawnEnterWatcher(targetPid) {
+  const watcherScript = path.join(__dirname, '..', 'hooks', 'enter-watcher.ps1');
+
+  log(`Watcher script path: ${watcherScript}`);
+  if (!fs.existsSync(watcherScript)) {
+    log(`ERROR: Watcher script not found: ${watcherScript}`);
+    return;
+  }
+
+  const args = [
+    '-ExecutionPolicy', 'Bypass',
+    '-WindowStyle', 'Hidden',
+    '-File', watcherScript
+  ];
+
+  if (targetPid) {
+    args.push('-TargetPid', targetPid.toString());
+  }
+
+  log(`Spawning: powershell ${args.join(' ')}`);
+
+  try {
+    const watcher = spawn('powershell', args, {
+      detached: true,
+      stdio: 'ignore',
+      windowsHide: true
+    });
+
+    watcher.on('error', (err) => {
+      log(`Watcher spawn error: ${err.message}`);
+    });
+
+    watcher.unref();
+    log(`Spawned enter watcher (PID: ${watcher.pid}, mode: ${targetPid || 'search'})`);
+  } catch (err) {
+    log(`ERROR spawning watcher: ${err.message}`);
+  }
+}
+
+// Auto-start the watcher on server startup
+function initializeWatcher() {
+  log('Starting watcher initialization...');
+  const claudePid = findClaudeWindowPid();
+  log(`Found Claude PID: ${claudePid}`);
+  spawnEnterWatcher(claudePid);
 }
 
 // Queue incoming messages from Telegram
@@ -81,6 +183,9 @@ bot.on('message', (msg) => {
   // Write updated queue
   fs.writeFileSync(QUEUE_FILE, JSON.stringify(queue, null, 2));
   log(`Queued message from ${messageData.from}: ${messageData.text.substring(0, 50)}...`);
+
+  // Trigger Enter keystroke to wake up Claude Code
+  triggerEnterKey();
 });
 
 // Handle polling errors
@@ -89,6 +194,22 @@ bot.on('polling_error', (error) => {
 });
 
 log('Telegram bot listener started');
+
+// Trigger file for the watcher script
+const TRIGGER_FILE = path.join(QUEUE_DIR, 'trigger-enter');
+
+// Trigger Enter keystroke by writing a trigger file (watcher script picks this up)
+function triggerEnterKey() {
+  // Small delay to ensure message is queued before triggering
+  setTimeout(() => {
+    try {
+      fs.writeFileSync(TRIGGER_FILE, Date.now().toString());
+      log('Wrote trigger file for Enter keystroke');
+    } catch (e) {
+      log(`Failed to write trigger file: ${e.message}`);
+    }
+  }, 500);
+}
 
 // Create MCP server
 const server = new Server(
@@ -263,6 +384,9 @@ async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
   log('MCP server connected via stdio');
+
+  // Auto-start the enter watcher
+  initializeWatcher();
 }
 
 main().catch((error) => {

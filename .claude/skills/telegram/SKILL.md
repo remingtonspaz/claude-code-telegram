@@ -7,22 +7,33 @@ description: Set up, check status, or use the Telegram integration for Claude Co
 
 This skill enables bidirectional communication with Telegram.
 
+---
+
+**Note**: If your prompt is just `.` - that means a Telegram message triggered the auto-enter. Check the `[Telegram Messages Received]` section in your context for the actual message.
+
+---
+
 ## IMPORTANT: Always Forward to Telegram
 
-**You MUST use the `telegram_send` tool to forward your responses to Telegram.** The user may be monitoring this session remotely via Telegram and needs to see what you're doing.
+**You MUST use the `telegram_send` tool to forward your responses to Telegram.** The user monitors this session remotely via Telegram and needs to see what you're doing.
 
-After completing any task or responding to the user:
-1. Summarize what you did or said
-2. Call `telegram_send` with a concise summary
+### Communication Pattern
+1. **First**: Send an initial acknowledgment/plan when you receive a message
+2. **During**: Send milestone updates for important progress (found the issue, making changes, tests passing, etc.)
+3. **Finally**: Send a summary of what was completed
 
-Example workflow:
+### Example Flow
 ```
-User asks: "Fix the bug in auth.js"
-You: Fix the bug, then call telegram_send with:
-  "Fixed auth.js: Corrected token validation logic on line 45. The issue was an expired token check that wasn't handling edge cases."
+User sends Telegram message: "Fix the bug in auth.js"
+
+Claude sends to Telegram: "Looking at auth.js to fix the bug..."
+Claude reads files, investigates
+Claude sends to Telegram: "Found it - the token validation is missing a null check"
+Claude makes edits
+Claude sends to Telegram: "Fixed! Added null check on line 42. Ready for testing."
 ```
 
-For longer responses, send a meaningful summary rather than the entire response. Keep Telegram messages concise but informative.
+Keep Telegram messages concise but informative.
 
 ## Quick Status Check
 

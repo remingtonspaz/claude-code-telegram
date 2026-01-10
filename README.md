@@ -12,20 +12,22 @@ Bidirectional Telegram messaging for Claude Code with remote permission control.
 
 ## Requirements
 
-- Windows (macOS/Linux support coming soon)
+- **Windows only** (macOS/Linux support planned)
 - Node.js 18+
 - Telegram Bot Token (from [@BotFather](https://t.me/botfather))
 - Your Telegram User ID
 
 ## Installation
 
-### As a Claude Code Plugin
+### Quick Install (Recommended)
 
-```bash
-/plugin install telegram
-```
-
-Then configure your credentials (see Setup below).
+1. Clone or download this repository into your project directory
+2. Run the installer:
+   ```bash
+   node install.js
+   ```
+3. Configure your Telegram credentials (see Setup below)
+4. Restart Claude Code
 
 ### Manual Installation
 
@@ -34,8 +36,13 @@ Then configure your credentials (see Setup below).
    ```bash
    cd mcp-server && npm install
    ```
-3. Copy `.mcp.json.template` to `.mcp.json` and add your credentials
-4. Restart Claude Code
+3. Create the queue directory:
+   ```bash
+   mkdir ~/.claude-telegram
+   ```
+4. Copy `.mcp.json.template` to `.mcp.json` and add your credentials
+5. Configure hooks in `.claude/settings.local.json` (see Hooks Configuration below)
+6. Restart Claude Code
 
 ## Setup
 
@@ -82,17 +89,68 @@ Message your bot on Telegram to start the conversation. The bot can only message
 
 Restart Claude Code to load the MCP server and hooks.
 
+### 6. Verify Installation
+
+Run the status check to verify everything is configured:
+```bash
+node install.js --status
+```
+
+Or check `/mcp` in Claude Code to see if the telegram server is connected.
+
+## Hooks Configuration
+
+The hooks should be configured automatically if you place this plugin in your project. If not, add the following to `.claude/settings.local.json`:
+
+```json
+{
+  "hooks": {
+    "UserPromptSubmit": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node path/to/hooks/telegram-context.js"
+          }
+        ]
+      }
+    ],
+    "PermissionRequest": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node path/to/hooks/permission-telegram.cjs"
+          }
+        ]
+      }
+    ],
+    "SessionStart": [
+      {
+        "matcher": "",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node path/to/hooks/session-start.js"
+          }
+        ]
+      }
+    ]
+  }
+}
+```
+
 ## Usage
 
 ### Sending Messages
 
 Claude can send messages to you using the MCP tools:
 
-```
-telegram_send - Send a text message
-telegram_send_image - Send an image file
-telegram_check_messages - Check for pending messages
-```
+- `telegram_send` - Send a text message
+- `telegram_send_image` - Send an image file
+- `telegram_check_messages` - Check for pending messages
 
 ### Receiving Messages
 
@@ -120,24 +178,30 @@ When Claude needs permission for a tool:
    - `a` or `always` - Always allow
 3. The watcher sends your response to Claude
 
-## Plugin Structure
+## Project Structure
 
 ```
-telegram/
+claude-code-telegram/
 ├── .claude-plugin/
-│   └── plugin.json           # Plugin metadata
+│   └── plugin.json              # Plugin metadata
 ├── hooks/
-│   ├── telegram-context.js   # Injects Telegram messages
-│   ├── permission-telegram.cjs # Permission notifications
-│   └── session-start.js      # Auto-spawns watcher
+│   ├── telegram-context.js      # Injects Telegram messages into prompts
+│   ├── permission-telegram.cjs  # Sends permission requests to Telegram
+│   └── session-start.js         # Auto-spawns watcher on session start
 ├── skills/
 │   └── telegram/
-│       └── SKILL.md          # Claude skill instructions
+│       └── SKILL.md             # Claude skill instructions
 ├── scripts/
-│   └── enter-watcher.ps1     # Keystroke automation
+│   ├── enter-watcher.ps1        # Keystroke automation (main watcher)
+│   ├── list-windows.ps1         # Helper to find Claude windows
+│   ├── send-enter.ps1           # Helper to send keystrokes
+│   └── post-install.js          # Post-install setup script
 ├── mcp-server/
-│   └── server.js             # MCP server with Telegram bot
-├── .mcp.json.template        # Credential template
+│   ├── server.js                # MCP server with Telegram bot
+│   └── package.json             # MCP server dependencies
+├── .mcp.json.template           # Credential template
+├── install.js                   # Installation script
+├── package.json                 # Root package.json
 └── README.md
 ```
 
@@ -158,7 +222,7 @@ telegram/
 
 1. Check `/mcp` in Claude Code
 2. Verify `.mcp.json` exists with valid credentials
-3. Ensure `mcp-server/node_modules` exists
+3. Ensure `mcp-server/node_modules` exists (run `cd mcp-server && npm install`)
 4. Restart Claude Code
 
 ### Messages not being received
@@ -175,9 +239,16 @@ telegram/
 
 ### Permission notifications not appearing
 
-1. Ensure PermissionRequest hook is configured
+1. Ensure PermissionRequest hook is configured in `.claude/settings.local.json`
 2. Check that the tool isn't already in the allow list
 3. Verify Telegram bot is connected
+
+### Check installation status
+
+Run the diagnostic command:
+```bash
+node install.js --status
+```
 
 ## Configuration Files
 

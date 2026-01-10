@@ -4,7 +4,7 @@
   "description": "Bidirectional Telegram messaging for Claude Code with remote permission control",
   "version": "1.0.0",
   "author": "Satrio",
-  "repository": "https://github.com/anthropics/claude-code-telegram",
+  "repository": "https://github.com/remingtonspaz/claude-code-telegram",
   "license": "MIT",
   "platforms": ["win32"],
   "components": {

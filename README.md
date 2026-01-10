@@ -19,7 +19,23 @@ Bidirectional Telegram messaging for Claude Code with remote permission control.
 
 ## Installation
 
-### Quick Install (Recommended)
+### As a Plugin (Recommended)
+
+1. Add the marketplace:
+   ```
+   /plugin marketplace add https://github.com/remingtonspaz/claude-code-telegram
+   ```
+
+2. Install the plugin:
+   ```
+   /plugin install telegram-integration:telegram
+   ```
+
+3. Set your Telegram credentials as environment variables (see Setup below)
+
+4. Restart Claude Code
+
+### From Source
 
 1. Clone or download this repository into your project directory
 2. Run the installer:
@@ -58,6 +74,28 @@ Bidirectional Telegram messaging for Claude Code with remote permission control.
 2. It will reply with your user ID (a number like `123456789`)
 
 ### 3. Configure Credentials
+
+#### For Plugin Installation
+
+Set environment variables in your shell profile (`.bashrc`, `.zshrc`, or Windows environment):
+
+```bash
+export TELEGRAM_BOT_TOKEN="your_bot_token_here"
+export TELEGRAM_USER_ID="your_user_id_here"
+```
+
+Or add them to your user-level Claude config at `~/.claude.json`:
+
+```json
+{
+  "env": {
+    "TELEGRAM_BOT_TOKEN": "your_bot_token_here",
+    "TELEGRAM_USER_ID": "your_user_id_here"
+  }
+}
+```
+
+#### For Source Installation
 
 Copy the template and edit with your credentials:
 

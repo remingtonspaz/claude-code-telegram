@@ -3,5 +3,15 @@
   "description": "Bidirectional Telegram messaging for Claude Code with remote permission control",
   "author": {
     "name": "Satrio"
+  },
+  "mcpServers": {
+    "telegram": {
+      "command": "node",
+      "args": ["${CLAUDE_PLUGIN_ROOT}/mcp-server/server.js"],
+      "env": {
+        "TELEGRAM_BOT_TOKEN": "${TELEGRAM_BOT_TOKEN}",
+        "TELEGRAM_USER_ID": "${TELEGRAM_USER_ID}"
+      }
+    }
   }
 }

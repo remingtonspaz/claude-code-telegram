@@ -17,15 +17,23 @@ const path = require('path');
 const os = require('os');
 
 // Paths
-const PROJECT_DIR = process.env.CLAUDE_PROJECT_DIR || path.join(__dirname, '..');
-const MCP_CONFIG_PATH = path.join(PROJECT_DIR, '.mcp.json');
 const TELEGRAM_DIR = path.join(os.homedir(), '.claude-telegram');
 const PENDING_PERMISSION_PATH = path.join(TELEGRAM_DIR, 'pending-permission.json');
 
-// Read Telegram credentials from .mcp.json
+// Read Telegram credentials from environment variables
 function getCredentials() {
+    const botToken = process.env.TELEGRAM_BOT_TOKEN;
+    const userId = process.env.TELEGRAM_USER_ID;
+
+    if (botToken && userId) {
+        return { botToken, userId };
+    }
+
+    // Fallback: try reading from .mcp.json in project directory
     try {
-        const config = JSON.parse(fs.readFileSync(MCP_CONFIG_PATH, 'utf8'));
+        const projectDir = process.env.CLAUDE_PROJECT_DIR || path.join(__dirname, '..');
+        const mcpConfigPath = path.join(projectDir, '.mcp.json');
+        const config = JSON.parse(fs.readFileSync(mcpConfigPath, 'utf8'));
         return {
             botToken: config.mcpServers?.telegram?.env?.TELEGRAM_BOT_TOKEN,
             userId: config.mcpServers?.telegram?.env?.TELEGRAM_USER_ID

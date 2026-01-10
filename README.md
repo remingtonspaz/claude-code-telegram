@@ -75,49 +75,28 @@ Bidirectional Telegram messaging for Claude Code with remote permission control.
 
 ### 3. Configure Credentials
 
-#### For Plugin Installation
+Add the MCP server to your project's `.mcp.json` with your credentials:
 
-Set environment variables in your shell profile (`.bashrc`, `.zshrc`, or Windows environment):
-
-```bash
-export TELEGRAM_BOT_TOKEN="your_bot_token_here"
-export TELEGRAM_USER_ID="your_user_id_here"
-```
-
-Or add them to your user-level Claude config at `~/.claude.json`:
-
-```json
-{
-  "env": {
-    "TELEGRAM_BOT_TOKEN": "your_bot_token_here",
-    "TELEGRAM_USER_ID": "your_user_id_here"
-  }
-}
-```
-
-#### For Source Installation
-
-Copy the template and edit with your credentials:
-
-```bash
-cp .mcp.json.template .mcp.json
-```
-
-Edit `.mcp.json`:
 ```json
 {
   "mcpServers": {
     "telegram": {
       "command": "node",
-      "args": ["./mcp-server/server.js"],
+      "args": ["/path/to/claude-code-telegram/mcp-server/server.js"],
       "env": {
-        "TELEGRAM_BOT_TOKEN": "YOUR_BOT_TOKEN_HERE",
-        "TELEGRAM_USER_ID": "YOUR_USER_ID_HERE"
+        "TELEGRAM_BOT_TOKEN": "your_bot_token_here",
+        "TELEGRAM_USER_ID": "your_user_id_here"
       }
     }
   }
 }
 ```
+
+Replace `/path/to/claude-code-telegram` with:
+- **Source install:** The path where you cloned the repo (e.g., `./claude-code-telegram`)
+- **Plugin install:** The plugin cache path (check `~/.claude/plugins/`)
+
+Each project can have its own `.mcp.json` with different Telegram credentials.
 
 ### 4. Start Your Bot
 

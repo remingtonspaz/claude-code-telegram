@@ -19,7 +19,7 @@ Bidirectional Telegram messaging for Claude Code with remote permission control.
 
 ## Installation
 
-### As a Plugin (Recommended)
+### As a Plugin
 
 1. Add the marketplace:
    ```
@@ -31,9 +31,16 @@ Bidirectional Telegram messaging for Claude Code with remote permission control.
    /plugin install telegram-integration:telegram
    ```
 
-3. Set your Telegram credentials as environment variables (see Setup below)
+3. Install MCP server dependencies:
+   ```bash
+   cd ~/.claude/plugins/marketplaces/telegram-integration/mcp-server
+   npm install
+   ```
+   On Windows: `cd %USERPROFILE%\.claude\plugins\marketplaces\telegram-integration\mcp-server`
 
-4. Restart Claude Code
+4. Configure credentials in your project (see Setup below)
+
+5. Restart Claude Code
 
 ### From Source
 

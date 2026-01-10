@@ -101,7 +101,7 @@ function findClaudeWindowPid() {
 
 // Spawn the enter watcher script with target PID
 function spawnEnterWatcher(targetPid) {
-  const watcherScript = path.join(__dirname, '..', 'hooks', 'enter-watcher.ps1');
+  const watcherScript = path.join(__dirname, '..', 'scripts', 'enter-watcher.ps1');
 
   log(`Watcher script path: ${watcherScript}`);
   if (!fs.existsSync(watcherScript)) {

@@ -73,12 +73,11 @@ Use the telegram_check_messages tool
 
 ## Installation
 
-If the integration isn't set up yet, run:
-```bash
-cd D:/Documents/ClaudeCodeRoot && node install.js
-```
+If the integration isn't set up yet:
 
-Then restart Claude Code to load the MCP server.
+1. Install the plugin: `/plugin install telegram`
+2. Configure credentials in `.mcp.json`
+3. Restart Claude Code to load the MCP server
 
 ## Troubleshooting
 

@@ -4,15 +4,106 @@
  *
  * This hook reads pending Telegram messages from the queue file
  * and injects them as additional context before each prompt is processed.
+ * Also spawns the enter-watcher if not already running (workaround for SessionStart hook not firing).
  */
 
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
+import { spawn, execSync } from 'child_process';
+import { fileURLToPath } from 'url';
 
-const QUEUE_FILE = path.join(os.homedir(), '.claude-telegram', 'queue.json');
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+const TELEGRAM_DIR = path.join(os.homedir(), '.claude-telegram');
+const QUEUE_FILE = path.join(TELEGRAM_DIR, 'queue.json');
+const WATCHER_PID_FILE = path.join(TELEGRAM_DIR, 'watcher.pid');
+
+// Check if watcher is already running
+function isWatcherRunning() {
+  if (!fs.existsSync(WATCHER_PID_FILE)) return false;
+
+  try {
+    const pid = parseInt(fs.readFileSync(WATCHER_PID_FILE, 'utf-8').trim(), 10);
+    if (isNaN(pid)) return false;
+
+    // Check if process exists (Windows)
+    if (os.platform() === 'win32') {
+      try {
+        execSync(`tasklist /FI "PID eq ${pid}" /NH`, { encoding: 'utf-8', windowsHide: true });
+        return true;
+      } catch {
+        return false;
+      }
+    }
+    return false;
+  } catch {
+    return false;
+  }
+}
+
+// Find Claude window PID
+function findClaudeWindowPid() {
+  if (os.platform() !== 'win32') return null;
+
+  try {
+    let currentPid = process.pid;
+    for (let i = 0; i < 10; i++) {
+      const result = execSync(
+        `wmic process where ProcessId=${currentPid} get ParentProcessId /format:value`,
+        { encoding: 'utf-8', windowsHide: true }
+      );
+      const match = result.match(/ParentProcessId=(\d+)/);
+      if (!match) break;
+
+      const parentPid = parseInt(match[1], 10);
+      if (parentPid <= 0) break;
+
+      try {
+        const nameResult = execSync(
+          `wmic process where ProcessId=${parentPid} get Name /format:value`,
+          { encoding: 'utf-8', windowsHide: true }
+        );
+        if (nameResult.includes('cmd.exe')) return parentPid;
+      } catch {}
+
+      currentPid = parentPid;
+    }
+  } catch {}
+  return null;
+}
+
+// Spawn watcher if not running
+function ensureWatcherRunning() {
+  if (isWatcherRunning()) return;
+
+  const watcherScript = path.join(__dirname, '..', 'scripts', 'enter-watcher.ps1');
+  if (!fs.existsSync(watcherScript)) return;
+
+  const targetPid = findClaudeWindowPid();
+  const args = ['-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', watcherScript];
+  if (targetPid) args.push('-TargetPid', targetPid.toString());
+
+  try {
+    const watcher = spawn('powershell', args, {
+      detached: true,
+      stdio: 'ignore',
+      windowsHide: true
+    });
+
+    // Save PID for future checks
+    if (!fs.existsSync(TELEGRAM_DIR)) fs.mkdirSync(TELEGRAM_DIR, { recursive: true });
+    fs.writeFileSync(WATCHER_PID_FILE, watcher.pid.toString());
+
+    watcher.unref();
+  } catch {}
+}
 
 async function main() {
+  // Ensure watcher is running (workaround for SessionStart hook not firing)
+  ensureWatcherRunning();
+
   // Read input from stdin (Claude Code sends hook input as JSON)
   let input = '';
   for await (const chunk of process.stdin) {

@@ -1,0 +1,161 @@
+#!/usr/bin/env node
+/**
+ * PermissionRequest Hook - Forwards permission requests to Telegram
+ *
+ * When Claude Code requests permission for a tool, this hook:
+ * 1. Sends a notification to Telegram with tool details
+ * 2. Writes pending permission info to a file
+ * 3. Returns "ask" to show the normal permission prompt
+ *
+ * The user can then reply y/n/a on Telegram, which triggers the watcher
+ * to send the appropriate keystroke.
+ */
+
+const https = require('https');
+const fs = require('fs');
+const path = require('path');
+const os = require('os');
+
+// Paths
+const PROJECT_DIR = process.env.CLAUDE_PROJECT_DIR || path.join(__dirname, '..');
+const MCP_CONFIG_PATH = path.join(PROJECT_DIR, '.mcp.json');
+const TELEGRAM_DIR = path.join(os.homedir(), '.claude-telegram');
+const PENDING_PERMISSION_PATH = path.join(TELEGRAM_DIR, 'pending-permission.json');
+
+// Read Telegram credentials from .mcp.json
+function getCredentials() {
+    try {
+        const config = JSON.parse(fs.readFileSync(MCP_CONFIG_PATH, 'utf8'));
+        return {
+            botToken: config.mcpServers?.telegram?.env?.TELEGRAM_BOT_TOKEN,
+            userId: config.mcpServers?.telegram?.env?.TELEGRAM_USER_ID
+        };
+    } catch (err) {
+        return null;
+    }
+}
+
+// Send message via Telegram Bot API
+function sendTelegram(botToken, userId, message) {
+    return new Promise((resolve, reject) => {
+        const data = JSON.stringify({
+            chat_id: userId,
+            text: message,
+            parse_mode: 'HTML'
+        });
+
+        const options = {
+            hostname: 'api.telegram.org',
+            port: 443,
+            path: `/bot${botToken}/sendMessage`,
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Content-Length': Buffer.byteLength(data)
+            }
+        };
+
+        const req = https.request(options, (res) => {
+            let body = '';
+            res.on('data', chunk => body += chunk);
+            res.on('end', () => resolve(body));
+        });
+
+        req.on('error', reject);
+        req.write(data);
+        req.end();
+    });
+}
+
+// Escape HTML special characters for Telegram
+function escapeHtml(text) {
+    if (typeof text !== 'string') return String(text);
+    return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+}
+
+// Format tool info for display
+function formatToolInfo(toolName, toolInput) {
+    let details = '';
+
+    if (toolName === 'Bash' && toolInput?.command) {
+        details = `<code>${escapeHtml(toolInput.command)}</code>`;
+    } else if (toolName === 'Edit' && toolInput?.file_path) {
+        details = `File: <code>${escapeHtml(toolInput.file_path)}</code>`;
+    } else if (toolName === 'Write' && toolInput?.file_path) {
+        details = `File: <code>${escapeHtml(toolInput.file_path)}</code>`;
+    } else if (toolName === 'Read' && toolInput?.file_path) {
+        details = `File: <code>${escapeHtml(toolInput.file_path)}</code>`;
+    } else if (toolInput) {
+        // Generic formatting for other tools
+        const keys = Object.keys(toolInput).slice(0, 3);
+        details = keys.map(k => `${escapeHtml(k)}: ${escapeHtml(JSON.stringify(toolInput[k]).slice(0, 50))}`).join('\n');
+    }
+
+    return details;
+}
+
+async function main() {
+    // Read input from stdin
+    let input = '';
+    for await (const chunk of process.stdin) {
+        input += chunk;
+    }
+
+    let hookInput;
+    try {
+        hookInput = JSON.parse(input);
+    } catch (err) {
+        // If we can't parse input, just allow the normal prompt
+        console.log(JSON.stringify({ decision: { behavior: 'ask' } }));
+        return;
+    }
+
+    const { tool_name, tool_input } = hookInput;
+
+    // Get credentials
+    const creds = getCredentials();
+    if (!creds || !creds.botToken || !creds.userId) {
+        // No credentials, fall back to normal prompt
+        console.log(JSON.stringify({ decision: { behavior: 'ask' } }));
+        return;
+    }
+
+    // Ensure telegram directory exists
+    if (!fs.existsSync(TELEGRAM_DIR)) {
+        fs.mkdirSync(TELEGRAM_DIR, { recursive: true });
+    }
+
+    // Write pending permission info
+    const pendingInfo = {
+        timestamp: new Date().toISOString(),
+        tool_name,
+        tool_input
+    };
+    fs.writeFileSync(PENDING_PERMISSION_PATH, JSON.stringify(pendingInfo, null, 2));
+
+    // Format and send Telegram notification
+    const toolDetails = formatToolInfo(tool_name, tool_input);
+    const message = `🔐 <b>Permission Request</b>
+
+<b>Tool:</b> ${escapeHtml(tool_name)}
+${toolDetails ? `\n${toolDetails}\n` : ''}
+Reply: <b>y</b> (yes) / <b>n</b> (no) / <b>a</b> (always)`;
+
+    try {
+        await sendTelegram(creds.botToken, creds.userId, message);
+    } catch (err) {
+        // Failed to send, but don't block - just show normal prompt
+    }
+
+    // Return "ask" to show the normal permission prompt
+    // The watcher will handle the keystroke when user replies on Telegram
+    console.log(JSON.stringify({ decision: { behavior: 'ask' } }));
+}
+
+main().catch(() => {
+    // On any error, fall back to normal behavior
+    console.log(JSON.stringify({ decision: { behavior: 'ask' } }));
+});

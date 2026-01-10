@@ -5,38 +5,52 @@
 - Auto-enter (no manual Enter needed): WORKING
 - Session-specific PID targeting: WORKING
 - Watcher auto-spawn: WORKING
+- **Permission control via Telegram: TESTING** (new feature)
 
 ---
 
-## SESSION SUMMARY (2026-01-09)
+## SESSION SUMMARY (2026-01-09 - Session 2)
+
+### New Feature: Telegram Permission Control
+Built a system to control Claude Code's permission prompts via Telegram.
+
+#### How It Works
+1. When Claude requests permission for a tool, `PermissionRequest` hook fires
+2. Hook sends Telegram notification: "🔐 Permission Request - Tool: X"
+3. User replies y/n/a on Telegram
+4. MCP server receives response, writes to `permission-response.json`
+5. Watcher sends the keystroke (y/n/a + Enter) to Claude window
+
+#### New Files
+- `hooks/permission-telegram.cjs` - PermissionRequest hook that notifies Telegram (uses .cjs for CommonJS compatibility)
+
+#### Modified Files
+- `mcp-server/server.js` - Added permission response handling (y/n/a detection)
+- `hooks/enter-watcher.ps1` - Now checks for permission responses before sending keys
+- `.claude/settings.local.json` - Added PermissionRequest hook config
+
+#### Testing Needed
+1. Restart Claude Code
+2. Trigger a tool that needs permission (something not in allow list)
+3. Check Telegram for "🔐 Permission Request" message
+4. Reply y, n, or a
+5. Verify keystroke is sent and Claude continues
+
+#### Files Involved
+| File | Purpose |
+|------|---------|
+| `~/.claude-telegram/pending-permission.json` | Stores current permission request |
+| `~/.claude-telegram/permission-response.json` | User's y/n/a response |
+
+---
+
+## Previous Session (2026-01-09 - Session 1)
 
 ### Issue Investigated
-User reported watcher auto-start wasn't working. Investigation found:
-- Process tree is correct: MCP server → Claude CLI → cmd.exe
-- The watcher script works perfectly when spawned manually
-- The spawn from MCP server was failing silently (no error output)
+Watcher auto-start wasn't working. Added debug logging to diagnose.
 
-### Changes Made
-Added debug logging to `mcp-server/server.js`:
-1. Logs watcher script path before checking existence
-2. Logs the full spawn command being executed
-3. Added error event handler on spawn process
-4. Added try-catch around spawn call
-5. Logs the spawned process PID on success
-
-### What to Test on Restart
-1. Restart Claude Code in this project
-2. Check `/mcp` logs for the telegram-mcp-server
-3. Look for these log lines:
-   - `Starting watcher initialization...`
-   - `Watcher script path: ...`
-   - `Found Claude PID: <number>`
-   - `Spawning: powershell ...`
-   - `Spawned enter watcher (PID: <number>, mode: <pid>)`
-4. If any errors appear, they'll show what's failing
-
-### Files Modified
-- `mcp-server/server.js` - added debug logging to `spawnEnterWatcher()` and `initializeWatcher()`
+### Result
+After restart, watcher auto-spawn confirmed WORKING.
 
 ### Temporary Files (can delete)
 - `debug-pid.ps1` - was used for process tree debugging
@@ -87,6 +101,41 @@ powershell -ExecutionPolicy Bypass -File "D:\Documents\ClaudeCodeRoot\hooks\ente
 
 ---
 
+## Permission Control via Telegram (NEW)
+
+### Status: TESTING
+
+Control Claude Code's permission prompts (Y/n/always) remotely via Telegram.
+
+### How It Works
+1. Claude requests permission for a tool not in the allow list
+2. `PermissionRequest` hook fires and sends Telegram notification
+3. You receive: "🔐 Permission Request - Tool: Bash - `some command`"
+4. Reply with: `y` (yes), `n` (no), or `a` (always)
+5. MCP server detects response, writes to response file
+6. Watcher sends the keystroke to Claude window
+7. You receive confirmation: "✅ Permission: Yes/No/Always"
+
+### Components
+| File | Purpose |
+|------|---------|
+| `hooks/permission-telegram.cjs` | PermissionRequest hook - sends notifications |
+| `mcp-server/server.js` | Handles y/n/a responses from Telegram |
+| `hooks/enter-watcher.ps1` | Sends permission keystrokes |
+
+### Response Options
+| Reply | Effect |
+|-------|--------|
+| `y` or `yes` | Allow this one time |
+| `n` or `no` | Deny this request |
+| `a` or `always` | Always allow this tool |
+
+### Files Used
+- `~/.claude-telegram/pending-permission.json` - Current pending permission
+- `~/.claude-telegram/permission-response.json` - Your response
+
+---
+
 ## Overview
 
 This project provides a non-blocking Telegram integration for Claude Code, allowing bidirectional communication between Claude Code sessions and Telegram.
@@ -122,9 +171,11 @@ This project provides a non-blocking Telegram integration for Claude Code, allow
 |-----------|----------|---------|
 | MCP Server | `mcp-server/server.js` | Hosts Telegram bot, exposes tools to Claude |
 | Context Hook | `hooks/telegram-context.js` | Injects Telegram messages before each prompt |
+| Permission Hook | `hooks/permission-telegram.cjs` | Notifies Telegram of permission requests |
+| Enter Watcher | `hooks/enter-watcher.ps1` | Sends keystrokes to Claude window |
 | Message Queue | `~/.claude-telegram/queue.json` | Stores incoming messages |
 | MCP Config | `.mcp.json` | Configures MCP server for Claude Code |
-| Hook Config | `.claude/settings.local.json` | Configures the UserPromptSubmit hook |
+| Hook Config | `.claude/settings.local.json` | Configures hooks (UserPromptSubmit, PermissionRequest) |
 | Skill | `.claude/skills/telegram/SKILL.md` | Guides Claude on using the integration |
 
 ## Development

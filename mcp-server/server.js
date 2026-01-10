@@ -147,6 +147,55 @@ function initializeWatcher() {
   spawnEnterWatcher(claudePid);
 }
 
+// Check if a message is a permission response (y/n/a)
+function isPermissionResponse(text) {
+  const normalized = (text || '').trim().toLowerCase();
+  return ['y', 'n', 'a', 'yes', 'no', 'always'].includes(normalized);
+}
+
+// Normalize permission response to single character
+function normalizePermissionResponse(text) {
+  const normalized = (text || '').trim().toLowerCase();
+  if (normalized === 'yes' || normalized === 'y') return 'y';
+  if (normalized === 'no' || normalized === 'n') return 'n';
+  if (normalized === 'always' || normalized === 'a') return 'a';
+  return null;
+}
+
+// Check for pending permission request
+function hasPendingPermission() {
+  try {
+    if (!fs.existsSync(PENDING_PERMISSION_FILE)) return false;
+    const data = JSON.parse(fs.readFileSync(PENDING_PERMISSION_FILE, 'utf-8'));
+    // Consider pending if created within last 5 minutes
+    const age = Date.now() - new Date(data.timestamp).getTime();
+    return age < 5 * 60 * 1000;
+  } catch (e) {
+    return false;
+  }
+}
+
+// Clear pending permission
+function clearPendingPermission() {
+  try {
+    if (fs.existsSync(PENDING_PERMISSION_FILE)) {
+      fs.unlinkSync(PENDING_PERMISSION_FILE);
+    }
+  } catch (e) {
+    log(`Error clearing pending permission: ${e.message}`);
+  }
+}
+
+// Write permission response for watcher to pick up
+function writePermissionResponse(response) {
+  const responseData = {
+    timestamp: new Date().toISOString(),
+    response: response
+  };
+  fs.writeFileSync(PERMISSION_RESPONSE_FILE, JSON.stringify(responseData, null, 2));
+  log(`Wrote permission response: ${response}`);
+}
+
 // Queue incoming messages from Telegram
 bot.on('message', (msg) => {
   // Only accept messages from authorized user
@@ -155,10 +204,33 @@ bot.on('message', (msg) => {
     return;
   }
 
+  const text = msg.text || '';
+
+  // Check if this is a permission response
+  if (isPermissionResponse(text) && hasPendingPermission()) {
+    const response = normalizePermissionResponse(text);
+    log(`Received permission response: ${text} -> ${response}`);
+
+    // Send confirmation to user
+    const responseText = response === 'y' ? 'Yes (allow once)' :
+                         response === 'n' ? 'No (deny)' :
+                         response === 'a' ? 'Always (allow permanently)' : text;
+    bot.sendMessage(TELEGRAM_USER_ID, `✅ Permission: ${responseText}`).catch(() => {});
+
+    // Write response for watcher
+    writePermissionResponse(response);
+    clearPendingPermission();
+
+    // Trigger the watcher (it will see the permission response file)
+    triggerEnterKey();
+    return;
+  }
+
+  // Regular message - queue it
   const messageData = {
     id: msg.message_id,
     timestamp: Date.now(),
-    text: msg.text || '',
+    text: text,
     from: msg.from.first_name || msg.from.username || 'User',
     chatId: msg.chat.id,
   };
@@ -182,7 +254,7 @@ bot.on('message', (msg) => {
 
   // Write updated queue
   fs.writeFileSync(QUEUE_FILE, JSON.stringify(queue, null, 2));
-  log(`Queued message from ${messageData.from}: ${messageData.text.substring(0, 50)}...`);
+  log(`Queued message from ${messageData.from}: ${text.substring(0, 50)}...`);
 
   // Trigger Enter keystroke to wake up Claude Code
   triggerEnterKey();
@@ -197,6 +269,8 @@ log('Telegram bot listener started');
 
 // Trigger file for the watcher script
 const TRIGGER_FILE = path.join(QUEUE_DIR, 'trigger-enter');
+const PENDING_PERMISSION_FILE = path.join(QUEUE_DIR, 'pending-permission.json');
+const PERMISSION_RESPONSE_FILE = path.join(QUEUE_DIR, 'permission-response.json');
 
 // Trigger Enter keystroke by writing a trigger file (watcher script picks this up)
 function triggerEnterKey() {

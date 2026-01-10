@@ -29,6 +29,7 @@ $WM_KEYUP = 0x0101
 $VK_RETURN = 0x0D
 
 $triggerFile = "$env:USERPROFILE\.claude-telegram\trigger-enter"
+$permissionResponseFile = "$env:USERPROFILE\.claude-telegram\permission-response.json"
 $triggerDir = Split-Path $triggerFile
 
 # Ensure directory exists
@@ -74,7 +75,26 @@ while ($true) {
         # Remove trigger file first
         Remove-Item $triggerFile -Force
 
-        Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Trigger detected! Sending Enter..."
+        # Check if this is a permission response or a regular message trigger
+        $keysToSend = ".{ENTER}"
+        $logMessage = "Period+Enter"
+
+        if (Test-Path $permissionResponseFile) {
+            try {
+                $responseContent = Get-Content $permissionResponseFile -Raw | ConvertFrom-Json
+                $response = $responseContent.response
+                if ($response -eq "y" -or $response -eq "n" -or $response -eq "a") {
+                    $keysToSend = "$response{ENTER}"
+                    $logMessage = "Permission response: $response"
+                }
+                # Remove the permission response file
+                Remove-Item $permissionResponseFile -Force
+            } catch {
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: Failed to parse permission response"
+            }
+        }
+
+        Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Trigger detected! Sending $logMessage..."
 
         # Find Claude Code window
         if ($TargetPid -gt 0) {
@@ -107,9 +127,8 @@ while ($true) {
             # Verify we have focus
             $foreground = [Win32]::GetForegroundWindow()
             if ($foreground -eq $hwnd) {
-                # Type a period first (Claude ignores Enter on empty/whitespace input), then Enter
-                $wshell.SendKeys(".{ENTER}")
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Period+Enter sent via WScript.Shell"
+                $wshell.SendKeys($keysToSend)
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via WScript.Shell"
             } else {
                 # Fallback: Try PostMessage directly to window
                 [Win32]::PostMessage($hwnd, $WM_KEYDOWN, [IntPtr]$VK_RETURN, [IntPtr]0) | Out-Null

@@ -18,6 +18,9 @@
     "SessionStart": "hooks/session-start.js"
   },
   "skills": ["telegram"],
+  "scripts": {
+    "postInstall": "node scripts/post-install.js"
+  },
   "setup": {
     "required": ["TELEGRAM_BOT_TOKEN", "TELEGRAM_USER_ID"],
     "instructions": "Run the setup wizard or manually configure .mcp.json with your Telegram bot token and user ID"

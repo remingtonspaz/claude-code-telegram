@@ -27,6 +27,14 @@ public class Win32 {
     public static extern bool IsWindow(IntPtr hWnd);
     [DllImport("user32.dll")]
     public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
+    [DllImport("user32.dll")]
+    public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
+    [DllImport("kernel32.dll")]
+    public static extern uint GetCurrentThreadId();
+    [DllImport("user32.dll")]
+    public static extern bool BringWindowToTop(IntPtr hWnd);
+    [DllImport("user32.dll")]
+    public static extern bool AllowSetForegroundWindow(int processId);
 }
 "@
 
@@ -166,30 +174,55 @@ while ($true) {
                 continue
             }
 
-            # Try multiple times to activate and send keys
+            # Try to activate window and send keys using AttachThreadInput trick
             $sent = $false
+
+            # Get thread IDs for AttachThreadInput
+            $targetThreadId = 0
+            $targetProcId = 0
+            [Win32]::GetWindowThreadProcessId($hwnd, [ref]$targetProcId) | Out-Null
+            $targetThreadId = [Win32]::GetWindowThreadProcessId($hwnd, [ref]$targetProcId)
+            $currentThreadId = [Win32]::GetCurrentThreadId()
+
             for ($attempt = 1; $attempt -le 3; $attempt++) {
-                # Activate window with multiple methods
-                [Win32]::ShowWindow($hwnd, 9) | Out-Null  # SW_RESTORE
-                Start-Sleep -Milliseconds 50
-                [Win32]::ShowWindow($hwnd, 5) | Out-Null  # SW_SHOW
-                Start-Sleep -Milliseconds 50
-                [Win32]::SetForegroundWindow($hwnd) | Out-Null
-                Start-Sleep -Milliseconds 150
+                # Attach to target window's thread input queue (bypasses focus stealing prevention)
+                $attached = [Win32]::AttachThreadInput($currentThreadId, $targetThreadId, $true)
+
+                try {
+                    # Now we can manipulate the window
+                    [Win32]::ShowWindow($hwnd, 9) | Out-Null  # SW_RESTORE
+                    [Win32]::BringWindowToTop($hwnd) | Out-Null
+                    [Win32]::SetForegroundWindow($hwnd) | Out-Null
+                    Start-Sleep -Milliseconds 100
+
+                    # Verify we have focus
+                    $foreground = [Win32]::GetForegroundWindow()
+                    if ($foreground -eq $hwnd) {
+                        $wshell.SendKeys($keysToSend)
+                        Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via SendKeys (attempt $attempt)"
+                        $sent = $true
+                        break
+                    }
+                } finally {
+                    # Always detach
+                    if ($attached) {
+                        [Win32]::AttachThreadInput($currentThreadId, $targetThreadId, $false) | Out-Null
+                    }
+                }
 
                 # Also try AppActivate by process ID
-                try {
-                    $wshell.AppActivate($claudeProcess.Id) | Out-Null
-                    Start-Sleep -Milliseconds 100
-                } catch {}
-
-                # Verify we have focus
-                $foreground = [Win32]::GetForegroundWindow()
-                if ($foreground -eq $hwnd) {
-                    $wshell.SendKeys($keysToSend)
-                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via SendKeys (attempt $attempt)"
-                    $sent = $true
-                    break
+                if ($claudeProcess) {
+                    try {
+                        $wshell.AppActivate($claudeProcess.Id) | Out-Null
+                        Start-Sleep -Milliseconds 100
+                        $foreground = [Win32]::GetForegroundWindow()
+                        if ($foreground -eq $hwnd) {
+                            $wshell.SendKeys($keysToSend)
+                            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via AppActivate (attempt $attempt)"
+                            $sent = $true
+                            break
+                        }
+                    } catch {}
                 }
 
                 Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Focus attempt $attempt failed, retrying..."

@@ -31,8 +31,10 @@ function isWatcherRunning() {
     // Check if process exists (Windows)
     if (os.platform() === 'win32') {
       try {
-        execSync(`tasklist /FI "PID eq ${pid}" /NH`, { encoding: 'utf-8', windowsHide: true });
-        return true;
+        const output = execSync(`tasklist /FI "PID eq ${pid}" /NH`, { encoding: 'utf-8', windowsHide: true });
+        // tasklist returns "INFO: No tasks..." when process doesn't exist, doesn't throw
+        // Check if output contains the actual PID (not just "INFO:")
+        return output.includes(pid.toString()) && !output.includes('INFO:');
       } catch {
         return false;
       }

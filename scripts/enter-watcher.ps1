@@ -46,17 +46,19 @@ if (Test-Path $triggerFile) {
 $wshell = New-Object -ComObject WScript.Shell
 
 # Determine mode
+$useSearchFallback = $false
 if ($TargetPid -gt 0) {
     Write-Host "Enter Watcher started (PID mode: $TargetPid)"
     $targetProcess = Get-Process -Id $TargetPid -ErrorAction SilentlyContinue
     if (-not $targetProcess) {
-        Write-Host "ERROR: Process $TargetPid not found. Exiting."
-        exit 1
+        Write-Host "WARNING: Process $TargetPid not found. Using search mode as fallback."
+        $useSearchFallback = $true
+        $TargetPid = 0
+    } else {
+        Write-Host "Targeting: $($targetProcess.ProcessName) - $($targetProcess.MainWindowTitle)"
     }
-    Write-Host "Targeting: $($targetProcess.ProcessName) - $($targetProcess.MainWindowTitle)"
 } else {
     Write-Host "Enter Watcher started (search mode)"
-    Write-Host "Tip: Run with -TargetPid for specific window targeting"
 }
 Write-Host "Trigger file: $triggerFile"
 Write-Host ""
@@ -66,8 +68,8 @@ while ($true) {
     if ($TargetPid -gt 0) {
         $targetProcess = Get-Process -Id $TargetPid -ErrorAction SilentlyContinue
         if (-not $targetProcess) {
-            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Target process $TargetPid ended. Watcher exiting."
-            exit 0
+            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Target process $TargetPid ended. Switching to search mode."
+            $TargetPid = 0
         }
     }
 
@@ -118,23 +120,47 @@ while ($true) {
                 continue
             }
 
-            # Activate window
-            [Win32]::ShowWindow($hwnd, 9) | Out-Null  # SW_RESTORE
-            Start-Sleep -Milliseconds 100
-            [Win32]::SetForegroundWindow($hwnd) | Out-Null
-            Start-Sleep -Milliseconds 200
-
-            # Verify we have focus
-            $foreground = [Win32]::GetForegroundWindow()
-            if ($foreground -eq $hwnd) {
-                $wshell.SendKeys($keysToSend)
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via WScript.Shell"
-            } else {
-                # Fallback: Try PostMessage directly to window
-                [Win32]::PostMessage($hwnd, $WM_KEYDOWN, [IntPtr]$VK_RETURN, [IntPtr]0) | Out-Null
+            # Try multiple times to activate and send keys
+            $sent = $false
+            for ($attempt = 1; $attempt -le 3; $attempt++) {
+                # Activate window with multiple methods
+                [Win32]::ShowWindow($hwnd, 9) | Out-Null  # SW_RESTORE
                 Start-Sleep -Milliseconds 50
-                [Win32]::PostMessage($hwnd, $WM_KEYUP, [IntPtr]$VK_RETURN, [IntPtr]0) | Out-Null
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Enter sent via PostMessage (focus failed)"
+                [Win32]::ShowWindow($hwnd, 5) | Out-Null  # SW_SHOW
+                Start-Sleep -Milliseconds 50
+                [Win32]::SetForegroundWindow($hwnd) | Out-Null
+                Start-Sleep -Milliseconds 150
+
+                # Also try AppActivate by process ID
+                try {
+                    $wshell.AppActivate($claudeProcess.Id) | Out-Null
+                    Start-Sleep -Milliseconds 100
+                } catch {}
+
+                # Verify we have focus
+                $foreground = [Win32]::GetForegroundWindow()
+                if ($foreground -eq $hwnd) {
+                    $wshell.SendKeys($keysToSend)
+                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via SendKeys (attempt $attempt)"
+                    $sent = $true
+                    break
+                }
+
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Focus attempt $attempt failed, retrying..."
+                Start-Sleep -Milliseconds 200
+            }
+
+            if (-not $sent) {
+                # Final fallback: use AppActivate + SendKeys without focus check
+                try {
+                    $wshell.AppActivate($claudeProcess.Id) | Out-Null
+                    Start-Sleep -Milliseconds 200
+                    $wshell.SendKeys($keysToSend)
+                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via AppActivate fallback"
+                    $sent = $true
+                } catch {
+                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: All focus methods failed"
+                }
             }
         } else {
             Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: Claude window not found"

@@ -46,27 +46,51 @@ function isWatcherRunning() {
   }
 }
 
-// Get the console window handle using Win32 API via PowerShell
-// This is reliable because the hook runs in the same console as Claude Code
+// Get the console window handle by finding the cmd.exe ancestor process
+// and getting its main window handle
 function getConsoleWindowHandle() {
   if (os.platform() !== 'win32') return null;
 
   try {
+    // Find cmd.exe in our process ancestry and get its window handle
     const psScript = `
-Add-Type -Name Win32 -Namespace Console -MemberDefinition '[DllImport("kernel32.dll")] public static extern IntPtr GetConsoleWindow();'
-$hwnd = [Console.Win32]::GetConsoleWindow()
-Write-Output $hwnd.ToInt64()
+$currentPid = ${process.pid}
+for ($i = 0; $i -lt 15; $i++) {
+    $proc = Get-CimInstance Win32_Process -Filter "ProcessId = $currentPid" -ErrorAction SilentlyContinue
+    if (-not $proc) { break }
+    $parentPid = $proc.ParentProcessId
+    if ($parentPid -le 0) { break }
+
+    $parentProc = Get-Process -Id $parentPid -ErrorAction SilentlyContinue
+    if ($parentProc -and $parentProc.ProcessName -eq 'cmd') {
+        $hwnd = $parentProc.MainWindowHandle.ToInt64()
+        if ($hwnd -gt 0) {
+            Write-Output "$hwnd,$parentPid"
+            exit
+        }
+    }
+    $currentPid = $parentPid
+}
+Write-Output "0,0"
 `;
     const result = execSync(`powershell -NoProfile -Command "${psScript.replace(/\n/g, ' ')}"`, {
       encoding: 'utf-8',
       windowsHide: true,
-      timeout: 5000
+      timeout: 10000
     });
-    const hwnd = parseInt(result.trim(), 10);
+    const [hwndStr, pidStr] = result.trim().split(',');
+    const hwnd = parseInt(hwndStr, 10);
+    const pid = parseInt(pidStr, 10);
     if (hwnd && hwnd > 0) {
-      return hwnd;
+      return { hwnd, pid };
     }
-  } catch {}
+  } catch (e) {
+    // Log error for debugging
+    try {
+      fs.appendFileSync(path.join(TELEGRAM_DIR, 'debug.log'),
+        `[${new Date().toISOString()}] getConsoleWindowHandle error: ${e.message}\n`);
+    } catch {}
+  }
   return null;
 }
 
@@ -104,16 +128,15 @@ function ensureWatcherRunning() {
   // Ensure directory exists
   if (!fs.existsSync(TELEGRAM_DIR)) fs.mkdirSync(TELEGRAM_DIR, { recursive: true });
 
-  // Get the console window handle - this is the most reliable method
-  // since the hook runs in the same console as Claude Code
-  const windowHandle = getConsoleWindowHandle();
-  const targetPid = windowHandle ? getPidFromWindowHandle(windowHandle) : null;
+  // Get the console window handle by walking up process tree
+  const windowInfo = getConsoleWindowHandle();
 
   // Save session info for debugging
   const sessionInfo = {
     cwd: process.cwd(),
-    windowHandle: windowHandle,
-    targetPid: targetPid,
+    hookPid: process.pid,
+    windowHandle: windowInfo?.hwnd || null,
+    targetPid: windowInfo?.pid || null,
     timestamp: Date.now()
   };
   fs.writeFileSync(SESSION_INFO_FILE, JSON.stringify(sessionInfo, null, 2));
@@ -121,10 +144,10 @@ function ensureWatcherRunning() {
   const args = ['-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', watcherScript];
 
   // Prefer window handle (most reliable), fall back to PID, then search mode
-  if (windowHandle) {
-    args.push('-WindowHandle', windowHandle.toString());
-  } else if (targetPid) {
-    args.push('-TargetPid', targetPid.toString());
+  if (windowInfo?.hwnd) {
+    args.push('-WindowHandle', windowInfo.hwnd.toString());
+  } else if (windowInfo?.pid) {
+    args.push('-TargetPid', windowInfo.pid.toString());
   }
   // If neither, watcher will use search mode
 

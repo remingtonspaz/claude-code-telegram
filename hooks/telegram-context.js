@@ -46,32 +46,49 @@ function isWatcherRunning() {
   }
 }
 
-// Find Claude window PID
-function findClaudeWindowPid() {
+// Get the console window handle using Win32 API via PowerShell
+// This is reliable because the hook runs in the same console as Claude Code
+function getConsoleWindowHandle() {
   if (os.platform() !== 'win32') return null;
 
   try {
-    let currentPid = process.pid;
-    for (let i = 0; i < 10; i++) {
-      const result = execSync(
-        `wmic process where ProcessId=${currentPid} get ParentProcessId /format:value`,
-        { encoding: 'utf-8', windowsHide: true }
-      );
-      const match = result.match(/ParentProcessId=(\d+)/);
-      if (!match) break;
+    const psScript = `
+Add-Type -Name Win32 -Namespace Console -MemberDefinition '[DllImport("kernel32.dll")] public static extern IntPtr GetConsoleWindow();'
+$hwnd = [Console.Win32]::GetConsoleWindow()
+Write-Output $hwnd.ToInt64()
+`;
+    const result = execSync(`powershell -NoProfile -Command "${psScript.replace(/\n/g, ' ')}"`, {
+      encoding: 'utf-8',
+      windowsHide: true,
+      timeout: 5000
+    });
+    const hwnd = parseInt(result.trim(), 10);
+    if (hwnd && hwnd > 0) {
+      return hwnd;
+    }
+  } catch {}
+  return null;
+}
 
-      const parentPid = parseInt(match[1], 10);
-      if (parentPid <= 0) break;
+// Find the PID that owns a window handle
+function getPidFromWindowHandle(hwnd) {
+  if (!hwnd) return null;
 
-      try {
-        const nameResult = execSync(
-          `wmic process where ProcessId=${parentPid} get Name /format:value`,
-          { encoding: 'utf-8', windowsHide: true }
-        );
-        if (nameResult.includes('cmd.exe')) return parentPid;
-      } catch {}
-
-      currentPid = parentPid;
+  try {
+    const psScript = `
+Add-Type -Name Win32 -Namespace User32 -MemberDefinition '[DllImport("user32.dll")] public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);'
+$pid = 0
+[User32.Win32]::GetWindowThreadProcessId([IntPtr]${hwnd}, [ref]$pid) | Out-Null
+Write-Output $pid
+`;
+    const result = execSync(`powershell -NoProfile -Command "${psScript.replace(/\n/g, ' ')}"`, {
+      encoding: 'utf-8',
+      windowsHide: true,
+      timeout: 5000
+    });
+    const pid = parseInt(result.trim(), 10);
+    if (pid && pid > 0) {
+      return pid;
     }
   } catch {}
   return null;
@@ -87,18 +104,29 @@ function ensureWatcherRunning() {
   // Ensure directory exists
   if (!fs.existsSync(TELEGRAM_DIR)) fs.mkdirSync(TELEGRAM_DIR, { recursive: true });
 
-  // Save session info for the watcher to use for window matching
-  const cwd = process.cwd();
+  // Get the console window handle - this is the most reliable method
+  // since the hook runs in the same console as Claude Code
+  const windowHandle = getConsoleWindowHandle();
+  const targetPid = windowHandle ? getPidFromWindowHandle(windowHandle) : null;
+
+  // Save session info for debugging
   const sessionInfo = {
-    cwd: cwd,
-    cwdBasename: path.basename(cwd),
+    cwd: process.cwd(),
+    windowHandle: windowHandle,
+    targetPid: targetPid,
     timestamp: Date.now()
   };
   fs.writeFileSync(SESSION_INFO_FILE, JSON.stringify(sessionInfo, null, 2));
 
   const args = ['-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', watcherScript];
-  // Pass the cwd basename for window title matching (more reliable than PID)
-  args.push('-MatchTitle', sessionInfo.cwdBasename);
+
+  // Prefer window handle (most reliable), fall back to PID, then search mode
+  if (windowHandle) {
+    args.push('-WindowHandle', windowHandle.toString());
+  } else if (targetPid) {
+    args.push('-TargetPid', targetPid.toString());
+  }
+  // If neither, watcher will use search mode
 
   try {
     const watcher = spawn('powershell', args, {

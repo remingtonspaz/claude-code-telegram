@@ -7,7 +7,8 @@
 
 param(
     [int]$TargetPid = 0,
-    [string]$MatchTitle = ""
+    [string]$MatchTitle = "",
+    [long]$WindowHandle = 0
 )
 
 Add-Type @"
@@ -22,6 +23,10 @@ public class Win32 {
     public static extern IntPtr PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
     [DllImport("user32.dll")]
     public static extern IntPtr GetForegroundWindow();
+    [DllImport("user32.dll")]
+    public static extern bool IsWindow(IntPtr hWnd);
+    [DllImport("user32.dll")]
+    public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
 }
 "@
 
@@ -47,7 +52,15 @@ if (Test-Path $triggerFile) {
 $wshell = New-Object -ComObject WScript.Shell
 
 # Determine mode
-if ($MatchTitle -ne "") {
+if ($WindowHandle -gt 0) {
+    Write-Host "Enter Watcher started (window handle mode: $WindowHandle)"
+    # Verify handle is valid by checking if window exists
+    $isValid = [Win32]::IsWindow([IntPtr]$WindowHandle)
+    if (-not $isValid) {
+        Write-Host "WARNING: Window handle $WindowHandle is invalid. Using search mode as fallback."
+        $WindowHandle = 0
+    }
+} elseif ($MatchTitle -ne "") {
     Write-Host "Enter Watcher started (title match mode: '$MatchTitle')"
 } elseif ($TargetPid -gt 0) {
     Write-Host "Enter Watcher started (PID mode: $TargetPid)"
@@ -65,8 +78,13 @@ Write-Host "Trigger file: $triggerFile"
 Write-Host ""
 
 while ($true) {
-    # If targeting specific PID, check if process still exists
-    if ($TargetPid -gt 0) {
+    # Check if target window/process still exists
+    if ($WindowHandle -gt 0) {
+        if (-not [Win32]::IsWindow([IntPtr]$WindowHandle)) {
+            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Target window closed. Switching to search mode."
+            $WindowHandle = 0
+        }
+    } elseif ($TargetPid -gt 0) {
         $targetProcess = Get-Process -Id $TargetPid -ErrorAction SilentlyContinue
         if (-not $targetProcess) {
             Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Target process $TargetPid ended. Switching to search mode."
@@ -100,7 +118,19 @@ while ($true) {
         Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Trigger detected! Sending $logMessage..."
 
         # Find Claude Code window
-        if ($MatchTitle -ne "") {
+        $hwnd = [IntPtr]::Zero
+        $claudeProcess = $null
+
+        if ($WindowHandle -gt 0) {
+            # Window handle mode: use the handle directly (most reliable)
+            $hwnd = [IntPtr]$WindowHandle
+            # Get process for AppActivate fallback
+            $procId = 0
+            [Win32]::GetWindowThreadProcessId($hwnd, [ref]$procId) | Out-Null
+            if ($procId -gt 0) {
+                $claudeProcess = Get-Process -Id $procId -ErrorAction SilentlyContinue
+            }
+        } elseif ($MatchTitle -ne "") {
             # Title match mode: find cmd window whose title contains the match string
             $claudeProcess = Get-Process -Name cmd -ErrorAction SilentlyContinue | Where-Object {
                 $_.MainWindowTitle -like "*$MatchTitle*"
@@ -125,11 +155,14 @@ while ($true) {
             } | Select-Object -First 1
         }
 
-        if ($claudeProcess) {
+        # Get window handle from process if not already set
+        if ($hwnd -eq [IntPtr]::Zero -and $claudeProcess) {
             $hwnd = $claudeProcess.MainWindowHandle
+        }
 
-            if ($hwnd -eq [IntPtr]::Zero) {
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: Process found but no window handle"
+        if ($hwnd -ne [IntPtr]::Zero) {
+            if (-not [Win32]::IsWindow($hwnd)) {
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: Window handle is invalid"
                 continue
             }
 
@@ -163,7 +196,7 @@ while ($true) {
                 Start-Sleep -Milliseconds 200
             }
 
-            if (-not $sent) {
+            if (-not $sent -and $claudeProcess) {
                 # Final fallback: use AppActivate + SendKeys without focus check
                 try {
                     $wshell.AppActivate($claudeProcess.Id) | Out-Null
@@ -172,8 +205,12 @@ while ($true) {
                     Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via AppActivate fallback"
                     $sent = $true
                 } catch {
-                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: All focus methods failed"
+                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: AppActivate fallback failed"
                 }
+            }
+
+            if (-not $sent) {
+                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: All methods failed to send keys"
             }
         } else {
             Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: Claude window not found"

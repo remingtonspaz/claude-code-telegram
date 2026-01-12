@@ -6,7 +6,8 @@
 #   With PID:   powershell -ExecutionPolicy Bypass -File enter-watcher.ps1 -TargetPid 12345
 
 param(
-    [int]$TargetPid = 0
+    [int]$TargetPid = 0,
+    [string]$MatchTitle = ""
 )
 
 Add-Type @"
@@ -46,13 +47,13 @@ if (Test-Path $triggerFile) {
 $wshell = New-Object -ComObject WScript.Shell
 
 # Determine mode
-$useSearchFallback = $false
-if ($TargetPid -gt 0) {
+if ($MatchTitle -ne "") {
+    Write-Host "Enter Watcher started (title match mode: '$MatchTitle')"
+} elseif ($TargetPid -gt 0) {
     Write-Host "Enter Watcher started (PID mode: $TargetPid)"
     $targetProcess = Get-Process -Id $TargetPid -ErrorAction SilentlyContinue
     if (-not $targetProcess) {
         Write-Host "WARNING: Process $TargetPid not found. Using search mode as fallback."
-        $useSearchFallback = $true
         $TargetPid = 0
     } else {
         Write-Host "Targeting: $($targetProcess.ProcessName) - $($targetProcess.MainWindowTitle)"
@@ -99,7 +100,19 @@ while ($true) {
         Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Trigger detected! Sending $logMessage..."
 
         # Find Claude Code window
-        if ($TargetPid -gt 0) {
+        if ($MatchTitle -ne "") {
+            # Title match mode: find cmd window whose title contains the match string
+            $claudeProcess = Get-Process -Name cmd -ErrorAction SilentlyContinue | Where-Object {
+                $_.MainWindowTitle -like "*$MatchTitle*"
+            } | Select-Object -First 1
+
+            if (-not $claudeProcess) {
+                # Fallback: try WindowsTerminal or other terminals
+                $claudeProcess = Get-Process -Name WindowsTerminal, powershell, pwsh -ErrorAction SilentlyContinue | Where-Object {
+                    $_.MainWindowTitle -like "*$MatchTitle*"
+                } | Select-Object -First 1
+            }
+        } elseif ($TargetPid -gt 0) {
             # PID mode: target specific process
             $claudeProcess = Get-Process -Id $TargetPid -ErrorAction SilentlyContinue
         } else {

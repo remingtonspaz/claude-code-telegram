@@ -19,6 +19,7 @@ const __dirname = path.dirname(__filename);
 const TELEGRAM_DIR = path.join(os.homedir(), '.claude-telegram');
 const QUEUE_FILE = path.join(TELEGRAM_DIR, 'queue.json');
 const WATCHER_PID_FILE = path.join(TELEGRAM_DIR, 'watcher.pid');
+const SESSION_INFO_FILE = path.join(TELEGRAM_DIR, 'session-info.json');
 
 // Check if watcher is already running
 function isWatcherRunning() {
@@ -83,9 +84,21 @@ function ensureWatcherRunning() {
   const watcherScript = path.join(__dirname, '..', 'scripts', 'enter-watcher.ps1');
   if (!fs.existsSync(watcherScript)) return;
 
-  const targetPid = findClaudeWindowPid();
+  // Ensure directory exists
+  if (!fs.existsSync(TELEGRAM_DIR)) fs.mkdirSync(TELEGRAM_DIR, { recursive: true });
+
+  // Save session info for the watcher to use for window matching
+  const cwd = process.cwd();
+  const sessionInfo = {
+    cwd: cwd,
+    cwdBasename: path.basename(cwd),
+    timestamp: Date.now()
+  };
+  fs.writeFileSync(SESSION_INFO_FILE, JSON.stringify(sessionInfo, null, 2));
+
   const args = ['-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', watcherScript];
-  if (targetPid) args.push('-TargetPid', targetPid.toString());
+  // Pass the cwd basename for window title matching (more reliable than PID)
+  args.push('-MatchTitle', sessionInfo.cwdBasename);
 
   try {
     const watcher = spawn('powershell', args, {
@@ -95,7 +108,6 @@ function ensureWatcherRunning() {
     });
 
     // Save PID for future checks
-    if (!fs.existsSync(TELEGRAM_DIR)) fs.mkdirSync(TELEGRAM_DIR, { recursive: true });
     fs.writeFileSync(WATCHER_PID_FILE, watcher.pid.toString());
 
     watcher.unref();

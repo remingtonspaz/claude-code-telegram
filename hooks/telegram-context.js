@@ -46,49 +46,60 @@ function isWatcherRunning() {
   }
 }
 
-// Get the console window handle by finding the cmd.exe ancestor process
-// and getting its main window handle
-function getConsoleWindowHandle() {
+// Walk up process tree using WMIC to find cmd.exe ancestor
+// Returns { pid, hwnd } or null
+function findCmdAncestor() {
   if (os.platform() !== 'win32') return null;
 
   try {
-    // Find cmd.exe in our process ancestry and get its window handle
-    const psScript = `
-$currentPid = ${process.pid}
-for ($i = 0; $i -lt 15; $i++) {
-    $proc = Get-CimInstance Win32_Process -Filter "ProcessId = $currentPid" -ErrorAction SilentlyContinue
-    if (-not $proc) { break }
-    $parentPid = $proc.ParentProcessId
-    if ($parentPid -le 0) { break }
+    let currentPid = process.pid;
 
-    $parentProc = Get-Process -Id $parentPid -ErrorAction SilentlyContinue
-    if ($parentProc -and $parentProc.ProcessName -eq 'cmd') {
-        $hwnd = $parentProc.MainWindowHandle.ToInt64()
-        if ($hwnd -gt 0) {
-            Write-Output "$hwnd,$parentPid"
-            exit
+    for (let i = 0; i < 15; i++) {
+      // Get parent PID using WMIC
+      let parentPid;
+      try {
+        const result = execSync(
+          `wmic process where ProcessId=${currentPid} get ParentProcessId /format:value`,
+          { encoding: 'utf-8', windowsHide: true, timeout: 5000 }
+        );
+        const match = result.match(/ParentProcessId=(\d+)/);
+        if (!match) break;
+        parentPid = parseInt(match[1], 10);
+        if (parentPid <= 0) break;
+      } catch {
+        break;
+      }
+
+      // Check if parent is cmd.exe
+      try {
+        const nameResult = execSync(
+          `wmic process where ProcessId=${parentPid} get Name /format:value`,
+          { encoding: 'utf-8', windowsHide: true, timeout: 5000 }
+        );
+
+        if (nameResult.includes('cmd.exe')) {
+          // Found cmd.exe! Now get its window handle using PowerShell
+          try {
+            const hwndResult = execSync(
+              `powershell -NoProfile -Command "(Get-Process -Id ${parentPid}).MainWindowHandle.ToInt64()"`,
+              { encoding: 'utf-8', windowsHide: true, timeout: 5000 }
+            );
+            const hwnd = parseInt(hwndResult.trim(), 10);
+            return { pid: parentPid, hwnd: hwnd > 0 ? hwnd : null };
+          } catch {
+            return { pid: parentPid, hwnd: null };
+          }
         }
-    }
-    $currentPid = $parentPid
-}
-Write-Output "0,0"
-`;
-    const result = execSync(`powershell -NoProfile -Command "${psScript.replace(/\n/g, ' ')}"`, {
-      encoding: 'utf-8',
-      windowsHide: true,
-      timeout: 10000
-    });
-    const [hwndStr, pidStr] = result.trim().split(',');
-    const hwnd = parseInt(hwndStr, 10);
-    const pid = parseInt(pidStr, 10);
-    if (hwnd && hwnd > 0) {
-      return { hwnd, pid };
+      } catch {
+        // Process might not exist, continue
+      }
+
+      currentPid = parentPid;
     }
   } catch (e) {
-    // Log error for debugging
     try {
       fs.appendFileSync(path.join(TELEGRAM_DIR, 'debug.log'),
-        `[${new Date().toISOString()}] getConsoleWindowHandle error: ${e.message}\n`);
+        `[${new Date().toISOString()}] findCmdAncestor error: ${e.message}\n`);
     } catch {}
   }
   return null;
@@ -128,15 +139,15 @@ function ensureWatcherRunning() {
   // Ensure directory exists
   if (!fs.existsSync(TELEGRAM_DIR)) fs.mkdirSync(TELEGRAM_DIR, { recursive: true });
 
-  // Get the console window handle by walking up process tree
-  const windowInfo = getConsoleWindowHandle();
+  // Find cmd.exe ancestor in process tree
+  const cmdInfo = findCmdAncestor();
 
   // Save session info for debugging
   const sessionInfo = {
     cwd: process.cwd(),
     hookPid: process.pid,
-    windowHandle: windowInfo?.hwnd || null,
-    targetPid: windowInfo?.pid || null,
+    cmdPid: cmdInfo?.pid || null,
+    windowHandle: cmdInfo?.hwnd || null,
     timestamp: Date.now()
   };
   fs.writeFileSync(SESSION_INFO_FILE, JSON.stringify(sessionInfo, null, 2));
@@ -144,10 +155,10 @@ function ensureWatcherRunning() {
   const args = ['-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', watcherScript];
 
   // Prefer window handle (most reliable), fall back to PID, then search mode
-  if (windowInfo?.hwnd) {
-    args.push('-WindowHandle', windowInfo.hwnd.toString());
-  } else if (windowInfo?.pid) {
-    args.push('-TargetPid', windowInfo.pid.toString());
+  if (cmdInfo?.hwnd) {
+    args.push('-WindowHandle', cmdInfo.hwnd.toString());
+  } else if (cmdInfo?.pid) {
+    args.push('-TargetPid', cmdInfo.pid.toString());
   }
   // If neither, watcher will use search mode
 

@@ -11,7 +11,6 @@ import path from 'path';
 import os from 'os';
 import crypto from 'crypto';
 import { fileURLToPath } from 'url';
-import { spawn, execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -59,101 +58,24 @@ function log(message) {
   console.error(`[telegram-mcp] ${message}`);
 }
 
-// Find the Claude Code window PID by walking up process tree
-function findClaudeWindowPid() {
-  if (os.platform() !== 'win32') {
-    log('Auto-watcher only supported on Windows');
-    return null;
-  }
+// Track processed message IDs to prevent duplicates (Telegram polling can deliver duplicates)
+const processedMessageIds = new Set();
+const MAX_PROCESSED_IDS = 1000; // Limit memory usage
 
-  try {
-    let currentPid = process.pid;
-
-    // Walk up the process tree looking for cmd.exe
-    for (let i = 0; i < 10; i++) { // Max 10 levels to prevent infinite loop
-      const result = execSync(
-        `wmic process where ProcessId=${currentPid} get ParentProcessId /format:value`,
-        { encoding: 'utf-8', windowsHide: true }
-      );
-
-      const match = result.match(/ParentProcessId=(\d+)/);
-      if (!match) break;
-
-      const parentPid = parseInt(match[1], 10);
-      if (parentPid <= 0) break;
-
-      // Check if parent is cmd.exe
-      try {
-        const nameResult = execSync(
-          `wmic process where ProcessId=${parentPid} get Name /format:value`,
-          { encoding: 'utf-8', windowsHide: true }
-        );
-
-        if (nameResult.includes('cmd.exe')) {
-          log(`Found Claude window: cmd.exe (PID: ${parentPid})`);
-          return parentPid;
-        }
-      } catch (e) {
-        // Process might not exist anymore
-      }
-
-      currentPid = parentPid;
-    }
-
-    log('Could not find cmd.exe ancestor');
-    return null;
-  } catch (e) {
-    log(`Error finding Claude window PID: ${e.message}`);
-    return null;
+// Add message ID to processed set with cleanup
+function markMessageProcessed(messageId) {
+  processedMessageIds.add(messageId);
+  // Clean up old IDs if set gets too large
+  if (processedMessageIds.size > MAX_PROCESSED_IDS) {
+    const idsArray = Array.from(processedMessageIds);
+    const toRemove = idsArray.slice(0, idsArray.length - MAX_PROCESSED_IDS / 2);
+    toRemove.forEach(id => processedMessageIds.delete(id));
   }
 }
 
-// Spawn the enter watcher script with target PID
-function spawnEnterWatcher(targetPid) {
-  const watcherScript = path.join(__dirname, '..', 'scripts', 'enter-watcher.ps1');
-
-  log(`Watcher script path: ${watcherScript}`);
-  if (!fs.existsSync(watcherScript)) {
-    log(`ERROR: Watcher script not found: ${watcherScript}`);
-    return;
-  }
-
-  const args = [
-    '-ExecutionPolicy', 'Bypass',
-    '-WindowStyle', 'Hidden',
-    '-File', watcherScript
-  ];
-
-  if (targetPid) {
-    args.push('-TargetPid', targetPid.toString());
-  }
-
-  log(`Spawning: powershell ${args.join(' ')}`);
-
-  try {
-    const watcher = spawn('powershell', args, {
-      detached: true,
-      stdio: 'ignore',
-      windowsHide: true
-    });
-
-    watcher.on('error', (err) => {
-      log(`Watcher spawn error: ${err.message}`);
-    });
-
-    watcher.unref();
-    log(`Spawned enter watcher (PID: ${watcher.pid}, mode: ${targetPid || 'search'})`);
-  } catch (err) {
-    log(`ERROR spawning watcher: ${err.message}`);
-  }
-}
-
-// Auto-start the watcher on server startup
-function initializeWatcher() {
-  log('Starting watcher initialization...');
-  const claudePid = findClaudeWindowPid();
-  log(`Found Claude PID: ${claudePid}`);
-  spawnEnterWatcher(claudePid);
+// Check if message was already processed
+function isMessageProcessed(messageId) {
+  return processedMessageIds.has(messageId);
 }
 
 // Check if a message is a permission response (y/n/a)
@@ -212,6 +134,13 @@ bot.on('message', (msg) => {
     log(`Ignored message from unauthorized user: ${msg.from.id}`);
     return;
   }
+
+  // Deduplicate messages (Telegram polling can deliver duplicates)
+  if (isMessageProcessed(msg.message_id)) {
+    log(`Ignoring duplicate message: ${msg.message_id}`);
+    return;
+  }
+  markMessageProcessed(msg.message_id);
 
   const text = msg.text || '';
 
@@ -468,9 +397,8 @@ async function main() {
   const transport = new StdioServerTransport();
   await server.connect(transport);
   log('MCP server connected via stdio');
-
-  // Auto-start the enter watcher
-  initializeWatcher();
+  // Note: Watcher is spawned by the UserPromptSubmit hook (telegram-context.js)
+  // to ensure correct session directory and PID tracking
 }
 
 main().catch((error) => {

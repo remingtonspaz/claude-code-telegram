@@ -10,55 +10,65 @@
 
 ---
 
-## SESSION SUMMARY (2026-01-09 - Session 3)
+## SESSION SUMMARY (2026-01-13 - Session 4)
 
-### Plugin Conversion Complete
-Converted project from standalone integration to Claude Code plugin format.
+### Watcher Auto-Spawn & Keystroke Delivery Fixes
+Major debugging session to fix watcher auto-spawn and reliable keystroke delivery.
 
-#### New Plugin Structure
-```
-claude-code-telegram/
-├── .claude-plugin/
-│   └── plugin.json           # Plugin metadata
-├── hooks/
-│   ├── telegram-context.js   # UserPromptSubmit hook
-│   ├── permission-telegram.cjs # PermissionRequest hook
-│   └── session-start.js      # SessionStart hook (NEW)
-├── skills/
-│   └── telegram/
-│       └── SKILL.md          # Skill file
-├── scripts/
-│   ├── enter-watcher.ps1     # Watcher (moved from hooks/)
-│   ├── list-windows.ps1      # Helper
-│   └── send-enter.ps1        # Helper
-├── mcp-server/
-│   └── server.js             # MCP server
-├── .mcp.json.template        # Credential template (NEW)
-└── README.md                 # Documentation (NEW)
-```
+#### Problems Solved
 
-#### Key Changes
-- Created `.claude-plugin/plugin.json` with plugin metadata
-- Added `SessionStart` hook to auto-spawn watcher
-- Moved watcher scripts from `hooks/` to `scripts/`
-- Moved skill from `.claude/skills/` to `skills/`
-- Added `.mcp.json.template` for distribution
-- Added comprehensive `README.md`
+1. **SessionStart hook not firing** (Claude Code bug)
+   - Moved watcher spawn logic into `UserPromptSubmit` hook as workaround
+   - Watcher now spawns on first prompt instead of session start
 
-#### Bug Fixes
-- Fixed HTML formatting in Telegram permission notifications (Buffer.byteLength vs string.length for UTF-8)
+2. **Watcher process dying immediately**
+   - Node.js `spawn()` with `detached: true` unreliable on Windows
+   - Fixed by using PowerShell `Start-Process` for proper background process
+
+3. **isWatcherRunning() false positive**
+   - `tasklist` doesn't throw error when no process matches
+   - Fixed to check output for "INFO:" message
+
+4. **Process tree walking failures**
+   - PowerShell script syntax errors when newlines replaced with spaces
+   - Fixed by using incremental WMIC calls (same as session-start.js)
+
+5. **Focus/keystroke delivery failing**
+   - `SetForegroundWindow` blocked by Windows focus-stealing prevention
+   - Fixed by using `AppActivate` as primary method (works reliably)
+
+6. **Multiple Claude windows targeting wrong window**
+   - Search mode would find first matching window
+   - Fixed by walking process tree from hook to find correct cmd.exe ancestor
+
+#### Key Technical Changes
+
+- `telegram-context.js`: Added `findCmdAncestor()` using WMIC to reliably find parent cmd.exe
+- `telegram-context.js`: Use `Start-Process` via PowerShell for watcher spawn
+- `enter-watcher.ps1`: Prioritize `AppActivate` over `SetForegroundWindow`
+- `enter-watcher.ps1`: Fall back to search mode if PID invalid (handles race conditions)
+- `enter-watcher.ps1`: Added `AttachThreadInput` as secondary focus method
+
+#### New Debug Files
+
+| File | Purpose |
+|------|---------|
+| `~/.claude-telegram/session-info.json` | Debug: hookPid, cmdPid, windowHandle |
+| `~/.claude-telegram/watcher.pid` | Tracks spawned watcher process |
+| `~/.claude-telegram/debug.log` | Error logging |
 
 ---
 
 ## Previous Sessions
 
+### Session 3 (2026-01-09)
+Plugin conversion - converted from standalone to plugin format.
+
 ### Session 2 (2026-01-09)
-- Built permission control via Telegram (y/n/a responses)
-- Fixed HTML tag rendering issue
+Built permission control via Telegram (y/n/a responses).
 
 ### Session 1 (2026-01-09)
-- Fixed watcher auto-spawn
-- Added debug logging
+Initial watcher auto-spawn and debug logging.
 
 ---
 
@@ -94,9 +104,9 @@ claude-code-telegram/
 |-----------|----------|---------|
 | Plugin Metadata | `.claude-plugin/plugin.json` | Plugin configuration |
 | MCP Server | `mcp-server/server.js` | Telegram bot, MCP tools |
-| Context Hook | `hooks/telegram-context.js` | Injects messages into prompts |
+| Context Hook | `hooks/telegram-context.js` | Injects messages + spawns watcher |
 | Permission Hook | `hooks/permission-telegram.cjs` | Permission notifications |
-| Session Hook | `hooks/session-start.js` | Auto-spawns watcher |
+| Session Hook | `hooks/session-start.js` | (Unused - SessionStart hook bug) |
 | Watcher Script | `scripts/enter-watcher.ps1` | Keystroke automation |
 | Skill | `skills/telegram/SKILL.md` | Claude instructions |
 
@@ -152,8 +162,12 @@ cp .mcp.json.template .mcp.json
 | `.mcp.json` | Credentials (gitignored) |
 | `.mcp.json.template` | Template for distribution |
 | `~/.claude-telegram/queue.json` | Message queue |
+| `~/.claude-telegram/trigger-enter` | Trigger file for watcher |
 | `~/.claude-telegram/pending-permission.json` | Pending permission |
 | `~/.claude-telegram/permission-response.json` | Permission response |
+| `~/.claude-telegram/watcher.pid` | Watcher process ID |
+| `~/.claude-telegram/session-info.json` | Debug: session/window info |
+| `~/.claude-telegram/debug.log` | Error logging |
 
 ---
 
@@ -163,5 +177,26 @@ cp .mcp.json.template .mcp.json
 |-------|----------|
 | MCP not connecting | Check `/mcp`, verify `.mcp.json` |
 | Messages not appearing | Check queue file, verify hook config |
-| Watcher not running | Restart Claude Code session |
+| Watcher not running | Check `watcher.pid`, verify process exists |
+| Watcher dies immediately | Check `debug.log` for errors |
+| Keystrokes to wrong window | Verify `session-info.json` has correct `cmdPid` |
 | Permission notifications broken | Check hook in settings.local.json |
+
+### Debug Commands
+
+```powershell
+# Check watcher status
+Get-Content "$env:USERPROFILE\.claude-telegram\watcher.pid"
+Get-Process -Id <pid> -ErrorAction SilentlyContinue
+
+# Check session info
+Get-Content "$env:USERPROFILE\.claude-telegram\session-info.json"
+
+# Check for errors
+Get-Content "$env:USERPROFILE\.claude-telegram\debug.log"
+
+# List all cmd.exe windows (for multiple window debugging)
+Get-Process -Name cmd | ForEach-Object {
+    Write-Host "PID: $($_.Id) | Title: '$($_.MainWindowTitle)'"
+}
+```

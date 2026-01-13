@@ -161,13 +161,22 @@ cp .mcp.json.template .mcp.json
 |------|---------|
 | `.mcp.json` | Credentials (gitignored) |
 | `.mcp.json.template` | Template for distribution |
-| `~/.claude-telegram/queue.json` | Message queue |
-| `~/.claude-telegram/trigger-enter` | Trigger file for watcher |
-| `~/.claude-telegram/pending-permission.json` | Pending permission |
-| `~/.claude-telegram/permission-response.json` | Permission response |
-| `~/.claude-telegram/watcher.pid` | Watcher process ID |
-| `~/.claude-telegram/session-info.json` | Debug: session/window info |
-| `~/.claude-telegram/debug.log` | Error logging |
+
+### Session-Specific Files
+
+Each Claude Code session has its own folder: `~/.claude-telegram/<project>-<hash>/`
+
+Example: `D:\Projects\my-app` → `~/.claude-telegram/my-app-a1b2c3/`
+
+| File | Purpose |
+|------|---------|
+| `queue.json` | Message queue |
+| `trigger-enter` | Trigger file for watcher |
+| `pending-permission.json` | Pending permission |
+| `permission-response.json` | Permission response |
+| `watcher.pid` | Watcher process ID |
+| `session-info.json` | Debug: session/window info |
+| `debug.log` | Error logging |
 
 ---
 
@@ -185,15 +194,18 @@ cp .mcp.json.template .mcp.json
 ### Debug Commands
 
 ```powershell
-# Check watcher status
-Get-Content "$env:USERPROFILE\.claude-telegram\watcher.pid"
-Get-Process -Id <pid> -ErrorAction SilentlyContinue
+# List all session folders
+Get-ChildItem "$env:USERPROFILE\.claude-telegram" -Directory
 
-# Check session info
-Get-Content "$env:USERPROFILE\.claude-telegram\session-info.json"
+# Check session info (replace <session-folder> with actual folder name)
+Get-Content "$env:USERPROFILE\.claude-telegram\<session-folder>\session-info.json"
+
+# Check watcher status
+$pid = Get-Content "$env:USERPROFILE\.claude-telegram\<session-folder>\watcher.pid"
+Get-Process -Id $pid -ErrorAction SilentlyContinue
 
 # Check for errors
-Get-Content "$env:USERPROFILE\.claude-telegram\debug.log"
+Get-Content "$env:USERPROFILE\.claude-telegram\<session-folder>\debug.log"
 
 # List all cmd.exe windows (for multiple window debugging)
 Get-Process -Name cmd | ForEach-Object {

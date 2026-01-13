@@ -174,71 +174,42 @@ while ($true) {
                 continue
             }
 
-            # Try to activate window and send keys using AttachThreadInput trick
+            # Try to send keys - AppActivate method works best
             $sent = $false
 
-            # Get thread IDs for AttachThreadInput
-            $targetThreadId = 0
-            $targetProcId = 0
-            [Win32]::GetWindowThreadProcessId($hwnd, [ref]$targetProcId) | Out-Null
-            $targetThreadId = [Win32]::GetWindowThreadProcessId($hwnd, [ref]$targetProcId)
-            $currentThreadId = [Win32]::GetCurrentThreadId()
+            # Method 1: AppActivate (most reliable based on testing)
+            if ($claudeProcess) {
+                try {
+                    $wshell.AppActivate($claudeProcess.Id) | Out-Null
+                    Start-Sleep -Milliseconds 150
+                    $wshell.SendKeys($keysToSend)
+                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via AppActivate"
+                    $sent = $true
+                } catch {
+                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] AppActivate failed: $_"
+                }
+            }
 
-            for ($attempt = 1; $attempt -le 3; $attempt++) {
-                # Attach to target window's thread input queue (bypasses focus stealing prevention)
+            # Method 2: AttachThreadInput + SetForegroundWindow (fallback)
+            if (-not $sent) {
+                $targetThreadId = [Win32]::GetWindowThreadProcessId($hwnd, [ref]$null)
+                $currentThreadId = [Win32]::GetCurrentThreadId()
                 $attached = [Win32]::AttachThreadInput($currentThreadId, $targetThreadId, $true)
 
                 try {
-                    # Now we can manipulate the window
-                    [Win32]::ShowWindow($hwnd, 9) | Out-Null  # SW_RESTORE
+                    [Win32]::ShowWindow($hwnd, 9) | Out-Null
                     [Win32]::BringWindowToTop($hwnd) | Out-Null
                     [Win32]::SetForegroundWindow($hwnd) | Out-Null
                     Start-Sleep -Milliseconds 100
-
-                    # Verify we have focus
-                    $foreground = [Win32]::GetForegroundWindow()
-                    if ($foreground -eq $hwnd) {
-                        $wshell.SendKeys($keysToSend)
-                        Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via SendKeys (attempt $attempt)"
-                        $sent = $true
-                        break
-                    }
+                    $wshell.SendKeys($keysToSend)
+                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via SetForegroundWindow"
+                    $sent = $true
+                } catch {
+                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] SetForegroundWindow failed: $_"
                 } finally {
-                    # Always detach
                     if ($attached) {
                         [Win32]::AttachThreadInput($currentThreadId, $targetThreadId, $false) | Out-Null
                     }
-                }
-
-                # Also try AppActivate by process ID
-                if ($claudeProcess) {
-                    try {
-                        $wshell.AppActivate($claudeProcess.Id) | Out-Null
-                        Start-Sleep -Milliseconds 100
-                        $foreground = [Win32]::GetForegroundWindow()
-                        if ($foreground -eq $hwnd) {
-                            $wshell.SendKeys($keysToSend)
-                            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via AppActivate (attempt $attempt)"
-                            $sent = $true
-                            break
-                        }
-                    } catch {}
-                }
-
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Focus attempt $attempt failed, retrying..."
-                Start-Sleep -Milliseconds 200
-            }
-
-            if (-not $sent -and $claudeProcess) {
-                # Final fallback: use AppActivate + SendKeys without focus check
-                try {
-                    $wshell.AppActivate($claudeProcess.Id) | Out-Null
-                    Start-Sleep -Milliseconds 200
-                    $wshell.SendKeys($keysToSend)
-                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via AppActivate fallback"
-                    $sent = $true
-                } catch {
-                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: AppActivate fallback failed"
                 }
             }
 

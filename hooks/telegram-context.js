@@ -152,28 +152,35 @@ function ensureWatcherRunning() {
   };
   fs.writeFileSync(SESSION_INFO_FILE, JSON.stringify(sessionInfo, null, 2));
 
-  const args = ['-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', watcherScript];
-
-  // Prefer window handle (most reliable), fall back to PID, then search mode
+  // Build watcher arguments
+  const watcherArgs = [];
   if (cmdInfo?.hwnd) {
-    args.push('-WindowHandle', cmdInfo.hwnd.toString());
+    watcherArgs.push('-WindowHandle', cmdInfo.hwnd.toString());
   } else if (cmdInfo?.pid) {
-    args.push('-TargetPid', cmdInfo.pid.toString());
+    watcherArgs.push('-TargetPid', cmdInfo.pid.toString());
   }
-  // If neither, watcher will use search mode
+
+  // Use Start-Process to spawn a truly detached background process
+  // This is more reliable on Windows than Node's spawn with detached
+  const startProcessCmd = `Start-Process -FilePath 'powershell' -ArgumentList '-ExecutionPolicy', 'Bypass', '-WindowStyle', 'Hidden', '-File', '${watcherScript.replace(/'/g, "''")}' ${watcherArgs.map(a => `, '${a}'`).join('')} -WindowStyle Hidden -PassThru | Select-Object -ExpandProperty Id`;
 
   try {
-    const watcher = spawn('powershell', args, {
-      detached: true,
-      stdio: 'ignore',
-      windowsHide: true
+    const result = execSync(`powershell -NoProfile -Command "${startProcessCmd}"`, {
+      encoding: 'utf-8',
+      windowsHide: true,
+      timeout: 10000
     });
-
-    // Save PID for future checks
-    fs.writeFileSync(WATCHER_PID_FILE, watcher.pid.toString());
-
-    watcher.unref();
-  } catch {}
+    const watcherPid = parseInt(result.trim(), 10);
+    if (watcherPid > 0) {
+      fs.writeFileSync(WATCHER_PID_FILE, watcherPid.toString());
+    }
+  } catch (e) {
+    // Log error for debugging
+    try {
+      fs.appendFileSync(path.join(TELEGRAM_DIR, 'debug.log'),
+        `[${new Date().toISOString()}] Watcher spawn error: ${e.message}\n`);
+    } catch {}
+  }
 }
 
 async function main() {

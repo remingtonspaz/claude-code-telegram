@@ -23,9 +23,37 @@ function getSessionDir(cwd) {
   return path.join(os.homedir(), '.claude-telegram', `${basename}-${hash}`);
 }
 
-// Configuration from environment
-const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_USER_ID = process.env.TELEGRAM_USER_ID;
+// Load credentials from project-specific config or environment variables
+// Priority: .claude/telegram.json > environment variables
+function loadCredentials() {
+  const configPath = path.join(process.cwd(), '.claude', 'telegram.json');
+
+  // Try project-specific config first
+  if (fs.existsSync(configPath)) {
+    try {
+      const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));
+      if (config.botToken && config.userId) {
+        console.error(`[telegram-mcp] Using credentials from ${configPath}`);
+        return {
+          botToken: config.botToken,
+          userId: config.userId.toString()
+        };
+      }
+    } catch (e) {
+      console.error(`[telegram-mcp] Error reading ${configPath}: ${e.message}`);
+    }
+  }
+
+  // Fall back to environment variables
+  return {
+    botToken: process.env.TELEGRAM_BOT_TOKEN,
+    userId: process.env.TELEGRAM_USER_ID
+  };
+}
+
+const credentials = loadCredentials();
+const TELEGRAM_BOT_TOKEN = credentials.botToken;
+const TELEGRAM_USER_ID = credentials.userId;
 const SESSION_DIR = getSessionDir(process.cwd());
 const QUEUE_FILE = path.join(SESSION_DIR, 'queue.json');
 

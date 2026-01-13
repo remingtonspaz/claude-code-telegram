@@ -157,9 +157,28 @@ cp .mcp.json.template .mcp.json
 
 ## Configuration Files
 
+### Credentials (choose one)
+
+| Method | Location | Purpose |
+|--------|----------|---------|
+| Per-project | `<project>/.claude/telegram.json` | Project-specific credentials (priority) |
+| Global | `.mcp.json` env vars | Default credentials for all projects |
+
+**Per-project config** (`<project>/.claude/telegram.json`):
+```json
+{
+  "botToken": "YOUR_BOT_TOKEN",
+  "userId": "YOUR_USER_ID"
+}
+```
+
+The server checks for `.claude/telegram.json` first, then falls back to environment variables from `.mcp.json`.
+
+### Other Files
+
 | File | Purpose |
 |------|---------|
-| `.mcp.json` | Credentials (gitignored) |
+| `.mcp.json` | MCP server config + fallback credentials |
 | `.mcp.json.template` | Template for distribution |
 
 ### Session-Specific Files

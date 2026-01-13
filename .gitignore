@@ -1,9 +1,6 @@
 # Dependencies
 node_modules/
 
-# Sensitive configuration (contains API keys)
-.mcp.json
-
 # Local Claude settings
 .claude/settings.local.json
 

@@ -10,16 +10,25 @@
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
+import crypto from 'crypto';
 import { spawn, execSync } from 'child_process';
 import { fileURLToPath } from 'url';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-const TELEGRAM_DIR = path.join(os.homedir(), '.claude-telegram');
-const QUEUE_FILE = path.join(TELEGRAM_DIR, 'queue.json');
-const WATCHER_PID_FILE = path.join(TELEGRAM_DIR, 'watcher.pid');
-const SESSION_INFO_FILE = path.join(TELEGRAM_DIR, 'session-info.json');
+// Generate session-specific directory based on project path
+// Format: ~/.claude-telegram/<basename>-<hash>/
+function getSessionDir(cwd) {
+  const basename = path.basename(cwd).replace(/[^a-zA-Z0-9-_]/g, '_');
+  const hash = crypto.createHash('md5').update(cwd).digest('hex').substring(0, 6);
+  return path.join(os.homedir(), '.claude-telegram', `${basename}-${hash}`);
+}
+
+const SESSION_DIR = getSessionDir(process.cwd());
+const QUEUE_FILE = path.join(SESSION_DIR, 'queue.json');
+const WATCHER_PID_FILE = path.join(SESSION_DIR, 'watcher.pid');
+const SESSION_INFO_FILE = path.join(SESSION_DIR, 'session-info.json');
 
 // Check if watcher is already running
 function isWatcherRunning() {
@@ -98,7 +107,7 @@ function findCmdAncestor() {
     }
   } catch (e) {
     try {
-      fs.appendFileSync(path.join(TELEGRAM_DIR, 'debug.log'),
+      fs.appendFileSync(path.join(SESSION_DIR, 'debug.log'),
         `[${new Date().toISOString()}] findCmdAncestor error: ${e.message}\n`);
     } catch {}
   }
@@ -137,7 +146,7 @@ function ensureWatcherRunning() {
   if (!fs.existsSync(watcherScript)) return;
 
   // Ensure directory exists
-  if (!fs.existsSync(TELEGRAM_DIR)) fs.mkdirSync(TELEGRAM_DIR, { recursive: true });
+  if (!fs.existsSync(SESSION_DIR)) fs.mkdirSync(SESSION_DIR, { recursive: true });
 
   // Find cmd.exe ancestor in process tree
   const cmdInfo = findCmdAncestor();
@@ -145,6 +154,7 @@ function ensureWatcherRunning() {
   // Save session info for debugging
   const sessionInfo = {
     cwd: process.cwd(),
+    sessionDir: SESSION_DIR,
     hookPid: process.pid,
     cmdPid: cmdInfo?.pid || null,
     windowHandle: cmdInfo?.hwnd || null,
@@ -152,8 +162,8 @@ function ensureWatcherRunning() {
   };
   fs.writeFileSync(SESSION_INFO_FILE, JSON.stringify(sessionInfo, null, 2));
 
-  // Build watcher arguments
-  const watcherArgs = [];
+  // Build watcher arguments - always pass session directory
+  const watcherArgs = ['-SessionDir', SESSION_DIR.replace(/\\/g, '/')];
   if (cmdInfo?.hwnd) {
     watcherArgs.push('-WindowHandle', cmdInfo.hwnd.toString());
   } else if (cmdInfo?.pid) {
@@ -177,7 +187,7 @@ function ensureWatcherRunning() {
   } catch (e) {
     // Log error for debugging
     try {
-      fs.appendFileSync(path.join(TELEGRAM_DIR, 'debug.log'),
+      fs.appendFileSync(path.join(SESSION_DIR, 'debug.log'),
         `[${new Date().toISOString()}] Watcher spawn error: ${e.message}\n`);
     } catch {}
   }

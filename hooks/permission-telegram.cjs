@@ -15,10 +15,19 @@ const https = require('https');
 const fs = require('fs');
 const path = require('path');
 const os = require('os');
+const crypto = require('crypto');
 
-// Paths
-const TELEGRAM_DIR = path.join(os.homedir(), '.claude-telegram');
-const PENDING_PERMISSION_PATH = path.join(TELEGRAM_DIR, 'pending-permission.json');
+// Generate session-specific directory based on project path
+// Format: ~/.claude-telegram/<basename>-<hash>/
+function getSessionDir(cwd) {
+    const basename = path.basename(cwd).replace(/[^a-zA-Z0-9-_]/g, '_');
+    const hash = crypto.createHash('md5').update(cwd).digest('hex').substring(0, 6);
+    return path.join(os.homedir(), '.claude-telegram', `${basename}-${hash}`);
+}
+
+// Paths - session-specific
+const SESSION_DIR = getSessionDir(process.cwd());
+const PENDING_PERMISSION_PATH = path.join(SESSION_DIR, 'pending-permission.json');
 
 // Read Telegram credentials from environment variables
 function getCredentials() {
@@ -131,9 +140,9 @@ async function main() {
         return;
     }
 
-    // Ensure telegram directory exists
-    if (!fs.existsSync(TELEGRAM_DIR)) {
-        fs.mkdirSync(TELEGRAM_DIR, { recursive: true });
+    // Ensure session directory exists
+    if (!fs.existsSync(SESSION_DIR)) {
+        fs.mkdirSync(SESSION_DIR, { recursive: true });
     }
 
     // Write pending permission info

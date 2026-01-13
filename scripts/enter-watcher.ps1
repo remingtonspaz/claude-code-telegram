@@ -8,7 +8,8 @@
 param(
     [int]$TargetPid = 0,
     [string]$MatchTitle = "",
-    [long]$WindowHandle = 0
+    [long]$WindowHandle = 0,
+    [string]$SessionDir = ""
 )
 
 Add-Type @"
@@ -42,9 +43,16 @@ $WM_KEYDOWN = 0x0100
 $WM_KEYUP = 0x0101
 $VK_RETURN = 0x0D
 
-$triggerFile = "$env:USERPROFILE\.claude-telegram\trigger-enter"
-$permissionResponseFile = "$env:USERPROFILE\.claude-telegram\permission-response.json"
-$triggerDir = Split-Path $triggerFile
+# Determine session directory (use provided SessionDir or fall back to default)
+if ($SessionDir -ne "") {
+    $sessionPath = $SessionDir
+} else {
+    $sessionPath = "$env:USERPROFILE\.claude-telegram"
+}
+
+$triggerFile = Join-Path $sessionPath "trigger-enter"
+$permissionResponseFile = Join-Path $sessionPath "permission-response.json"
+$triggerDir = $sessionPath
 
 # Ensure directory exists
 if (-not (Test-Path $triggerDir)) {
@@ -82,6 +90,7 @@ if ($WindowHandle -gt 0) {
 } else {
     Write-Host "Enter Watcher started (search mode)"
 }
+Write-Host "Session dir: $sessionPath"
 Write-Host "Trigger file: $triggerFile"
 Write-Host ""
 

@@ -9,17 +9,26 @@ import TelegramBot from 'node-telegram-bot-api';
 import fs from 'fs';
 import path from 'path';
 import os from 'os';
+import crypto from 'crypto';
 import { fileURLToPath } from 'url';
 import { spawn, execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
+// Generate session-specific directory based on project path
+// Format: ~/.claude-telegram/<basename>-<hash>/
+function getSessionDir(cwd) {
+  const basename = path.basename(cwd).replace(/[^a-zA-Z0-9-_]/g, '_');
+  const hash = crypto.createHash('md5').update(cwd).digest('hex').substring(0, 6);
+  return path.join(os.homedir(), '.claude-telegram', `${basename}-${hash}`);
+}
+
 // Configuration from environment
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_USER_ID = process.env.TELEGRAM_USER_ID;
-const QUEUE_DIR = path.join(os.homedir(), '.claude-telegram');
-const QUEUE_FILE = path.join(QUEUE_DIR, 'queue.json');
+const SESSION_DIR = getSessionDir(process.cwd());
+const QUEUE_FILE = path.join(SESSION_DIR, 'queue.json');
 
 // Validate configuration
 if (!TELEGRAM_BOT_TOKEN) {
@@ -33,8 +42,8 @@ if (!TELEGRAM_USER_ID) {
 }
 
 // Ensure queue directory exists
-if (!fs.existsSync(QUEUE_DIR)) {
-  fs.mkdirSync(QUEUE_DIR, { recursive: true });
+if (!fs.existsSync(SESSION_DIR)) {
+  fs.mkdirSync(SESSION_DIR, { recursive: true });
 }
 
 // Initialize empty queue if file doesn't exist
@@ -265,12 +274,13 @@ bot.on('polling_error', (error) => {
   log(`Polling error: ${error.message}`);
 });
 
-log('Telegram bot listener started');
+log(`Telegram bot listener started`);
+log(`Session directory: ${SESSION_DIR}`);
 
 // Trigger file for the watcher script
-const TRIGGER_FILE = path.join(QUEUE_DIR, 'trigger-enter');
-const PENDING_PERMISSION_FILE = path.join(QUEUE_DIR, 'pending-permission.json');
-const PERMISSION_RESPONSE_FILE = path.join(QUEUE_DIR, 'permission-response.json');
+const TRIGGER_FILE = path.join(SESSION_DIR, 'trigger-enter');
+const PENDING_PERMISSION_FILE = path.join(SESSION_DIR, 'pending-permission.json');
+const PERMISSION_RESPONSE_FILE = path.join(SESSION_DIR, 'permission-response.json');
 
 // Trigger Enter keystroke by writing a trigger file (watcher script picks this up)
 function triggerEnterKey() {

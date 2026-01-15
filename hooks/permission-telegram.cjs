@@ -29,8 +29,26 @@ function getSessionDir(cwd) {
 const SESSION_DIR = getSessionDir(process.cwd());
 const PENDING_PERMISSION_PATH = path.join(SESSION_DIR, 'pending-permission.json');
 
-// Read Telegram credentials from environment variables
+// Read Telegram credentials from multiple sources
+// Priority: .claude/telegram.json > environment variables > .mcp.json
 function getCredentials() {
+    // 1. Try project-specific config first (same as MCP server)
+    try {
+        const configPath = path.join(process.cwd(), '.claude', 'telegram.json');
+        if (fs.existsSync(configPath)) {
+            const config = JSON.parse(fs.readFileSync(configPath, 'utf8'));
+            if (config.botToken && config.userId) {
+                return {
+                    botToken: config.botToken,
+                    userId: config.userId.toString()
+                };
+            }
+        }
+    } catch (err) {
+        // Continue to next method
+    }
+
+    // 2. Try environment variables
     const botToken = process.env.TELEGRAM_BOT_TOKEN;
     const userId = process.env.TELEGRAM_USER_ID;
 
@@ -38,7 +56,7 @@ function getCredentials() {
         return { botToken, userId };
     }
 
-    // Fallback: try reading from .mcp.json in project directory
+    // 3. Fallback: try reading from .mcp.json in project directory
     try {
         const projectDir = process.env.CLAUDE_PROJECT_DIR || path.join(__dirname, '..');
         const mcpConfigPath = path.join(projectDir, '.mcp.json');

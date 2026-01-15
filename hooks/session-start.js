@@ -110,6 +110,15 @@ function spawnEnterWatcher(targetPid) {
   }
 }
 
+// Track initialization state to prevent double-initialization
+let initialized = false;
+
+function safeInitializeWatcher() {
+  if (initialized) return;
+  initialized = true;
+  initializeWatcher();
+}
+
 // Main
 async function main() {
   // Read hook input from stdin (if any)
@@ -119,7 +128,7 @@ async function main() {
   // Non-blocking read with timeout
   const timeout = setTimeout(() => {
     // No input received, proceed anyway
-    initializeWatcher();
+    safeInitializeWatcher();
   }, 100);
 
   process.stdin.on('data', (chunk) => {
@@ -128,13 +137,13 @@ async function main() {
 
   process.stdin.on('end', () => {
     clearTimeout(timeout);
-    initializeWatcher();
+    safeInitializeWatcher();
   });
 
   // If stdin is not a TTY and has no data, proceed immediately
   if (process.stdin.isTTY === false) {
     clearTimeout(timeout);
-    initializeWatcher();
+    safeInitializeWatcher();
   }
 }
 

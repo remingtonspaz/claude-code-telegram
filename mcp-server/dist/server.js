@@ -81948,6 +81948,10 @@ function isPermissionResponse(text) {
   const normalized = (text || "").trim().toLowerCase();
   return ["y", "n", "a", "yes", "no", "always"].includes(normalized);
 }
+function isNumericResponse(text) {
+  const normalized = (text || "").trim();
+  return /^\d+$/.test(normalized);
+}
 function normalizePermissionResponse(text) {
   const normalized = (text || "").trim().toLowerCase();
   if (normalized === "yes" || normalized === "y") return "y";
@@ -81955,15 +81959,19 @@ function normalizePermissionResponse(text) {
   if (normalized === "always" || normalized === "a") return "a";
   return null;
 }
-function hasPendingPermission() {
+function getPendingPermission() {
   try {
-    if (!fs.existsSync(PENDING_PERMISSION_FILE)) return false;
+    if (!fs.existsSync(PENDING_PERMISSION_FILE)) return null;
     const data = JSON.parse(fs.readFileSync(PENDING_PERMISSION_FILE, "utf-8"));
     const age = Date.now() - new Date(data.timestamp).getTime();
-    return age < 5 * 60 * 1e3;
+    if (age >= 5 * 60 * 1e3) return null;
+    return data;
   } catch (e) {
-    return false;
+    return null;
   }
+}
+function hasPendingPermission() {
+  return getPendingPermission() !== null;
 }
 function clearPendingPermission() {
   try {
@@ -81974,13 +81982,14 @@ function clearPendingPermission() {
     log(`Error clearing pending permission: ${e.message}`);
   }
 }
-function writePermissionResponse(response) {
+function writePermissionResponse(response, promptType) {
   const responseData = {
     timestamp: (/* @__PURE__ */ new Date()).toISOString(),
-    response
+    response,
+    prompt_type: promptType || "permission"
   };
   fs.writeFileSync(PERMISSION_RESPONSE_FILE, JSON.stringify(responseData, null, 2));
-  log(`Wrote permission response: ${response}`);
+  log(`Wrote permission response: ${response} (type: ${promptType || "permission"})`);
 }
 bot.on("message", async (msg) => {
   if (msg.from.id.toString() !== TELEGRAM_USER_ID) {
@@ -81993,16 +82002,40 @@ bot.on("message", async (msg) => {
   }
   markMessageProcessed(msg.message_id);
   const text = msg.text || msg.caption || "";
-  if (msg.text && isPermissionResponse(text) && hasPendingPermission()) {
-    const response = normalizePermissionResponse(text);
-    log(`Received permission response: ${text} -> ${response}`);
-    const responseText = response === "y" ? "Yes (allow once)" : response === "n" ? "No (deny)" : response === "a" ? "Always (allow permanently)" : text;
-    bot.sendMessage(TELEGRAM_USER_ID, `\u2705 Permission: ${responseText}`).catch(() => {
-    });
-    writePermissionResponse(response);
-    clearPendingPermission();
-    triggerEnterKey();
-    return;
+  if (msg.text && hasPendingPermission()) {
+    const pending = getPendingPermission();
+    const promptType = pending?.prompt_type || "permission";
+    if (promptType === "question" && isNumericResponse(text)) {
+      const optionNum = parseInt(text.trim(), 10);
+      log(`Received question response: option ${optionNum} (type: ${promptType})`);
+      const questions = pending?.tool_input?.questions || [];
+      const options = questions[0]?.options || [];
+      let confirmText;
+      if (optionNum > 0 && optionNum <= options.length) {
+        confirmText = options[optionNum - 1].label;
+      } else if (optionNum === options.length + 1) {
+        confirmText = "Other (custom text)";
+      } else {
+        confirmText = `Option ${optionNum}`;
+      }
+      bot.sendMessage(TELEGRAM_USER_ID, `\u2705 Selected: ${confirmText}`).catch(() => {
+      });
+      writePermissionResponse(optionNum.toString(), "question");
+      clearPendingPermission();
+      triggerEnterKey();
+      return;
+    }
+    if (isPermissionResponse(text)) {
+      const response = normalizePermissionResponse(text);
+      log(`Received permission response: ${text} -> ${response}`);
+      const responseText = response === "y" ? "Yes (allow once)" : response === "n" ? "No (deny)" : response === "a" ? "Always (allow permanently)" : text;
+      bot.sendMessage(TELEGRAM_USER_ID, `\u2705 Permission: ${responseText}`).catch(() => {
+      });
+      writePermissionResponse(response, promptType);
+      clearPendingPermission();
+      triggerEnterKey();
+      return;
+    }
   }
   if (!msg.text && !msg.caption && !msg.photo) {
     log(`Ignoring unsupported message type from ${msg.from.first_name || "User"}`);

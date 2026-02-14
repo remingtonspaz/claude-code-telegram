@@ -78,6 +78,14 @@ function Send-PostMessageChars($hwnd, [string]$text) {
     return $true
 }
 
+# Handle AskUserQuestion: send option number directly
+# (Permission is auto-approved by the hook, so question UI is already showing)
+function Send-QuestionResponse($hwnd, [int]$optionNum) {
+    Log "  Sending option number $optionNum..."
+    Send-PostMessageChars $hwnd "$optionNum" | Out-Null
+    return $true
+}
+
 # Resolve window handle from parameters
 function Resolve-WindowHandle {
     if ($WindowHandle -gt 0) {
@@ -149,12 +157,17 @@ while ($true) {
         # Determine what to send
         $charsToSend = "."
         $logMessage = "Period+Enter"
+        $promptType = "message"
 
         if (Test-Path $permissionResponseFile) {
             try {
                 $responseContent = Get-Content $permissionResponseFile -Raw | ConvertFrom-Json
                 $response = $responseContent.response
-                if ($response -eq "y" -or $response -eq "n" -or $response -eq "a") {
+                $promptType = if ($responseContent.prompt_type) { $responseContent.prompt_type } else { "permission" }
+
+                if ($promptType -eq "question" -and $response -match '^\d+$') {
+                    $logMessage = "Question response: option $response"
+                } elseif ($response -eq "y" -or $response -eq "n" -or $response -eq "a") {
                     $charsToSend = $response
                     $logMessage = "Permission response: $response"
                 }
@@ -172,10 +185,24 @@ while ($true) {
         }
 
         if ($hwnd -ne [IntPtr]::Zero -and [Win32]::IsWindow($hwnd)) {
-            $sent = Send-PostMessageChars $hwnd $charsToSend
-            if ($sent) {
-                Log "  Sent via PostMessage WM_CHAR (handle=$hwnd)"
+            $sent = $false
+
+            if ($promptType -eq "question" -and $responseContent.response -match '^\d+$') {
+                # AskUserQuestion: send option number directly (hook auto-approved)
+                $optionNum = [int]$responseContent.response
+                $sent = Send-QuestionResponse $hwnd $optionNum
+                if ($sent) {
+                    Log "  Selected option $optionNum via PostMessage (handle=$hwnd)"
+                }
             } else {
+                # Regular message or permission response
+                $sent = Send-PostMessageChars $hwnd $charsToSend
+                if ($sent) {
+                    Log "  Sent via PostMessage WM_CHAR (handle=$hwnd)"
+                }
+            }
+
+            if (-not $sent) {
                 Log "  PostMessage failed, re-resolving handle..."
                 $hwnd = Resolve-WindowHandle
                 if ($hwnd -ne [IntPtr]::Zero) {

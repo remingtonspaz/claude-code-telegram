@@ -118,6 +118,12 @@ function isPermissionResponse(text) {
   return ['y', 'n', 'a', 'yes', 'no', 'always'].includes(normalized);
 }
 
+// Check if a message is a numeric response (for AskUserQuestion)
+function isNumericResponse(text) {
+  const normalized = (text || '').trim();
+  return /^\d+$/.test(normalized);
+}
+
 // Normalize permission response to single character
 function normalizePermissionResponse(text) {
   const normalized = (text || '').trim().toLowerCase();
@@ -127,17 +133,23 @@ function normalizePermissionResponse(text) {
   return null;
 }
 
-// Check for pending permission request
-function hasPendingPermission() {
+// Read pending permission info
+function getPendingPermission() {
   try {
-    if (!fs.existsSync(PENDING_PERMISSION_FILE)) return false;
+    if (!fs.existsSync(PENDING_PERMISSION_FILE)) return null;
     const data = JSON.parse(fs.readFileSync(PENDING_PERMISSION_FILE, 'utf-8'));
     // Consider pending if created within last 5 minutes
     const age = Date.now() - new Date(data.timestamp).getTime();
-    return age < 5 * 60 * 1000;
+    if (age >= 5 * 60 * 1000) return null;
+    return data;
   } catch (e) {
-    return false;
+    return null;
   }
+}
+
+// Check for pending permission request
+function hasPendingPermission() {
+  return getPendingPermission() !== null;
 }
 
 // Clear pending permission
@@ -152,13 +164,14 @@ function clearPendingPermission() {
 }
 
 // Write permission response for watcher to pick up
-function writePermissionResponse(response) {
+function writePermissionResponse(response, promptType) {
   const responseData = {
     timestamp: new Date().toISOString(),
-    response: response
+    response: response,
+    prompt_type: promptType || 'permission'
   };
   fs.writeFileSync(PERMISSION_RESPONSE_FILE, JSON.stringify(responseData, null, 2));
-  log(`Wrote permission response: ${response}`);
+  log(`Wrote permission response: ${response} (type: ${promptType || 'permission'})`);
 }
 
 // Queue incoming messages from Telegram
@@ -178,24 +191,50 @@ bot.on('message', async (msg) => {
 
   const text = msg.text || msg.caption || '';
 
-  // Check if this is a permission response (text messages only)
-  if (msg.text && isPermissionResponse(text) && hasPendingPermission()) {
-    const response = normalizePermissionResponse(text);
-    log(`Received permission response: ${text} -> ${response}`);
+  // Check if this is a response to a pending prompt
+  if (msg.text && hasPendingPermission()) {
+    const pending = getPendingPermission();
+    const promptType = pending?.prompt_type || 'permission';
 
-    // Send confirmation to user
-    const responseText = response === 'y' ? 'Yes (allow once)' :
-                         response === 'n' ? 'No (deny)' :
-                         response === 'a' ? 'Always (allow permanently)' : text;
-    bot.sendMessage(TELEGRAM_USER_ID, `✅ Permission: ${responseText}`).catch(() => {});
+    // Handle numeric responses for AskUserQuestion
+    if (promptType === 'question' && isNumericResponse(text)) {
+      const optionNum = parseInt(text.trim(), 10);
+      log(`Received question response: option ${optionNum} (type: ${promptType})`);
 
-    // Write response for watcher
-    writePermissionResponse(response);
-    clearPendingPermission();
+      // Find option label for confirmation
+      const questions = pending?.tool_input?.questions || [];
+      const options = questions[0]?.options || [];
+      let confirmText;
+      if (optionNum > 0 && optionNum <= options.length) {
+        confirmText = options[optionNum - 1].label;
+      } else if (optionNum === options.length + 1) {
+        confirmText = 'Other (custom text)';
+      } else {
+        confirmText = `Option ${optionNum}`;
+      }
+      bot.sendMessage(TELEGRAM_USER_ID, `✅ Selected: ${confirmText}`).catch(() => {});
 
-    // Trigger the watcher (it will see the permission response file)
-    triggerEnterKey();
-    return;
+      writePermissionResponse(optionNum.toString(), 'question');
+      clearPendingPermission();
+      triggerEnterKey();
+      return;
+    }
+
+    // Handle standard permission responses (y/n/a)
+    if (isPermissionResponse(text)) {
+      const response = normalizePermissionResponse(text);
+      log(`Received permission response: ${text} -> ${response}`);
+
+      const responseText = response === 'y' ? 'Yes (allow once)' :
+                           response === 'n' ? 'No (deny)' :
+                           response === 'a' ? 'Always (allow permanently)' : text;
+      bot.sendMessage(TELEGRAM_USER_ID, `✅ Permission: ${responseText}`).catch(() => {});
+
+      writePermissionResponse(response, promptType);
+      clearPendingPermission();
+      triggerEnterKey();
+      return;
+    }
   }
 
   // Skip messages with no text and no photo (stickers, voice, etc.)

@@ -8,6 +8,7 @@ Bidirectional Telegram messaging for Claude Code with remote permission control.
 - **Receive messages from Telegram** - Send commands to Claude remotely
 - **Auto-enter** - Messages trigger Claude automatically (no manual Enter needed)
 - **Remote permission control** - Approve/deny tool permissions via Telegram
+- **Slash command forwarding** - Send `;commit` on Telegram to run `/commit` in Claude Code
 - **Session-specific targeting** - Works correctly with multiple Claude windows
 
 ## Requirements
@@ -201,6 +202,19 @@ When Claude needs permission for a tool:
    - `n` or `no` - Deny
    - `a` or `always` - Always allow
 3. The watcher sends your response to Claude
+
+### Slash Command Forwarding
+
+Send Claude Code slash commands from Telegram using `;` as the prefix (since Telegram reserves `/` for bot commands):
+
+1. Send `;commit` on Telegram
+2. The bot confirms: "Forwarding /commit to Claude Code..."
+3. The watcher types `/commit` + Enter into the terminal
+4. Claude Code executes the command
+
+**Notes:**
+- Only single-word commands work: `;commit`, `;help`, `;mcp`
+- Multi-word messages like `;foo bar` are treated as regular messages
 
 ## Project Structure
 

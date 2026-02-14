@@ -237,6 +237,22 @@ bot.on('message', async (msg) => {
     }
   }
 
+  // Check if this is a slash command (;word → /word)
+  if (msg.text) {
+    const slashMatch = msg.text.trim().match(/^;(\w+)$/);
+    if (slashMatch) {
+      const command = slashMatch[1];
+      log(`Slash command detected: ;${command} → /${command}`);
+      fs.writeFileSync(SLASH_COMMAND_FILE, JSON.stringify({
+        timestamp: new Date().toISOString(),
+        command: command
+      }, null, 2));
+      bot.sendMessage(TELEGRAM_USER_ID, `Forwarding /${command} to Claude Code...`).catch(() => {});
+      triggerEnterKey();
+      return;
+    }
+  }
+
   // Skip messages with no text and no photo (stickers, voice, etc.)
   if (!msg.text && !msg.caption && !msg.photo) {
     log(`Ignoring unsupported message type from ${msg.from.first_name || 'User'}`);
@@ -311,6 +327,7 @@ log(`Session directory: ${SESSION_DIR}`);
 const TRIGGER_FILE = path.join(SESSION_DIR, 'trigger-enter');
 const PENDING_PERMISSION_FILE = path.join(SESSION_DIR, 'pending-permission.json');
 const PERMISSION_RESPONSE_FILE = path.join(SESSION_DIR, 'permission-response.json');
+const SLASH_COMMAND_FILE = path.join(SESSION_DIR, 'slash-command.json');
 
 // Trigger Enter keystroke by writing a trigger file (watcher script picks this up)
 function triggerEnterKey() {

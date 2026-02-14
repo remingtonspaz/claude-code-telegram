@@ -6,6 +6,7 @@
 - Session-specific PID targeting: WORKING
 - Watcher auto-spawn: WORKING
 - Permission control via Telegram: WORKING
+- Slash command forwarding (`;cmd` → `/cmd`): WORKING
 - **Plugin structure: CONVERTED** (new)
 
 ---
@@ -130,6 +131,19 @@ Control Claude's permission prompts remotely via Telegram.
 2. Reply: `y` (yes), `n` (no), or `a` (always)
 3. Watcher sends keystroke → Claude continues
 
+### Slash Command Forwarding
+Send Claude Code slash commands from Telegram using `;` as the prefix (since Telegram reserves `/` for bot commands).
+
+1. Send `;commit` on Telegram
+2. MCP server detects the `;word` pattern, writes `slash-command.json`
+3. Watcher reads the command file, types `/commit` + Enter into the terminal
+4. Claude Code executes the slash command
+
+**Rules:**
+- Only single-word commands are recognized: `;commit`, `;help`, `;mcp`
+- Multi-word messages like `;foo bar` are treated as regular messages
+- Commands older than 60 seconds are discarded as stale
+
 ### Available MCP Tools
 
 | Tool | Description |
@@ -194,6 +208,7 @@ Example: `D:\Projects\my-app` → `~/.claude-telegram/my-app-a1b2c3/`
 | `trigger-enter` | Trigger file for watcher |
 | `pending-permission.json` | Pending permission |
 | `permission-response.json` | Permission response |
+| `slash-command.json` | Pending slash command |
 | `watcher.pid` | Watcher process ID |
 | `session-info.json` | Debug: session/window info |
 | `debug.log` | Error logging |

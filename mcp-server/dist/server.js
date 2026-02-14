@@ -82037,6 +82037,21 @@ bot.on("message", async (msg) => {
       return;
     }
   }
+  if (msg.text) {
+    const slashMatch = msg.text.trim().match(/^;(\w+)$/);
+    if (slashMatch) {
+      const command = slashMatch[1];
+      log(`Slash command detected: ;${command} \u2192 /${command}`);
+      fs.writeFileSync(SLASH_COMMAND_FILE, JSON.stringify({
+        timestamp: (/* @__PURE__ */ new Date()).toISOString(),
+        command
+      }, null, 2));
+      bot.sendMessage(TELEGRAM_USER_ID, `Forwarding /${command} to Claude Code...`).catch(() => {
+      });
+      triggerEnterKey();
+      return;
+    }
+  }
   if (!msg.text && !msg.caption && !msg.photo) {
     log(`Ignoring unsupported message type from ${msg.from.first_name || "User"}`);
     return;
@@ -82088,6 +82103,7 @@ log(`Session directory: ${SESSION_DIR}`);
 var TRIGGER_FILE = path.join(SESSION_DIR, "trigger-enter");
 var PENDING_PERMISSION_FILE = path.join(SESSION_DIR, "pending-permission.json");
 var PERMISSION_RESPONSE_FILE = path.join(SESSION_DIR, "permission-response.json");
+var SLASH_COMMAND_FILE = path.join(SESSION_DIR, "slash-command.json");
 function triggerEnterKey() {
   setTimeout(() => {
     try {

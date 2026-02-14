@@ -41,6 +41,7 @@ if ($SessionDir -ne "") {
 
 $triggerFile = Join-Path $sessionPath "trigger-enter"
 $permissionResponseFile = Join-Path $sessionPath "permission-response.json"
+$slashCommandFile = Join-Path $sessionPath "slash-command.json"
 $debugLog = Join-Path $sessionPath "debug.log"
 
 # Ensure directory exists
@@ -192,6 +193,21 @@ while ($true) {
                 Remove-Item $permissionResponseFile -Force
             } catch {
                 Log "WARNING: Failed to parse permission response"
+            }
+        } elseif (Test-Path $slashCommandFile) {
+            try {
+                $cmdContent = Get-Content $slashCommandFile -Raw | ConvertFrom-Json
+                $cmdAge = (Get-Date) - [DateTime]::Parse($cmdContent.timestamp)
+                if ($cmdAge.TotalSeconds -lt 60) {
+                    $command = $cmdContent.command
+                    $charsToSend = "/$command"
+                    $logMessage = "Slash command: /$command"
+                } else {
+                    Log "WARNING: Stale slash command (age=$($cmdAge.TotalSeconds)s), discarding"
+                }
+                Remove-Item $slashCommandFile -Force
+            } catch {
+                Log "WARNING: Failed to parse slash command file"
             }
         }
 

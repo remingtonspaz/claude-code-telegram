@@ -186,6 +186,22 @@ function ensureWatcherRunning() {
   // Ensure directory exists
   if (!fs.existsSync(SESSION_DIR)) fs.mkdirSync(SESSION_DIR, { recursive: true });
 
+  // Atomic lock to prevent duplicate spawns from concurrent hook invocations
+  const lockFile = path.join(SESSION_DIR, 'watcher.lock');
+  try {
+    fs.writeFileSync(lockFile, process.pid.toString(), { flag: 'wx' });
+  } catch {
+    // Lock exists — check if stale (>30s) before giving up
+    try {
+      const lockAge = Date.now() - fs.statSync(lockFile).mtimeMs;
+      if (lockAge < 30000) return; // Another hook is actively spawning
+      fs.unlinkSync(lockFile);
+      fs.writeFileSync(lockFile, process.pid.toString(), { flag: 'wx' });
+    } catch {
+      return; // Can't acquire lock
+    }
+  }
+
   // Find cmd.exe ancestor in process tree
   const cmdInfo = findCmdAncestor();
 
@@ -231,6 +247,8 @@ function ensureWatcherRunning() {
       fs.appendFileSync(path.join(SESSION_DIR, 'debug.log'),
         `[${new Date().toISOString()}] Watcher spawn error: ${e.message}\n`);
     } catch {}
+  } finally {
+    try { fs.unlinkSync(lockFile); } catch {}
   }
 }
 

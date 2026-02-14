@@ -55,16 +55,19 @@ function isWatcherRunning() {
   }
 }
 
-// Walk up process tree using WMIC to find cmd.exe ancestor
+// Walk up process tree using WMIC to find the persistent cmd.exe ancestor
+// The process tree is: explorer → cmd.exe (persistent) → claude.exe → cmd.exe (transient) → node (hook)
+// We want the persistent cmd.exe (parent of claude.exe), NOT the transient one (child of claude.exe)
 // Returns { pid, hwnd } or null
 function findCmdAncestor() {
   if (os.platform() !== 'win32') return null;
 
   try {
     let currentPid = process.pid;
+    const chain = []; // collect { pid, name } as we walk up
 
     for (let i = 0; i < 15; i++) {
-      // Get parent PID using WMIC
+      // Get parent PID and name using WMIC
       let parentPid;
       try {
         const result = execSync(
@@ -79,31 +82,65 @@ function findCmdAncestor() {
         break;
       }
 
-      // Check if parent is cmd.exe
+      let parentName = '';
       try {
         const nameResult = execSync(
           `wmic process where ProcessId=${parentPid} get Name /format:value`,
           { encoding: 'utf-8', windowsHide: true, timeout: 5000 }
         );
-
-        if (nameResult.includes('cmd.exe')) {
-          // Found cmd.exe! Now get its window handle using PowerShell
-          try {
-            const hwndResult = execSync(
-              `powershell -NoProfile -Command "(Get-Process -Id ${parentPid}).MainWindowHandle.ToInt64()"`,
-              { encoding: 'utf-8', windowsHide: true, timeout: 5000 }
-            );
-            const hwnd = parseInt(hwndResult.trim(), 10);
-            return { pid: parentPid, hwnd: hwnd > 0 ? hwnd : null };
-          } catch {
-            return { pid: parentPid, hwnd: null };
-          }
-        }
+        const nameMatch = nameResult.match(/Name=(.+)/);
+        parentName = nameMatch ? nameMatch[1].trim().toLowerCase() : '';
       } catch {
-        // Process might not exist, continue
+        break;
       }
 
+      chain.push({ pid: parentPid, name: parentName });
+
+      // Stop at explorer.exe (top of user process tree)
+      if (parentName === 'explorer.exe') break;
+
       currentPid = parentPid;
+    }
+
+    // Log the chain for debugging
+    const chainStr = chain.map((c, i) => `i=${i} pid=${c.pid} name=${c.name}`).join(' | ');
+    try {
+      fs.appendFileSync(path.join(SESSION_DIR, 'debug.log'),
+        `[${new Date().toISOString()}] findCmdAncestor: hookPid=${process.pid} | ${chainStr}\n`);
+    } catch {}
+
+    // Find cmd.exe whose CHILD in the chain is claude.exe (the persistent cmd.exe)
+    for (let i = 0; i < chain.length; i++) {
+      if (chain[i].name === 'cmd.exe' && i > 0 && chain[i - 1].name === 'claude.exe') {
+        const pid = chain[i].pid;
+        try {
+          const hwndResult = execSync(
+            `powershell -NoProfile -Command "(Get-Process -Id ${pid}).MainWindowHandle.ToInt64()"`,
+            { encoding: 'utf-8', windowsHide: true, timeout: 5000 }
+          );
+          const hwnd = parseInt(hwndResult.trim(), 10);
+          return { pid, hwnd: hwnd > 0 ? hwnd : null };
+        } catch {
+          return { pid, hwnd: null };
+        }
+      }
+    }
+
+    // Fallback: find the last cmd.exe in the chain (closest to explorer.exe)
+    for (let i = chain.length - 1; i >= 0; i--) {
+      if (chain[i].name === 'cmd.exe') {
+        const pid = chain[i].pid;
+        try {
+          const hwndResult = execSync(
+            `powershell -NoProfile -Command "(Get-Process -Id ${pid}).MainWindowHandle.ToInt64()"`,
+            { encoding: 'utf-8', windowsHide: true, timeout: 5000 }
+          );
+          const hwnd = parseInt(hwndResult.trim(), 10);
+          return { pid, hwnd: hwnd > 0 ? hwnd : null };
+        } catch {
+          return { pid, hwnd: null };
+        }
+      }
     }
   } catch (e) {
     try {

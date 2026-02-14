@@ -1,8 +1,9 @@
 # Watcher script that monitors for trigger file and sends Enter to Claude Code
-# Can be run manually OR auto-spawned by MCP server with target PID
+# Uses PostMessage WM_CHAR for focus-independent keystroke delivery (multi-session safe)
 #
 # Usage:
 #   Manual:     powershell -ExecutionPolicy Bypass -File enter-watcher.ps1
+#   With handle: powershell -ExecutionPolicy Bypass -File enter-watcher.ps1 -WindowHandle 12345
 #   With PID:   powershell -ExecutionPolicy Bypass -File enter-watcher.ps1 -TargetPid 12345
 
 param(
@@ -17,33 +18,20 @@ using System;
 using System.Runtime.InteropServices;
 public class Win32 {
     [DllImport("user32.dll")]
-    public static extern bool SetForegroundWindow(IntPtr hWnd);
-    [DllImport("user32.dll")]
-    public static extern bool ShowWindow(IntPtr hWnd, int nCmdShow);
-    [DllImport("user32.dll")]
-    public static extern IntPtr PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
-    [DllImport("user32.dll")]
-    public static extern IntPtr GetForegroundWindow();
+    public static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
     [DllImport("user32.dll")]
     public static extern bool IsWindow(IntPtr hWnd);
     [DllImport("user32.dll")]
     public static extern uint GetWindowThreadProcessId(IntPtr hWnd, out uint processId);
-    [DllImport("user32.dll")]
-    public static extern bool AttachThreadInput(uint idAttach, uint idAttachTo, bool fAttach);
-    [DllImport("kernel32.dll")]
-    public static extern uint GetCurrentThreadId();
-    [DllImport("user32.dll")]
-    public static extern bool BringWindowToTop(IntPtr hWnd);
-    [DllImport("user32.dll")]
-    public static extern bool AllowSetForegroundWindow(int processId);
 }
 "@
 
-$WM_KEYDOWN = 0x0100
-$WM_KEYUP = 0x0101
+$WM_CHAR = 0x0102
 $VK_RETURN = 0x0D
+$LPARAM_REPEAT_1 = [IntPtr]1
+$CHAR_DELAY_MS = 20
 
-# Determine session directory (use provided SessionDir or fall back to default)
+# Determine session directory
 if ($SessionDir -ne "") {
     $sessionPath = $SessionDir
 } else {
@@ -52,11 +40,11 @@ if ($SessionDir -ne "") {
 
 $triggerFile = Join-Path $sessionPath "trigger-enter"
 $permissionResponseFile = Join-Path $sessionPath "permission-response.json"
-$triggerDir = $sessionPath
+$debugLog = Join-Path $sessionPath "debug.log"
 
 # Ensure directory exists
-if (-not (Test-Path $triggerDir)) {
-    New-Item -ItemType Directory -Path $triggerDir -Force | Out-Null
+if (-not (Test-Path $sessionPath)) {
+    New-Item -ItemType Directory -Path $sessionPath -Force | Out-Null
 }
 
 # Clean up any existing trigger file
@@ -64,57 +52,102 @@ if (Test-Path $triggerFile) {
     Remove-Item $triggerFile -Force
 }
 
-# Create WScript.Shell for SendKeys
-$wshell = New-Object -ComObject WScript.Shell
-
-# Determine mode
-if ($WindowHandle -gt 0) {
-    Write-Host "Enter Watcher started (window handle mode: $WindowHandle)"
-    # Verify handle is valid by checking if window exists
-    $isValid = [Win32]::IsWindow([IntPtr]$WindowHandle)
-    if (-not $isValid) {
-        Write-Host "WARNING: Window handle $WindowHandle is invalid. Using search mode as fallback."
-        $WindowHandle = 0
-    }
-} elseif ($MatchTitle -ne "") {
-    Write-Host "Enter Watcher started (title match mode: '$MatchTitle')"
-} elseif ($TargetPid -gt 0) {
-    Write-Host "Enter Watcher started (PID mode: $TargetPid)"
-    $targetProcess = Get-Process -Id $TargetPid -ErrorAction SilentlyContinue
-    if (-not $targetProcess) {
-        Write-Host "WARNING: Process $TargetPid not found. Using search mode as fallback."
-        $TargetPid = 0
-    } else {
-        Write-Host "Targeting: $($targetProcess.ProcessName) - $($targetProcess.MainWindowTitle)"
-    }
-} else {
-    Write-Host "Enter Watcher started (search mode)"
+function Log($msg) {
+    $timestamp = Get-Date -Format 'yyyy-MM-dd HH:mm:ss'
+    $line = "[$timestamp] $msg"
+    Write-Host $line
+    try { Add-Content -Path $debugLog -Value $line -ErrorAction SilentlyContinue } catch {}
 }
-Write-Host "Session dir: $sessionPath"
-Write-Host "Trigger file: $triggerFile"
-Write-Host ""
+
+# Send characters to a window handle via PostMessage WM_CHAR (no focus required)
+function Send-PostMessageChars($hwnd, [string]$text) {
+    foreach ($char in $text.ToCharArray()) {
+        $result = [Win32]::PostMessage($hwnd, $WM_CHAR, [IntPtr][int][char]$char, $LPARAM_REPEAT_1)
+        if (-not $result) {
+            Log "  PostMessage failed for char '$char'"
+            return $false
+        }
+        Start-Sleep -Milliseconds $CHAR_DELAY_MS
+    }
+    # Send Enter
+    $result = [Win32]::PostMessage($hwnd, $WM_CHAR, [IntPtr]$VK_RETURN, $LPARAM_REPEAT_1)
+    if (-not $result) {
+        Log "  PostMessage failed for Enter"
+        return $false
+    }
+    return $true
+}
+
+# Resolve window handle from parameters
+function Resolve-WindowHandle {
+    if ($WindowHandle -gt 0) {
+        $h = [IntPtr]$WindowHandle
+        if ([Win32]::IsWindow($h)) { return $h }
+        Log "WARNING: Window handle $WindowHandle is invalid"
+    }
+
+    if ($TargetPid -gt 0) {
+        $proc = Get-Process -Id $TargetPid -ErrorAction SilentlyContinue
+        if ($proc -and $proc.MainWindowHandle -ne [IntPtr]::Zero) {
+            return $proc.MainWindowHandle
+        }
+    }
+
+    if ($MatchTitle -ne "") {
+        $proc = Get-Process -Name cmd -ErrorAction SilentlyContinue | Where-Object {
+            $_.MainWindowTitle -like "*$MatchTitle*"
+        } | Select-Object -First 1
+        if (-not $proc) {
+            $proc = Get-Process -Name WindowsTerminal, powershell, pwsh -ErrorAction SilentlyContinue | Where-Object {
+                $_.MainWindowTitle -like "*$MatchTitle*"
+            } | Select-Object -First 1
+        }
+        if ($proc -and $proc.MainWindowHandle -ne [IntPtr]::Zero) {
+            return $proc.MainWindowHandle
+        }
+    }
+
+    # Search mode fallback
+    $proc = Get-Process -Name cmd -ErrorAction SilentlyContinue | Where-Object {
+        $title = $_.MainWindowTitle
+        ($title -match '^[^a-zA-Z]' -or $title -match 'claude') -and
+        $title -notmatch 'npm' -and
+        $title -notmatch 'powershell'
+    } | Select-Object -First 1
+    if ($proc -and $proc.MainWindowHandle -ne [IntPtr]::Zero) {
+        return $proc.MainWindowHandle
+    }
+
+    return [IntPtr]::Zero
+}
+
+# Startup logging
+$hwnd = Resolve-WindowHandle
+if ($hwnd -ne [IntPtr]::Zero) {
+    $procId = [uint32]0
+    [Win32]::GetWindowThreadProcessId($hwnd, [ref]$procId) | Out-Null
+    $proc = Get-Process -Id $procId -ErrorAction SilentlyContinue
+    Log "Watcher started: WindowHandle=$hwnd ProcessName=$($proc.ProcessName) PID=$procId"
+} else {
+    Log "Watcher started: No valid window handle yet (will resolve on trigger)"
+}
+Log "  SessionDir=$sessionPath"
+Log "  TriggerFile=$triggerFile"
+Log "  Method=PostMessage WM_CHAR (focus-independent)"
 
 while ($true) {
-    # Check if target window/process still exists
-    if ($WindowHandle -gt 0) {
-        if (-not [Win32]::IsWindow([IntPtr]$WindowHandle)) {
-            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Target window closed. Switching to search mode."
-            $WindowHandle = 0
-        }
-    } elseif ($TargetPid -gt 0) {
-        $targetProcess = Get-Process -Id $TargetPid -ErrorAction SilentlyContinue
-        if (-not $targetProcess) {
-            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Target process $TargetPid ended. Switching to search mode."
-            $TargetPid = 0
-        }
+    # Periodically validate window handle
+    if ($hwnd -ne [IntPtr]::Zero -and -not [Win32]::IsWindow($hwnd)) {
+        Log "Target window closed. Will re-resolve on next trigger."
+        $hwnd = [IntPtr]::Zero
     }
 
     if (Test-Path $triggerFile) {
         # Remove trigger file first
         Remove-Item $triggerFile -Force
 
-        # Check if this is a permission response or a regular message trigger
-        $keysToSend = ".{ENTER}"
+        # Determine what to send
+        $charsToSend = "."
         $logMessage = "Period+Enter"
 
         if (Test-Path $permissionResponseFile) {
@@ -122,111 +155,38 @@ while ($true) {
                 $responseContent = Get-Content $permissionResponseFile -Raw | ConvertFrom-Json
                 $response = $responseContent.response
                 if ($response -eq "y" -or $response -eq "n" -or $response -eq "a") {
-                    $keysToSend = "$response{ENTER}"
+                    $charsToSend = $response
                     $logMessage = "Permission response: $response"
                 }
-                # Remove the permission response file
                 Remove-Item $permissionResponseFile -Force
             } catch {
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: Failed to parse permission response"
+                Log "WARNING: Failed to parse permission response"
             }
         }
 
-        Write-Host "[$(Get-Date -Format 'HH:mm:ss')] Trigger detected! Sending $logMessage..."
+        Log "Trigger detected! Sending $logMessage..."
 
-        # Find Claude Code window
-        $hwnd = [IntPtr]::Zero
-        $claudeProcess = $null
-
-        if ($WindowHandle -gt 0) {
-            # Window handle mode: use the handle directly (most reliable)
-            $hwnd = [IntPtr]$WindowHandle
-            # Get process for AppActivate fallback
-            $procId = 0
-            [Win32]::GetWindowThreadProcessId($hwnd, [ref]$procId) | Out-Null
-            if ($procId -gt 0) {
-                $claudeProcess = Get-Process -Id $procId -ErrorAction SilentlyContinue
-            }
-        } elseif ($MatchTitle -ne "") {
-            # Title match mode: find cmd window whose title contains the match string
-            $claudeProcess = Get-Process -Name cmd -ErrorAction SilentlyContinue | Where-Object {
-                $_.MainWindowTitle -like "*$MatchTitle*"
-            } | Select-Object -First 1
-
-            if (-not $claudeProcess) {
-                # Fallback: try WindowsTerminal or other terminals
-                $claudeProcess = Get-Process -Name WindowsTerminal, powershell, pwsh -ErrorAction SilentlyContinue | Where-Object {
-                    $_.MainWindowTitle -like "*$MatchTitle*"
-                } | Select-Object -First 1
-            }
-        } elseif ($TargetPid -gt 0) {
-            # PID mode: target specific process
-            $claudeProcess = Get-Process -Id $TargetPid -ErrorAction SilentlyContinue
-        } else {
-            # Search mode: find by window title pattern
-            $claudeProcess = Get-Process -Name cmd -ErrorAction SilentlyContinue | Where-Object {
-                $title = $_.MainWindowTitle
-                ($title -match '^[^a-zA-Z]' -or $title -match 'claude') -and
-                $title -notmatch 'npm' -and
-                $title -notmatch 'powershell'
-            } | Select-Object -First 1
+        # Re-resolve handle if needed
+        if ($hwnd -eq [IntPtr]::Zero) {
+            $hwnd = Resolve-WindowHandle
         }
 
-        # Get window handle from process if not already set
-        if ($hwnd -eq [IntPtr]::Zero -and $claudeProcess) {
-            $hwnd = $claudeProcess.MainWindowHandle
-        }
-
-        if ($hwnd -ne [IntPtr]::Zero) {
-            if (-not [Win32]::IsWindow($hwnd)) {
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: Window handle is invalid"
-                continue
-            }
-
-            # Try to send keys - AppActivate method works best
-            $sent = $false
-
-            # Method 1: AppActivate (most reliable based on testing)
-            if ($claudeProcess) {
-                try {
-                    $wshell.AppActivate($claudeProcess.Id) | Out-Null
-                    Start-Sleep -Milliseconds 150
-                    $wshell.SendKeys($keysToSend)
-                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via AppActivate"
-                    $sent = $true
-                } catch {
-                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] AppActivate failed: $_"
+        if ($hwnd -ne [IntPtr]::Zero -and [Win32]::IsWindow($hwnd)) {
+            $sent = Send-PostMessageChars $hwnd $charsToSend
+            if ($sent) {
+                Log "  Sent via PostMessage WM_CHAR (handle=$hwnd)"
+            } else {
+                Log "  PostMessage failed, re-resolving handle..."
+                $hwnd = Resolve-WindowHandle
+                if ($hwnd -ne [IntPtr]::Zero) {
+                    $sent = Send-PostMessageChars $hwnd $charsToSend
+                    Log "  Retry result: sent=$sent (handle=$hwnd)"
+                } else {
+                    Log "  WARNING: Could not resolve window handle"
                 }
             }
-
-            # Method 2: AttachThreadInput + SetForegroundWindow (fallback)
-            if (-not $sent) {
-                $targetThreadId = [Win32]::GetWindowThreadProcessId($hwnd, [ref]$null)
-                $currentThreadId = [Win32]::GetCurrentThreadId()
-                $attached = [Win32]::AttachThreadInput($currentThreadId, $targetThreadId, $true)
-
-                try {
-                    [Win32]::ShowWindow($hwnd, 9) | Out-Null
-                    [Win32]::BringWindowToTop($hwnd) | Out-Null
-                    [Win32]::SetForegroundWindow($hwnd) | Out-Null
-                    Start-Sleep -Milliseconds 100
-                    $wshell.SendKeys($keysToSend)
-                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] $logMessage sent via SetForegroundWindow"
-                    $sent = $true
-                } catch {
-                    Write-Host "[$(Get-Date -Format 'HH:mm:ss')] SetForegroundWindow failed: $_"
-                } finally {
-                    if ($attached) {
-                        [Win32]::AttachThreadInput($currentThreadId, $targetThreadId, $false) | Out-Null
-                    }
-                }
-            }
-
-            if (-not $sent) {
-                Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: All methods failed to send keys"
-            }
         } else {
-            Write-Host "[$(Get-Date -Format 'HH:mm:ss')] WARNING: Claude window not found"
+            Log "WARNING: No valid window handle, cannot send"
         }
     }
 

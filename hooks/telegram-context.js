@@ -237,7 +237,14 @@ async function main() {
   const formattedMessages = messages
     .map((m) => {
       const time = new Date(m.timestamp).toLocaleTimeString();
-      return `[${time}] ${m.from}: ${m.text}`;
+      let content = '';
+      if (m.imagePath) {
+        content += `[Image: ${m.imagePath}]`;
+        if (m.text) content += ` ${m.text}`;
+      } else {
+        content = m.text;
+      }
+      return `[${time}] ${m.from}: ${content}`;
     })
     .join('\n');
 

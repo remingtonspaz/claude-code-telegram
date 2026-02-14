@@ -103,7 +103,8 @@ Initial watcher auto-spawn and debug logging.
 | Component | Location | Purpose |
 |-----------|----------|---------|
 | Plugin Metadata | `.claude-plugin/plugin.json` | Plugin configuration |
-| MCP Server | `mcp-server/server.js` | Telegram bot, MCP tools |
+| MCP Server (source) | `mcp-server/server.js` | Telegram bot, MCP tools |
+| MCP Server (bundle) | `mcp-server/dist/server.js` | Bundled server (what `.mcp.json` points to) |
 | Context Hook | `hooks/telegram-context.js` | Injects messages + spawns watcher |
 | Permission Hook | `hooks/permission-telegram.cjs` | Permission notifications |
 | Session Hook | `hooks/session-start.js` | (Unused - SessionStart hook bug) |
@@ -148,7 +149,7 @@ Control Claude's permission prompts remotely via Telegram.
 
 ### Manual
 ```bash
-cd mcp-server && npm install
+cd mcp-server && npm install && npm run build
 cp .mcp.json.template .mcp.json
 # Edit .mcp.json with your credentials
 ```
@@ -196,6 +197,23 @@ Example: `D:\Projects\my-app` → `~/.claude-telegram/my-app-a1b2c3/`
 | `watcher.pid` | Watcher process ID |
 | `session-info.json` | Debug: session/window info |
 | `debug.log` | Error logging |
+
+---
+
+## Development Workflow
+
+The MCP server is bundled into a single file using esbuild. This eliminates the need for `npm install` at runtime — all dependencies are baked into `mcp-server/dist/server.js`.
+
+### After editing `mcp-server/server.js`:
+```bash
+cd mcp-server && npm run build
+```
+Then restart the MCP server in Claude Code (`/mcp` → restart telegram).
+
+### Why bundling?
+- `.mcp.json` points to `dist/server.js`, not `server.js`
+- No `node_modules` needed at runtime (3 MB bundle vs 46 MB node_modules)
+- `npm install` is only needed for development (adding/updating dependencies)
 
 ---
 

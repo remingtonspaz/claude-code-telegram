@@ -5,7 +5,8 @@
   "type": "module",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js"
+    "start": "node server.js",
+    "build": "npx esbuild server.js --bundle --platform=node --outfile=dist/server.js --format=esm"
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",

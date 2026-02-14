@@ -156,7 +156,7 @@ function writePermissionResponse(response) {
 }
 
 // Queue incoming messages from Telegram
-bot.on('message', (msg) => {
+bot.on('message', async (msg) => {
   // Only accept messages from authorized user
   if (msg.from.id.toString() !== TELEGRAM_USER_ID) {
     log(`Ignored message from unauthorized user: ${msg.from.id}`);
@@ -170,10 +170,10 @@ bot.on('message', (msg) => {
   }
   markMessageProcessed(msg.message_id);
 
-  const text = msg.text || '';
+  const text = msg.text || msg.caption || '';
 
-  // Check if this is a permission response
-  if (isPermissionResponse(text) && hasPendingPermission()) {
+  // Check if this is a permission response (text messages only)
+  if (msg.text && isPermissionResponse(text) && hasPendingPermission()) {
     const response = normalizePermissionResponse(text);
     log(`Received permission response: ${text} -> ${response}`);
 
@@ -192,6 +192,29 @@ bot.on('message', (msg) => {
     return;
   }
 
+  // Skip messages with no text and no photo (stickers, voice, etc.)
+  if (!msg.text && !msg.caption && !msg.photo) {
+    log(`Ignoring unsupported message type from ${msg.from.first_name || 'User'}`);
+    return;
+  }
+
+  // Download photo if present
+  let imagePath = null;
+  if (msg.photo && msg.photo.length > 0) {
+    try {
+      // Pick highest resolution (last element in the array)
+      const photo = msg.photo[msg.photo.length - 1];
+      const imagesDir = path.join(SESSION_DIR, 'images');
+      if (!fs.existsSync(imagesDir)) {
+        fs.mkdirSync(imagesDir, { recursive: true });
+      }
+      imagePath = await bot.downloadFile(photo.file_id, imagesDir);
+      log(`Downloaded image: ${imagePath}`);
+    } catch (e) {
+      log(`Failed to download image: ${e.message}`);
+    }
+  }
+
   // Regular message - queue it
   const messageData = {
     id: msg.message_id,
@@ -200,6 +223,10 @@ bot.on('message', (msg) => {
     from: msg.from.first_name || msg.from.username || 'User',
     chatId: msg.chat.id,
   };
+
+  if (imagePath) {
+    messageData.imagePath = imagePath;
+  }
 
   // Read current queue
   let queue = { messages: [] };
@@ -220,7 +247,8 @@ bot.on('message', (msg) => {
 
   // Write updated queue
   fs.writeFileSync(QUEUE_FILE, JSON.stringify(queue, null, 2));
-  log(`Queued message from ${messageData.from}: ${text.substring(0, 50)}...`);
+  const logText = imagePath ? `[image] ${text.substring(0, 50)}` : text.substring(0, 50);
+  log(`Queued message from ${messageData.from}: ${logText}...`);
 
   // Trigger Enter keystroke to wake up Claude Code
   triggerEnterKey();
@@ -398,7 +426,17 @@ server.setRequestHandler(CallToolRequestSchema, async (request) => {
         }
 
         const formatted = messages
-          .map((m) => `[${new Date(m.timestamp).toLocaleTimeString()}] ${m.from}: ${m.text}`)
+          .map((m) => {
+            const time = new Date(m.timestamp).toLocaleTimeString();
+            let content = '';
+            if (m.imagePath) {
+              content += `[Image: ${m.imagePath}]`;
+              if (m.text) content += ` ${m.text}`;
+            } else {
+              content = m.text;
+            }
+            return `[${time}] ${m.from}: ${content}`;
+          })
           .join('\n');
 
         return {

@@ -1,4 +1,5 @@
 #!/usr/bin/env node
+import { createRequire } from 'module'; const require = createRequire(import.meta.url);
 var __create = Object.create;
 var __defProp = Object.defineProperty;
 var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
@@ -39,9 +40,9 @@ var __toESM = (mod, isNodeMode, target) => (target = mod != null ? __create(__ge
 ));
 var __toCommonJS = (mod) => __copyProps(__defProp({}, "__esModule", { value: true }), mod);
 
-// mcp-server/node_modules/ajv/dist/compile/codegen/code.js
+// node_modules/ajv/dist/compile/codegen/code.js
 var require_code = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/codegen/code.js"(exports2) {
+  "node_modules/ajv/dist/compile/codegen/code.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.regexpCode = exports2.getEsmExportName = exports2.getProperty = exports2.safeStringify = exports2.stringify = exports2.strConcat = exports2.addCodeArg = exports2.str = exports2._ = exports2.nil = exports2._Code = exports2.Name = exports2.IDENTIFIER = exports2._CodeOrName = void 0;
@@ -193,9 +194,9 @@ var require_code = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/codegen/scope.js
+// node_modules/ajv/dist/compile/codegen/scope.js
 var require_scope = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/codegen/scope.js"(exports2) {
+  "node_modules/ajv/dist/compile/codegen/scope.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.ValueScope = exports2.ValueScopeName = exports2.Scope = exports2.varKinds = exports2.UsedValueState = void 0;
@@ -338,9 +339,9 @@ var require_scope = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/codegen/index.js
+// node_modules/ajv/dist/compile/codegen/index.js
 var require_codegen = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/codegen/index.js"(exports2) {
+  "node_modules/ajv/dist/compile/codegen/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.or = exports2.and = exports2.not = exports2.CodeGen = exports2.operators = exports2.varKinds = exports2.ValueScopeName = exports2.ValueScope = exports2.Scope = exports2.Name = exports2.regexpCode = exports2.stringify = exports2.getProperty = exports2.nil = exports2.strConcat = exports2.str = exports2._ = void 0;
@@ -1058,9 +1059,9 @@ var require_codegen = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/util.js
+// node_modules/ajv/dist/compile/util.js
 var require_util = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/util.js"(exports2) {
+  "node_modules/ajv/dist/compile/util.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.checkStrictMode = exports2.getErrorPath = exports2.Type = exports2.useFunc = exports2.setEvaluated = exports2.evaluatedPropsToName = exports2.mergeEvaluated = exports2.eachItem = exports2.unescapeJsonPointer = exports2.escapeJsonPointer = exports2.escapeFragment = exports2.unescapeFragment = exports2.schemaRefOrVal = exports2.schemaHasRulesButRef = exports2.schemaHasRules = exports2.checkUnknownRules = exports2.alwaysValidSchema = exports2.toHash = void 0;
@@ -1225,9 +1226,9 @@ var require_util = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/names.js
+// node_modules/ajv/dist/compile/names.js
 var require_names = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/names.js"(exports2) {
+  "node_modules/ajv/dist/compile/names.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -1264,9 +1265,9 @@ var require_names = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/errors.js
+// node_modules/ajv/dist/compile/errors.js
 var require_errors = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/errors.js"(exports2) {
+  "node_modules/ajv/dist/compile/errors.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.extendErrors = exports2.resetErrorsCount = exports2.reportExtraError = exports2.reportError = exports2.keyword$DataError = exports2.keywordError = void 0;
@@ -1386,9 +1387,9 @@ var require_errors = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/validate/boolSchema.js
+// node_modules/ajv/dist/compile/validate/boolSchema.js
 var require_boolSchema = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/validate/boolSchema.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/boolSchema.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.boolOrEmptySchema = exports2.topBoolOrEmptySchema = void 0;
@@ -1437,9 +1438,9 @@ var require_boolSchema = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/rules.js
+// node_modules/ajv/dist/compile/rules.js
 var require_rules = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/rules.js"(exports2) {
+  "node_modules/ajv/dist/compile/rules.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getRules = exports2.isJSONType = void 0;
@@ -1468,9 +1469,9 @@ var require_rules = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/validate/applicability.js
+// node_modules/ajv/dist/compile/validate/applicability.js
 var require_applicability = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/validate/applicability.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/applicability.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.shouldUseRule = exports2.shouldUseGroup = exports2.schemaHasRulesForType = void 0;
@@ -1491,9 +1492,9 @@ var require_applicability = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/validate/dataType.js
+// node_modules/ajv/dist/compile/validate/dataType.js
 var require_dataType = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/validate/dataType.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/dataType.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.reportTypeError = exports2.checkDataTypes = exports2.checkDataType = exports2.coerceAndCheckDataType = exports2.getJSONTypes = exports2.getSchemaTypes = exports2.DataType = void 0;
@@ -1675,9 +1676,9 @@ var require_dataType = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/validate/defaults.js
+// node_modules/ajv/dist/compile/validate/defaults.js
 var require_defaults = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/validate/defaults.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/defaults.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.assignDefaults = void 0;
@@ -1712,9 +1713,9 @@ var require_defaults = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/code.js
+// node_modules/ajv/dist/vocabularies/code.js
 var require_code2 = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/code.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/code.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateUnion = exports2.validateArray = exports2.usePattern = exports2.callValidateCode = exports2.schemaProperties = exports2.allSchemaProperties = exports2.noPropertyInData = exports2.propertyInData = exports2.isOwnProperty = exports2.hasPropFunc = exports2.reportMissingProp = exports2.checkMissingProp = exports2.checkReportMissingProp = void 0;
@@ -1845,9 +1846,9 @@ var require_code2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/validate/keyword.js
+// node_modules/ajv/dist/compile/validate/keyword.js
 var require_keyword = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/validate/keyword.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/keyword.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateKeywordUsage = exports2.validSchemaType = exports2.funcKeywordCode = exports2.macroKeywordCode = void 0;
@@ -1963,9 +1964,9 @@ var require_keyword = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/validate/subschema.js
+// node_modules/ajv/dist/compile/validate/subschema.js
 var require_subschema = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/validate/subschema.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/subschema.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.extendSubschemaMode = exports2.extendSubschemaData = exports2.getSubschema = void 0;
@@ -2046,9 +2047,9 @@ var require_subschema = __commonJS({
   }
 });
 
-// mcp-server/node_modules/fast-deep-equal/index.js
+// node_modules/fast-deep-equal/index.js
 var require_fast_deep_equal = __commonJS({
-  "mcp-server/node_modules/fast-deep-equal/index.js"(exports2, module2) {
+  "node_modules/fast-deep-equal/index.js"(exports2, module2) {
     "use strict";
     module2.exports = function equal(a, b) {
       if (a === b) return true;
@@ -2081,9 +2082,9 @@ var require_fast_deep_equal = __commonJS({
   }
 });
 
-// mcp-server/node_modules/json-schema-traverse/index.js
+// node_modules/json-schema-traverse/index.js
 var require_json_schema_traverse = __commonJS({
-  "mcp-server/node_modules/json-schema-traverse/index.js"(exports2, module2) {
+  "node_modules/json-schema-traverse/index.js"(exports2, module2) {
     "use strict";
     var traverse = module2.exports = function(schema, opts, cb) {
       if (typeof opts == "function") {
@@ -2169,9 +2170,9 @@ var require_json_schema_traverse = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/resolve.js
+// node_modules/ajv/dist/compile/resolve.js
 var require_resolve = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/resolve.js"(exports2) {
+  "node_modules/ajv/dist/compile/resolve.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getSchemaRefs = exports2.resolveUrl = exports2.normalizeId = exports2._getFullPath = exports2.getFullPath = exports2.inlineRef = void 0;
@@ -2325,9 +2326,9 @@ var require_resolve = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/validate/index.js
+// node_modules/ajv/dist/compile/validate/index.js
 var require_validate = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/validate/index.js"(exports2) {
+  "node_modules/ajv/dist/compile/validate/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getData = exports2.KeywordCxt = exports2.validateFunctionCode = void 0;
@@ -2833,9 +2834,9 @@ var require_validate = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/runtime/validation_error.js
+// node_modules/ajv/dist/runtime/validation_error.js
 var require_validation_error = __commonJS({
-  "mcp-server/node_modules/ajv/dist/runtime/validation_error.js"(exports2) {
+  "node_modules/ajv/dist/runtime/validation_error.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var ValidationError = class extends Error {
@@ -2849,9 +2850,9 @@ var require_validation_error = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/ref_error.js
+// node_modules/ajv/dist/compile/ref_error.js
 var require_ref_error = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/ref_error.js"(exports2) {
+  "node_modules/ajv/dist/compile/ref_error.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var resolve_1 = require_resolve();
@@ -2866,9 +2867,9 @@ var require_ref_error = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/compile/index.js
+// node_modules/ajv/dist/compile/index.js
 var require_compile = __commonJS({
-  "mcp-server/node_modules/ajv/dist/compile/index.js"(exports2) {
+  "node_modules/ajv/dist/compile/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.resolveSchema = exports2.getCompilingSchema = exports2.resolveRef = exports2.compileSchema = exports2.SchemaEnv = void 0;
@@ -3090,9 +3091,9 @@ var require_compile = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/refs/data.json
+// node_modules/ajv/dist/refs/data.json
 var require_data = __commonJS({
-  "mcp-server/node_modules/ajv/dist/refs/data.json"(exports2, module2) {
+  "node_modules/ajv/dist/refs/data.json"(exports2, module2) {
     module2.exports = {
       $id: "https://raw.githubusercontent.com/ajv-validator/ajv/master/lib/refs/data.json#",
       description: "Meta-schema for $data reference (JSON AnySchema extension proposal)",
@@ -3109,9 +3110,9 @@ var require_data = __commonJS({
   }
 });
 
-// mcp-server/node_modules/fast-uri/lib/utils.js
+// node_modules/fast-uri/lib/utils.js
 var require_utils = __commonJS({
-  "mcp-server/node_modules/fast-uri/lib/utils.js"(exports2, module2) {
+  "node_modules/fast-uri/lib/utils.js"(exports2, module2) {
     "use strict";
     var isUUID = RegExp.prototype.test.bind(/^[\da-f]{8}-[\da-f]{4}-[\da-f]{4}-[\da-f]{4}-[\da-f]{12}$/iu);
     var isIPv4 = RegExp.prototype.test.bind(/^(?:(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)\.){3}(?:25[0-5]|2[0-4]\d|1\d{2}|[1-9]\d|\d)$/u);
@@ -3366,9 +3367,9 @@ var require_utils = __commonJS({
   }
 });
 
-// mcp-server/node_modules/fast-uri/lib/schemes.js
+// node_modules/fast-uri/lib/schemes.js
 var require_schemes = __commonJS({
-  "mcp-server/node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
+  "node_modules/fast-uri/lib/schemes.js"(exports2, module2) {
     "use strict";
     var { isUUID } = require_utils();
     var URN_REG = /([\da-z][\d\-a-z]{0,31}):((?:[\w!$'()*+,\-.:;=@]|%[\da-f]{2})+)/iu;
@@ -3576,9 +3577,9 @@ var require_schemes = __commonJS({
   }
 });
 
-// mcp-server/node_modules/fast-uri/index.js
+// node_modules/fast-uri/index.js
 var require_fast_uri = __commonJS({
-  "mcp-server/node_modules/fast-uri/index.js"(exports2, module2) {
+  "node_modules/fast-uri/index.js"(exports2, module2) {
     "use strict";
     var { normalizeIPv6, removeDotSegments, recomposeAuthority, normalizeComponentEncoding, isIPv4, nonSimpleDomain } = require_utils();
     var { SCHEMES, getSchemeHandler } = require_schemes();
@@ -3831,9 +3832,9 @@ var require_fast_uri = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/runtime/uri.js
+// node_modules/ajv/dist/runtime/uri.js
 var require_uri = __commonJS({
-  "mcp-server/node_modules/ajv/dist/runtime/uri.js"(exports2) {
+  "node_modules/ajv/dist/runtime/uri.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var uri = require_fast_uri();
@@ -3842,9 +3843,9 @@ var require_uri = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/core.js
+// node_modules/ajv/dist/core.js
 var require_core = __commonJS({
-  "mcp-server/node_modules/ajv/dist/core.js"(exports2) {
+  "node_modules/ajv/dist/core.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.CodeGen = exports2.Name = exports2.nil = exports2.stringify = exports2.str = exports2._ = exports2.KeywordCxt = void 0;
@@ -4453,9 +4454,9 @@ var require_core = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/core/id.js
+// node_modules/ajv/dist/vocabularies/core/id.js
 var require_id = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/core/id.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/core/id.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var def = {
@@ -4468,9 +4469,9 @@ var require_id = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/core/ref.js
+// node_modules/ajv/dist/vocabularies/core/ref.js
 var require_ref = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/core/ref.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/core/ref.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.callRef = exports2.getValidate = void 0;
@@ -4590,9 +4591,9 @@ var require_ref = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/core/index.js
+// node_modules/ajv/dist/vocabularies/core/index.js
 var require_core2 = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/core/index.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/core/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var id_1 = require_id();
@@ -4611,9 +4612,9 @@ var require_core2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/validation/limitNumber.js
+// node_modules/ajv/dist/vocabularies/validation/limitNumber.js
 var require_limitNumber = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/limitNumber.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -4643,9 +4644,9 @@ var require_limitNumber = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/validation/multipleOf.js
+// node_modules/ajv/dist/vocabularies/validation/multipleOf.js
 var require_multipleOf = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/multipleOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -4671,9 +4672,9 @@ var require_multipleOf = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/runtime/ucs2length.js
+// node_modules/ajv/dist/runtime/ucs2length.js
 var require_ucs2length = __commonJS({
-  "mcp-server/node_modules/ajv/dist/runtime/ucs2length.js"(exports2) {
+  "node_modules/ajv/dist/runtime/ucs2length.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     function ucs2length(str) {
@@ -4697,9 +4698,9 @@ var require_ucs2length = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/validation/limitLength.js
+// node_modules/ajv/dist/vocabularies/validation/limitLength.js
 var require_limitLength = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/limitLength.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -4729,9 +4730,9 @@ var require_limitLength = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/validation/pattern.js
+// node_modules/ajv/dist/vocabularies/validation/pattern.js
 var require_pattern = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/pattern.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -4757,9 +4758,9 @@ var require_pattern = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/validation/limitProperties.js
+// node_modules/ajv/dist/vocabularies/validation/limitProperties.js
 var require_limitProperties = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/limitProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -4786,9 +4787,9 @@ var require_limitProperties = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/validation/required.js
+// node_modules/ajv/dist/vocabularies/validation/required.js
 var require_required = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/validation/required.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/required.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -4868,9 +4869,9 @@ var require_required = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/validation/limitItems.js
+// node_modules/ajv/dist/vocabularies/validation/limitItems.js
 var require_limitItems = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/limitItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -4897,9 +4898,9 @@ var require_limitItems = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/runtime/equal.js
+// node_modules/ajv/dist/runtime/equal.js
 var require_equal = __commonJS({
-  "mcp-server/node_modules/ajv/dist/runtime/equal.js"(exports2) {
+  "node_modules/ajv/dist/runtime/equal.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var equal = require_fast_deep_equal();
@@ -4908,9 +4909,9 @@ var require_equal = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
+// node_modules/ajv/dist/vocabularies/validation/uniqueItems.js
 var require_uniqueItems = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/uniqueItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var dataType_1 = require_dataType();
@@ -4975,9 +4976,9 @@ var require_uniqueItems = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/validation/const.js
+// node_modules/ajv/dist/vocabularies/validation/const.js
 var require_const = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/validation/const.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/const.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5004,9 +5005,9 @@ var require_const = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/validation/enum.js
+// node_modules/ajv/dist/vocabularies/validation/enum.js
 var require_enum = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/validation/enum.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/enum.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5053,9 +5054,9 @@ var require_enum = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/validation/index.js
+// node_modules/ajv/dist/vocabularies/validation/index.js
 var require_validation = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/validation/index.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/validation/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var limitNumber_1 = require_limitNumber();
@@ -5091,9 +5092,9 @@ var require_validation = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
+// node_modules/ajv/dist/vocabularies/applicator/additionalItems.js
 var require_additionalItems = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/additionalItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateAdditionalItems = void 0;
@@ -5144,9 +5145,9 @@ var require_additionalItems = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/items.js
+// node_modules/ajv/dist/vocabularies/applicator/items.js
 var require_items = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/items.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/items.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateTuple = void 0;
@@ -5201,9 +5202,9 @@ var require_items = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
+// node_modules/ajv/dist/vocabularies/applicator/prefixItems.js
 var require_prefixItems = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/prefixItems.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var items_1 = require_items();
@@ -5218,9 +5219,9 @@ var require_prefixItems = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/items2020.js
+// node_modules/ajv/dist/vocabularies/applicator/items2020.js
 var require_items2020 = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/items2020.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5253,9 +5254,9 @@ var require_items2020 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/contains.js
+// node_modules/ajv/dist/vocabularies/applicator/contains.js
 var require_contains = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/contains.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5347,9 +5348,9 @@ var require_contains = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/dependencies.js
+// node_modules/ajv/dist/vocabularies/applicator/dependencies.js
 var require_dependencies = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/dependencies.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.validateSchemaDeps = exports2.validatePropertyDeps = exports2.error = void 0;
@@ -5441,9 +5442,9 @@ var require_dependencies = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
+// node_modules/ajv/dist/vocabularies/applicator/propertyNames.js
 var require_propertyNames = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/propertyNames.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5484,9 +5485,9 @@ var require_propertyNames = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
+// node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js
 var require_additionalProperties = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/additionalProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5590,9 +5591,9 @@ var require_additionalProperties = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/properties.js
+// node_modules/ajv/dist/vocabularies/applicator/properties.js
 var require_properties = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/properties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var validate_1 = require_validate();
@@ -5648,9 +5649,9 @@ var require_properties = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
+// node_modules/ajv/dist/vocabularies/applicator/patternProperties.js
 var require_patternProperties = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/patternProperties.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5722,9 +5723,9 @@ var require_patternProperties = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/not.js
+// node_modules/ajv/dist/vocabularies/applicator/not.js
 var require_not = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/not.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/not.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -5753,9 +5754,9 @@ var require_not = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/anyOf.js
+// node_modules/ajv/dist/vocabularies/applicator/anyOf.js
 var require_anyOf = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/anyOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var code_1 = require_code2();
@@ -5770,9 +5771,9 @@ var require_anyOf = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/oneOf.js
+// node_modules/ajv/dist/vocabularies/applicator/oneOf.js
 var require_oneOf = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/oneOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5828,9 +5829,9 @@ var require_oneOf = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/allOf.js
+// node_modules/ajv/dist/vocabularies/applicator/allOf.js
 var require_allOf = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/allOf.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -5855,9 +5856,9 @@ var require_allOf = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/if.js
+// node_modules/ajv/dist/vocabularies/applicator/if.js
 var require_if = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/if.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/if.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -5924,9 +5925,9 @@ var require_if = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/thenElse.js
+// node_modules/ajv/dist/vocabularies/applicator/thenElse.js
 var require_thenElse = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/thenElse.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var util_1 = require_util();
@@ -5942,9 +5943,9 @@ var require_thenElse = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/applicator/index.js
+// node_modules/ajv/dist/vocabularies/applicator/index.js
 var require_applicator = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/applicator/index.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/applicator/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var additionalItems_1 = require_additionalItems();
@@ -5990,9 +5991,9 @@ var require_applicator = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/format/format.js
+// node_modules/ajv/dist/vocabularies/format/format.js
 var require_format = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/format/format.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/format/format.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6080,9 +6081,9 @@ var require_format = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/format/index.js
+// node_modules/ajv/dist/vocabularies/format/index.js
 var require_format2 = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/format/index.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/format/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var format_1 = require_format();
@@ -6091,9 +6092,9 @@ var require_format2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/metadata.js
+// node_modules/ajv/dist/vocabularies/metadata.js
 var require_metadata = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/metadata.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/metadata.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.contentVocabulary = exports2.metadataVocabulary = void 0;
@@ -6114,9 +6115,9 @@ var require_metadata = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/draft7.js
+// node_modules/ajv/dist/vocabularies/draft7.js
 var require_draft7 = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/draft7.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/draft7.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var core_1 = require_core2();
@@ -6136,9 +6137,9 @@ var require_draft7 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/discriminator/types.js
+// node_modules/ajv/dist/vocabularies/discriminator/types.js
 var require_types = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/discriminator/types.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.DiscrError = void 0;
@@ -6150,9 +6151,9 @@ var require_types = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/vocabularies/discriminator/index.js
+// node_modules/ajv/dist/vocabularies/discriminator/index.js
 var require_discriminator = __commonJS({
-  "mcp-server/node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports2) {
+  "node_modules/ajv/dist/vocabularies/discriminator/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var codegen_1 = require_codegen();
@@ -6255,9 +6256,9 @@ var require_discriminator = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/refs/json-schema-draft-07.json
+// node_modules/ajv/dist/refs/json-schema-draft-07.json
 var require_json_schema_draft_07 = __commonJS({
-  "mcp-server/node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports2, module2) {
+  "node_modules/ajv/dist/refs/json-schema-draft-07.json"(exports2, module2) {
     module2.exports = {
       $schema: "http://json-schema.org/draft-07/schema#",
       $id: "http://json-schema.org/draft-07/schema#",
@@ -6412,9 +6413,9 @@ var require_json_schema_draft_07 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv/dist/ajv.js
+// node_modules/ajv/dist/ajv.js
 var require_ajv = __commonJS({
-  "mcp-server/node_modules/ajv/dist/ajv.js"(exports2, module2) {
+  "node_modules/ajv/dist/ajv.js"(exports2, module2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.MissingRefError = exports2.ValidationError = exports2.CodeGen = exports2.Name = exports2.nil = exports2.stringify = exports2.str = exports2._ = exports2.KeywordCxt = exports2.Ajv = void 0;
@@ -6482,9 +6483,9 @@ var require_ajv = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv-formats/dist/formats.js
+// node_modules/ajv-formats/dist/formats.js
 var require_formats = __commonJS({
-  "mcp-server/node_modules/ajv-formats/dist/formats.js"(exports2) {
+  "node_modules/ajv-formats/dist/formats.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.formatNames = exports2.fastFormats = exports2.fullFormats = void 0;
@@ -6685,9 +6686,9 @@ var require_formats = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv-formats/dist/limit.js
+// node_modules/ajv-formats/dist/limit.js
 var require_limit = __commonJS({
-  "mcp-server/node_modules/ajv-formats/dist/limit.js"(exports2) {
+  "node_modules/ajv-formats/dist/limit.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.formatLimitDefinition = void 0;
@@ -6757,9 +6758,9 @@ var require_limit = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ajv-formats/dist/index.js
+// node_modules/ajv-formats/dist/index.js
 var require_dist = __commonJS({
-  "mcp-server/node_modules/ajv-formats/dist/index.js"(exports2, module2) {
+  "node_modules/ajv-formats/dist/index.js"(exports2, module2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     var formats_1 = require_formats();
@@ -6799,18 +6800,18 @@ var require_dist = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/src/utils.js
+// node_modules/node-telegram-bot-api/src/utils.js
 var require_utils2 = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/src/utils.js"(exports2) {
+  "node_modules/node-telegram-bot-api/src/utils.js"(exports2) {
     var util2 = __require("util");
     exports2.deprecate = (msg) => util2.deprecate(() => {
     }, msg, "node-telegram-bot-api")();
   }
 });
 
-// mcp-server/node_modules/object-keys/isArguments.js
+// node_modules/object-keys/isArguments.js
 var require_isArguments = __commonJS({
-  "mcp-server/node_modules/object-keys/isArguments.js"(exports2, module2) {
+  "node_modules/object-keys/isArguments.js"(exports2, module2) {
     "use strict";
     var toStr = Object.prototype.toString;
     module2.exports = function isArguments(value) {
@@ -6824,9 +6825,9 @@ var require_isArguments = __commonJS({
   }
 });
 
-// mcp-server/node_modules/object-keys/implementation.js
+// node_modules/object-keys/implementation.js
 var require_implementation = __commonJS({
-  "mcp-server/node_modules/object-keys/implementation.js"(exports2, module2) {
+  "node_modules/object-keys/implementation.js"(exports2, module2) {
     "use strict";
     var keysShim;
     if (!Object.keys) {
@@ -6956,9 +6957,9 @@ var require_implementation = __commonJS({
   }
 });
 
-// mcp-server/node_modules/object-keys/index.js
+// node_modules/object-keys/index.js
 var require_object_keys = __commonJS({
-  "mcp-server/node_modules/object-keys/index.js"(exports2, module2) {
+  "node_modules/object-keys/index.js"(exports2, module2) {
     "use strict";
     var slice = Array.prototype.slice;
     var isArgs = require_isArguments();
@@ -6990,9 +6991,9 @@ var require_object_keys = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-define-property/index.js
+// node_modules/es-define-property/index.js
 var require_es_define_property = __commonJS({
-  "mcp-server/node_modules/es-define-property/index.js"(exports2, module2) {
+  "node_modules/es-define-property/index.js"(exports2, module2) {
     "use strict";
     var $defineProperty = Object.defineProperty || false;
     if ($defineProperty) {
@@ -7006,33 +7007,33 @@ var require_es_define_property = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-errors/syntax.js
+// node_modules/es-errors/syntax.js
 var require_syntax = __commonJS({
-  "mcp-server/node_modules/es-errors/syntax.js"(exports2, module2) {
+  "node_modules/es-errors/syntax.js"(exports2, module2) {
     "use strict";
     module2.exports = SyntaxError;
   }
 });
 
-// mcp-server/node_modules/es-errors/type.js
+// node_modules/es-errors/type.js
 var require_type = __commonJS({
-  "mcp-server/node_modules/es-errors/type.js"(exports2, module2) {
+  "node_modules/es-errors/type.js"(exports2, module2) {
     "use strict";
     module2.exports = TypeError;
   }
 });
 
-// mcp-server/node_modules/gopd/gOPD.js
+// node_modules/gopd/gOPD.js
 var require_gOPD = __commonJS({
-  "mcp-server/node_modules/gopd/gOPD.js"(exports2, module2) {
+  "node_modules/gopd/gOPD.js"(exports2, module2) {
     "use strict";
     module2.exports = Object.getOwnPropertyDescriptor;
   }
 });
 
-// mcp-server/node_modules/gopd/index.js
+// node_modules/gopd/index.js
 var require_gopd = __commonJS({
-  "mcp-server/node_modules/gopd/index.js"(exports2, module2) {
+  "node_modules/gopd/index.js"(exports2, module2) {
     "use strict";
     var $gOPD = require_gOPD();
     if ($gOPD) {
@@ -7046,9 +7047,9 @@ var require_gopd = __commonJS({
   }
 });
 
-// mcp-server/node_modules/define-data-property/index.js
+// node_modules/define-data-property/index.js
 var require_define_data_property = __commonJS({
-  "mcp-server/node_modules/define-data-property/index.js"(exports2, module2) {
+  "node_modules/define-data-property/index.js"(exports2, module2) {
     "use strict";
     var $defineProperty = require_es_define_property();
     var $SyntaxError = require_syntax();
@@ -7094,9 +7095,9 @@ var require_define_data_property = __commonJS({
   }
 });
 
-// mcp-server/node_modules/has-property-descriptors/index.js
+// node_modules/has-property-descriptors/index.js
 var require_has_property_descriptors = __commonJS({
-  "mcp-server/node_modules/has-property-descriptors/index.js"(exports2, module2) {
+  "node_modules/has-property-descriptors/index.js"(exports2, module2) {
     "use strict";
     var $defineProperty = require_es_define_property();
     var hasPropertyDescriptors = function hasPropertyDescriptors2() {
@@ -7116,9 +7117,9 @@ var require_has_property_descriptors = __commonJS({
   }
 });
 
-// mcp-server/node_modules/define-properties/index.js
+// node_modules/define-properties/index.js
 var require_define_properties = __commonJS({
-  "mcp-server/node_modules/define-properties/index.js"(exports2, module2) {
+  "node_modules/define-properties/index.js"(exports2, module2) {
     "use strict";
     var keys = require_object_keys();
     var hasSymbols = typeof Symbol === "function" && typeof /* @__PURE__ */ Symbol("foo") === "symbol";
@@ -7160,9 +7161,9 @@ var require_define_properties = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-object-atoms/RequireObjectCoercible.js
+// node_modules/es-object-atoms/RequireObjectCoercible.js
 var require_RequireObjectCoercible = __commonJS({
-  "mcp-server/node_modules/es-object-atoms/RequireObjectCoercible.js"(exports2, module2) {
+  "node_modules/es-object-atoms/RequireObjectCoercible.js"(exports2, module2) {
     "use strict";
     var $TypeError = require_type();
     module2.exports = function RequireObjectCoercible(value) {
@@ -7174,105 +7175,105 @@ var require_RequireObjectCoercible = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-object-atoms/index.js
+// node_modules/es-object-atoms/index.js
 var require_es_object_atoms = __commonJS({
-  "mcp-server/node_modules/es-object-atoms/index.js"(exports2, module2) {
+  "node_modules/es-object-atoms/index.js"(exports2, module2) {
     "use strict";
     module2.exports = Object;
   }
 });
 
-// mcp-server/node_modules/es-errors/index.js
+// node_modules/es-errors/index.js
 var require_es_errors = __commonJS({
-  "mcp-server/node_modules/es-errors/index.js"(exports2, module2) {
+  "node_modules/es-errors/index.js"(exports2, module2) {
     "use strict";
     module2.exports = Error;
   }
 });
 
-// mcp-server/node_modules/es-errors/eval.js
+// node_modules/es-errors/eval.js
 var require_eval = __commonJS({
-  "mcp-server/node_modules/es-errors/eval.js"(exports2, module2) {
+  "node_modules/es-errors/eval.js"(exports2, module2) {
     "use strict";
     module2.exports = EvalError;
   }
 });
 
-// mcp-server/node_modules/es-errors/range.js
+// node_modules/es-errors/range.js
 var require_range = __commonJS({
-  "mcp-server/node_modules/es-errors/range.js"(exports2, module2) {
+  "node_modules/es-errors/range.js"(exports2, module2) {
     "use strict";
     module2.exports = RangeError;
   }
 });
 
-// mcp-server/node_modules/es-errors/ref.js
+// node_modules/es-errors/ref.js
 var require_ref2 = __commonJS({
-  "mcp-server/node_modules/es-errors/ref.js"(exports2, module2) {
+  "node_modules/es-errors/ref.js"(exports2, module2) {
     "use strict";
     module2.exports = ReferenceError;
   }
 });
 
-// mcp-server/node_modules/es-errors/uri.js
+// node_modules/es-errors/uri.js
 var require_uri2 = __commonJS({
-  "mcp-server/node_modules/es-errors/uri.js"(exports2, module2) {
+  "node_modules/es-errors/uri.js"(exports2, module2) {
     "use strict";
     module2.exports = URIError;
   }
 });
 
-// mcp-server/node_modules/math-intrinsics/abs.js
+// node_modules/math-intrinsics/abs.js
 var require_abs = __commonJS({
-  "mcp-server/node_modules/math-intrinsics/abs.js"(exports2, module2) {
+  "node_modules/math-intrinsics/abs.js"(exports2, module2) {
     "use strict";
     module2.exports = Math.abs;
   }
 });
 
-// mcp-server/node_modules/math-intrinsics/floor.js
+// node_modules/math-intrinsics/floor.js
 var require_floor = __commonJS({
-  "mcp-server/node_modules/math-intrinsics/floor.js"(exports2, module2) {
+  "node_modules/math-intrinsics/floor.js"(exports2, module2) {
     "use strict";
     module2.exports = Math.floor;
   }
 });
 
-// mcp-server/node_modules/math-intrinsics/max.js
+// node_modules/math-intrinsics/max.js
 var require_max = __commonJS({
-  "mcp-server/node_modules/math-intrinsics/max.js"(exports2, module2) {
+  "node_modules/math-intrinsics/max.js"(exports2, module2) {
     "use strict";
     module2.exports = Math.max;
   }
 });
 
-// mcp-server/node_modules/math-intrinsics/min.js
+// node_modules/math-intrinsics/min.js
 var require_min = __commonJS({
-  "mcp-server/node_modules/math-intrinsics/min.js"(exports2, module2) {
+  "node_modules/math-intrinsics/min.js"(exports2, module2) {
     "use strict";
     module2.exports = Math.min;
   }
 });
 
-// mcp-server/node_modules/math-intrinsics/pow.js
+// node_modules/math-intrinsics/pow.js
 var require_pow = __commonJS({
-  "mcp-server/node_modules/math-intrinsics/pow.js"(exports2, module2) {
+  "node_modules/math-intrinsics/pow.js"(exports2, module2) {
     "use strict";
     module2.exports = Math.pow;
   }
 });
 
-// mcp-server/node_modules/math-intrinsics/round.js
+// node_modules/math-intrinsics/round.js
 var require_round = __commonJS({
-  "mcp-server/node_modules/math-intrinsics/round.js"(exports2, module2) {
+  "node_modules/math-intrinsics/round.js"(exports2, module2) {
     "use strict";
     module2.exports = Math.round;
   }
 });
 
-// mcp-server/node_modules/math-intrinsics/isNaN.js
+// node_modules/math-intrinsics/isNaN.js
 var require_isNaN = __commonJS({
-  "mcp-server/node_modules/math-intrinsics/isNaN.js"(exports2, module2) {
+  "node_modules/math-intrinsics/isNaN.js"(exports2, module2) {
     "use strict";
     module2.exports = Number.isNaN || function isNaN2(a) {
       return a !== a;
@@ -7280,9 +7281,9 @@ var require_isNaN = __commonJS({
   }
 });
 
-// mcp-server/node_modules/math-intrinsics/sign.js
+// node_modules/math-intrinsics/sign.js
 var require_sign = __commonJS({
-  "mcp-server/node_modules/math-intrinsics/sign.js"(exports2, module2) {
+  "node_modules/math-intrinsics/sign.js"(exports2, module2) {
     "use strict";
     var $isNaN = require_isNaN();
     module2.exports = function sign(number3) {
@@ -7294,9 +7295,9 @@ var require_sign = __commonJS({
   }
 });
 
-// mcp-server/node_modules/has-symbols/shams.js
+// node_modules/has-symbols/shams.js
 var require_shams = __commonJS({
-  "mcp-server/node_modules/has-symbols/shams.js"(exports2, module2) {
+  "node_modules/has-symbols/shams.js"(exports2, module2) {
     "use strict";
     module2.exports = function hasSymbols() {
       if (typeof Symbol !== "function" || typeof Object.getOwnPropertySymbols !== "function") {
@@ -7349,9 +7350,9 @@ var require_shams = __commonJS({
   }
 });
 
-// mcp-server/node_modules/has-symbols/index.js
+// node_modules/has-symbols/index.js
 var require_has_symbols = __commonJS({
-  "mcp-server/node_modules/has-symbols/index.js"(exports2, module2) {
+  "node_modules/has-symbols/index.js"(exports2, module2) {
     "use strict";
     var origSymbol = typeof Symbol !== "undefined" && Symbol;
     var hasSymbolSham = require_shams();
@@ -7373,26 +7374,26 @@ var require_has_symbols = __commonJS({
   }
 });
 
-// mcp-server/node_modules/get-proto/Reflect.getPrototypeOf.js
+// node_modules/get-proto/Reflect.getPrototypeOf.js
 var require_Reflect_getPrototypeOf = __commonJS({
-  "mcp-server/node_modules/get-proto/Reflect.getPrototypeOf.js"(exports2, module2) {
+  "node_modules/get-proto/Reflect.getPrototypeOf.js"(exports2, module2) {
     "use strict";
     module2.exports = typeof Reflect !== "undefined" && Reflect.getPrototypeOf || null;
   }
 });
 
-// mcp-server/node_modules/get-proto/Object.getPrototypeOf.js
+// node_modules/get-proto/Object.getPrototypeOf.js
 var require_Object_getPrototypeOf = __commonJS({
-  "mcp-server/node_modules/get-proto/Object.getPrototypeOf.js"(exports2, module2) {
+  "node_modules/get-proto/Object.getPrototypeOf.js"(exports2, module2) {
     "use strict";
     var $Object = require_es_object_atoms();
     module2.exports = $Object.getPrototypeOf || null;
   }
 });
 
-// mcp-server/node_modules/function-bind/implementation.js
+// node_modules/function-bind/implementation.js
 var require_implementation2 = __commonJS({
-  "mcp-server/node_modules/function-bind/implementation.js"(exports2, module2) {
+  "node_modules/function-bind/implementation.js"(exports2, module2) {
     "use strict";
     var ERROR_MESSAGE = "Function.prototype.bind called on incompatible ";
     var toStr = Object.prototype.toString;
@@ -7466,42 +7467,42 @@ var require_implementation2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/function-bind/index.js
+// node_modules/function-bind/index.js
 var require_function_bind = __commonJS({
-  "mcp-server/node_modules/function-bind/index.js"(exports2, module2) {
+  "node_modules/function-bind/index.js"(exports2, module2) {
     "use strict";
     var implementation = require_implementation2();
     module2.exports = Function.prototype.bind || implementation;
   }
 });
 
-// mcp-server/node_modules/call-bind-apply-helpers/functionCall.js
+// node_modules/call-bind-apply-helpers/functionCall.js
 var require_functionCall = __commonJS({
-  "mcp-server/node_modules/call-bind-apply-helpers/functionCall.js"(exports2, module2) {
+  "node_modules/call-bind-apply-helpers/functionCall.js"(exports2, module2) {
     "use strict";
     module2.exports = Function.prototype.call;
   }
 });
 
-// mcp-server/node_modules/call-bind-apply-helpers/functionApply.js
+// node_modules/call-bind-apply-helpers/functionApply.js
 var require_functionApply = __commonJS({
-  "mcp-server/node_modules/call-bind-apply-helpers/functionApply.js"(exports2, module2) {
+  "node_modules/call-bind-apply-helpers/functionApply.js"(exports2, module2) {
     "use strict";
     module2.exports = Function.prototype.apply;
   }
 });
 
-// mcp-server/node_modules/call-bind-apply-helpers/reflectApply.js
+// node_modules/call-bind-apply-helpers/reflectApply.js
 var require_reflectApply = __commonJS({
-  "mcp-server/node_modules/call-bind-apply-helpers/reflectApply.js"(exports2, module2) {
+  "node_modules/call-bind-apply-helpers/reflectApply.js"(exports2, module2) {
     "use strict";
     module2.exports = typeof Reflect !== "undefined" && Reflect && Reflect.apply;
   }
 });
 
-// mcp-server/node_modules/call-bind-apply-helpers/actualApply.js
+// node_modules/call-bind-apply-helpers/actualApply.js
 var require_actualApply = __commonJS({
-  "mcp-server/node_modules/call-bind-apply-helpers/actualApply.js"(exports2, module2) {
+  "node_modules/call-bind-apply-helpers/actualApply.js"(exports2, module2) {
     "use strict";
     var bind = require_function_bind();
     var $apply = require_functionApply();
@@ -7511,9 +7512,9 @@ var require_actualApply = __commonJS({
   }
 });
 
-// mcp-server/node_modules/call-bind-apply-helpers/index.js
+// node_modules/call-bind-apply-helpers/index.js
 var require_call_bind_apply_helpers = __commonJS({
-  "mcp-server/node_modules/call-bind-apply-helpers/index.js"(exports2, module2) {
+  "node_modules/call-bind-apply-helpers/index.js"(exports2, module2) {
     "use strict";
     var bind = require_function_bind();
     var $TypeError = require_type();
@@ -7528,9 +7529,9 @@ var require_call_bind_apply_helpers = __commonJS({
   }
 });
 
-// mcp-server/node_modules/dunder-proto/get.js
+// node_modules/dunder-proto/get.js
 var require_get = __commonJS({
-  "mcp-server/node_modules/dunder-proto/get.js"(exports2, module2) {
+  "node_modules/dunder-proto/get.js"(exports2, module2) {
     "use strict";
     var callBind = require_call_bind_apply_helpers();
     var gOPD = require_gopd();
@@ -7559,9 +7560,9 @@ var require_get = __commonJS({
   }
 });
 
-// mcp-server/node_modules/get-proto/index.js
+// node_modules/get-proto/index.js
 var require_get_proto = __commonJS({
-  "mcp-server/node_modules/get-proto/index.js"(exports2, module2) {
+  "node_modules/get-proto/index.js"(exports2, module2) {
     "use strict";
     var reflectGetProto = require_Reflect_getPrototypeOf();
     var originalGetProto = require_Object_getPrototypeOf();
@@ -7579,9 +7580,9 @@ var require_get_proto = __commonJS({
   }
 });
 
-// mcp-server/node_modules/hasown/index.js
+// node_modules/hasown/index.js
 var require_hasown = __commonJS({
-  "mcp-server/node_modules/hasown/index.js"(exports2, module2) {
+  "node_modules/hasown/index.js"(exports2, module2) {
     "use strict";
     var call = Function.prototype.call;
     var $hasOwn = Object.prototype.hasOwnProperty;
@@ -7590,9 +7591,9 @@ var require_hasown = __commonJS({
   }
 });
 
-// mcp-server/node_modules/get-intrinsic/index.js
+// node_modules/get-intrinsic/index.js
 var require_get_intrinsic = __commonJS({
-  "mcp-server/node_modules/get-intrinsic/index.js"(exports2, module2) {
+  "node_modules/get-intrinsic/index.js"(exports2, module2) {
     "use strict";
     var undefined2;
     var $Object = require_es_object_atoms();
@@ -7921,9 +7922,9 @@ var require_get_intrinsic = __commonJS({
   }
 });
 
-// mcp-server/node_modules/set-function-length/index.js
+// node_modules/set-function-length/index.js
 var require_set_function_length = __commonJS({
-  "mcp-server/node_modules/set-function-length/index.js"(exports2, module2) {
+  "node_modules/set-function-length/index.js"(exports2, module2) {
     "use strict";
     var GetIntrinsic = require_get_intrinsic();
     var define2 = require_define_data_property();
@@ -7974,9 +7975,9 @@ var require_set_function_length = __commonJS({
   }
 });
 
-// mcp-server/node_modules/call-bind-apply-helpers/applyBind.js
+// node_modules/call-bind-apply-helpers/applyBind.js
 var require_applyBind = __commonJS({
-  "mcp-server/node_modules/call-bind-apply-helpers/applyBind.js"(exports2, module2) {
+  "node_modules/call-bind-apply-helpers/applyBind.js"(exports2, module2) {
     "use strict";
     var bind = require_function_bind();
     var $apply = require_functionApply();
@@ -7987,9 +7988,9 @@ var require_applyBind = __commonJS({
   }
 });
 
-// mcp-server/node_modules/call-bind/index.js
+// node_modules/call-bind/index.js
 var require_call_bind = __commonJS({
-  "mcp-server/node_modules/call-bind/index.js"(exports2, module2) {
+  "node_modules/call-bind/index.js"(exports2, module2) {
     "use strict";
     var setFunctionLength = require_set_function_length();
     var $defineProperty = require_es_define_property();
@@ -8012,9 +8013,9 @@ var require_call_bind = __commonJS({
   }
 });
 
-// mcp-server/node_modules/call-bound/index.js
+// node_modules/call-bound/index.js
 var require_call_bound = __commonJS({
-  "mcp-server/node_modules/call-bound/index.js"(exports2, module2) {
+  "node_modules/call-bound/index.js"(exports2, module2) {
     "use strict";
     var GetIntrinsic = require_get_intrinsic();
     var callBindBasic = require_call_bind_apply_helpers();
@@ -8035,9 +8036,9 @@ var require_call_bound = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/helpers/IsArray.js
+// node_modules/es-abstract/helpers/IsArray.js
 var require_IsArray = __commonJS({
-  "mcp-server/node_modules/es-abstract/helpers/IsArray.js"(exports2, module2) {
+  "node_modules/es-abstract/helpers/IsArray.js"(exports2, module2) {
     "use strict";
     var GetIntrinsic = require_get_intrinsic();
     var $Array = GetIntrinsic("%Array%");
@@ -8048,17 +8049,17 @@ var require_IsArray = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/IsArray.js
+// node_modules/es-abstract/2024/IsArray.js
 var require_IsArray2 = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/IsArray.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/IsArray.js"(exports2, module2) {
     "use strict";
     module2.exports = require_IsArray();
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/Call.js
+// node_modules/es-abstract/2024/Call.js
 var require_Call = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/Call.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/Call.js"(exports2, module2) {
     "use strict";
     var GetIntrinsic = require_get_intrinsic();
     var callBound = require_call_bound();
@@ -8075,16 +8076,16 @@ var require_Call = __commonJS({
   }
 });
 
-// mcp-server/node_modules/object-inspect/util.inspect.js
+// node_modules/object-inspect/util.inspect.js
 var require_util_inspect = __commonJS({
-  "mcp-server/node_modules/object-inspect/util.inspect.js"(exports2, module2) {
+  "node_modules/object-inspect/util.inspect.js"(exports2, module2) {
     module2.exports = __require("util").inspect;
   }
 });
 
-// mcp-server/node_modules/object-inspect/index.js
+// node_modules/object-inspect/index.js
 var require_object_inspect = __commonJS({
-  "mcp-server/node_modules/object-inspect/index.js"(exports2, module2) {
+  "node_modules/object-inspect/index.js"(exports2, module2) {
     var hasMap = typeof Map === "function" && Map.prototype;
     var mapSizeDescriptor = Object.getOwnPropertyDescriptor && hasMap ? Object.getOwnPropertyDescriptor(Map.prototype, "size") : null;
     var mapSize = hasMap && mapSizeDescriptor && typeof mapSizeDescriptor.get === "function" ? mapSizeDescriptor.get : null;
@@ -8613,9 +8614,9 @@ var require_object_inspect = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/helpers/isPropertyKey.js
+// node_modules/es-abstract/helpers/isPropertyKey.js
 var require_isPropertyKey = __commonJS({
-  "mcp-server/node_modules/es-abstract/helpers/isPropertyKey.js"(exports2, module2) {
+  "node_modules/es-abstract/helpers/isPropertyKey.js"(exports2, module2) {
     "use strict";
     module2.exports = function isPropertyKey(argument) {
       return typeof argument === "string" || typeof argument === "symbol";
@@ -8623,9 +8624,9 @@ var require_isPropertyKey = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-object-atoms/isObject.js
+// node_modules/es-object-atoms/isObject.js
 var require_isObject = __commonJS({
-  "mcp-server/node_modules/es-object-atoms/isObject.js"(exports2, module2) {
+  "node_modules/es-object-atoms/isObject.js"(exports2, module2) {
     "use strict";
     module2.exports = function isObject3(x) {
       return !!x && (typeof x === "function" || typeof x === "object");
@@ -8633,9 +8634,9 @@ var require_isObject = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/Get.js
+// node_modules/es-abstract/2024/Get.js
 var require_Get = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/Get.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/Get.js"(exports2, module2) {
     "use strict";
     var $TypeError = require_type();
     var inspect = require_object_inspect();
@@ -8653,9 +8654,9 @@ var require_Get = __commonJS({
   }
 });
 
-// mcp-server/node_modules/is-callable/index.js
+// node_modules/is-callable/index.js
 var require_is_callable = __commonJS({
-  "mcp-server/node_modules/is-callable/index.js"(exports2, module2) {
+  "node_modules/is-callable/index.js"(exports2, module2) {
     "use strict";
     var fnToStr = Function.prototype.toString;
     var reflectApply = typeof Reflect === "object" && Reflect !== null && Reflect.apply;
@@ -8771,26 +8772,26 @@ var require_is_callable = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/IsCallable.js
+// node_modules/es-abstract/2024/IsCallable.js
 var require_IsCallable = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/IsCallable.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/IsCallable.js"(exports2, module2) {
     "use strict";
     module2.exports = require_is_callable();
   }
 });
 
-// mcp-server/node_modules/math-intrinsics/constants/maxSafeInteger.js
+// node_modules/math-intrinsics/constants/maxSafeInteger.js
 var require_maxSafeInteger = __commonJS({
-  "mcp-server/node_modules/math-intrinsics/constants/maxSafeInteger.js"(exports2, module2) {
+  "node_modules/math-intrinsics/constants/maxSafeInteger.js"(exports2, module2) {
     "use strict";
     module2.exports = /** @type {import('./maxSafeInteger')} */
     Number.MAX_SAFE_INTEGER || 9007199254740991;
   }
 });
 
-// mcp-server/node_modules/es-abstract/helpers/isPrimitive.js
+// node_modules/es-abstract/helpers/isPrimitive.js
 var require_isPrimitive = __commonJS({
-  "mcp-server/node_modules/es-abstract/helpers/isPrimitive.js"(exports2, module2) {
+  "node_modules/es-abstract/helpers/isPrimitive.js"(exports2, module2) {
     "use strict";
     module2.exports = function isPrimitive2(value) {
       return value === null || typeof value !== "function" && typeof value !== "object";
@@ -8798,9 +8799,9 @@ var require_isPrimitive = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-to-primitive/helpers/isPrimitive.js
+// node_modules/es-to-primitive/helpers/isPrimitive.js
 var require_isPrimitive2 = __commonJS({
-  "mcp-server/node_modules/es-to-primitive/helpers/isPrimitive.js"(exports2, module2) {
+  "node_modules/es-to-primitive/helpers/isPrimitive.js"(exports2, module2) {
     "use strict";
     module2.exports = function isPrimitive2(value) {
       return value === null || typeof value !== "function" && typeof value !== "object";
@@ -8808,9 +8809,9 @@ var require_isPrimitive2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/has-tostringtag/shams.js
+// node_modules/has-tostringtag/shams.js
 var require_shams2 = __commonJS({
-  "mcp-server/node_modules/has-tostringtag/shams.js"(exports2, module2) {
+  "node_modules/has-tostringtag/shams.js"(exports2, module2) {
     "use strict";
     var hasSymbols = require_shams();
     module2.exports = function hasToStringTagShams() {
@@ -8819,9 +8820,9 @@ var require_shams2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/is-date-object/index.js
+// node_modules/is-date-object/index.js
 var require_is_date_object = __commonJS({
-  "mcp-server/node_modules/is-date-object/index.js"(exports2, module2) {
+  "node_modules/is-date-object/index.js"(exports2, module2) {
     "use strict";
     var callBound = require_call_bound();
     var getDay = callBound("Date.prototype.getDay");
@@ -8845,9 +8846,9 @@ var require_is_date_object = __commonJS({
   }
 });
 
-// mcp-server/node_modules/is-regex/index.js
+// node_modules/is-regex/index.js
 var require_is_regex = __commonJS({
-  "mcp-server/node_modules/is-regex/index.js"(exports2, module2) {
+  "node_modules/is-regex/index.js"(exports2, module2) {
     "use strict";
     var callBound = require_call_bound();
     var hasToStringTag = require_shams2()();
@@ -8914,9 +8915,9 @@ var require_is_regex = __commonJS({
   }
 });
 
-// mcp-server/node_modules/safe-regex-test/index.js
+// node_modules/safe-regex-test/index.js
 var require_safe_regex_test = __commonJS({
-  "mcp-server/node_modules/safe-regex-test/index.js"(exports2, module2) {
+  "node_modules/safe-regex-test/index.js"(exports2, module2) {
     "use strict";
     var callBound = require_call_bound();
     var isRegex = require_is_regex();
@@ -8933,9 +8934,9 @@ var require_safe_regex_test = __commonJS({
   }
 });
 
-// mcp-server/node_modules/is-symbol/index.js
+// node_modules/is-symbol/index.js
 var require_is_symbol = __commonJS({
-  "mcp-server/node_modules/is-symbol/index.js"(exports2, module2) {
+  "node_modules/is-symbol/index.js"(exports2, module2) {
     "use strict";
     var callBound = require_call_bound();
     var $toString = callBound("Object.prototype.toString");
@@ -8974,9 +8975,9 @@ var require_is_symbol = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-to-primitive/es2015.js
+// node_modules/es-to-primitive/es2015.js
 var require_es2015 = __commonJS({
-  "mcp-server/node_modules/es-to-primitive/es2015.js"(exports2, module2) {
+  "node_modules/es-to-primitive/es2015.js"(exports2, module2) {
     "use strict";
     var hasSymbols = typeof Symbol === "function" && typeof Symbol.iterator === "symbol";
     var isPrimitive2 = require_isPrimitive2();
@@ -9056,9 +9057,9 @@ var require_es2015 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/ToPrimitive.js
+// node_modules/es-abstract/2024/ToPrimitive.js
 var require_ToPrimitive = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/ToPrimitive.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/ToPrimitive.js"(exports2, module2) {
     "use strict";
     var toPrimitive = require_es2015();
     module2.exports = function ToPrimitive(input) {
@@ -9070,9 +9071,9 @@ var require_ToPrimitive = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/ToString.js
+// node_modules/es-abstract/2024/ToString.js
 var require_ToString = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/ToString.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/ToString.js"(exports2, module2) {
     "use strict";
     var GetIntrinsic = require_get_intrinsic();
     var $String = GetIntrinsic("%String%");
@@ -9086,9 +9087,9 @@ var require_ToString = __commonJS({
   }
 });
 
-// mcp-server/node_modules/string.prototype.trim/implementation.js
+// node_modules/string.prototype.trim/implementation.js
 var require_implementation3 = __commonJS({
-  "mcp-server/node_modules/string.prototype.trim/implementation.js"(exports2, module2) {
+  "node_modules/string.prototype.trim/implementation.js"(exports2, module2) {
     "use strict";
     var RequireObjectCoercible = require_RequireObjectCoercible();
     var ToString = require_ToString();
@@ -9104,9 +9105,9 @@ var require_implementation3 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/string.prototype.trim/polyfill.js
+// node_modules/string.prototype.trim/polyfill.js
 var require_polyfill = __commonJS({
-  "mcp-server/node_modules/string.prototype.trim/polyfill.js"(exports2, module2) {
+  "node_modules/string.prototype.trim/polyfill.js"(exports2, module2) {
     "use strict";
     var implementation = require_implementation3();
     var zeroWidthSpace = "\u200B";
@@ -9120,9 +9121,9 @@ var require_polyfill = __commonJS({
   }
 });
 
-// mcp-server/node_modules/string.prototype.trim/shim.js
+// node_modules/string.prototype.trim/shim.js
 var require_shim = __commonJS({
-  "mcp-server/node_modules/string.prototype.trim/shim.js"(exports2, module2) {
+  "node_modules/string.prototype.trim/shim.js"(exports2, module2) {
     "use strict";
     var supportsDescriptors = require_has_property_descriptors()();
     var defineDataProperty = require_define_data_property();
@@ -9141,9 +9142,9 @@ var require_shim = __commonJS({
   }
 });
 
-// mcp-server/node_modules/string.prototype.trim/index.js
+// node_modules/string.prototype.trim/index.js
 var require_string_prototype = __commonJS({
-  "mcp-server/node_modules/string.prototype.trim/index.js"(exports2, module2) {
+  "node_modules/string.prototype.trim/index.js"(exports2, module2) {
     "use strict";
     var callBind = require_call_bind();
     var define2 = require_define_properties();
@@ -9165,9 +9166,9 @@ var require_string_prototype = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/StringToNumber.js
+// node_modules/es-abstract/2024/StringToNumber.js
 var require_StringToNumber = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/StringToNumber.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/StringToNumber.js"(exports2, module2) {
     "use strict";
     var GetIntrinsic = require_get_intrinsic();
     var $RegExp = GetIntrinsic("%RegExp%");
@@ -9205,9 +9206,9 @@ var require_StringToNumber = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/ToNumber.js
+// node_modules/es-abstract/2024/ToNumber.js
 var require_ToNumber = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/ToNumber.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/ToNumber.js"(exports2, module2) {
     "use strict";
     var GetIntrinsic = require_get_intrinsic();
     var $TypeError = require_type();
@@ -9231,9 +9232,9 @@ var require_ToNumber = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/floor.js
+// node_modules/es-abstract/2024/floor.js
 var require_floor2 = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/floor.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/floor.js"(exports2, module2) {
     "use strict";
     var $floor = require_floor();
     module2.exports = function floor(x) {
@@ -9245,9 +9246,9 @@ var require_floor2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/truncate.js
+// node_modules/es-abstract/2024/truncate.js
 var require_truncate = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/truncate.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/truncate.js"(exports2, module2) {
     "use strict";
     var floor = require_floor2();
     var $TypeError = require_type();
@@ -9261,9 +9262,9 @@ var require_truncate = __commonJS({
   }
 });
 
-// mcp-server/node_modules/math-intrinsics/isFinite.js
+// node_modules/math-intrinsics/isFinite.js
 var require_isFinite = __commonJS({
-  "mcp-server/node_modules/math-intrinsics/isFinite.js"(exports2, module2) {
+  "node_modules/math-intrinsics/isFinite.js"(exports2, module2) {
     "use strict";
     var $isNaN = require_isNaN();
     module2.exports = function isFinite2(x) {
@@ -9272,9 +9273,9 @@ var require_isFinite = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/ToIntegerOrInfinity.js
+// node_modules/es-abstract/2024/ToIntegerOrInfinity.js
 var require_ToIntegerOrInfinity = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/ToIntegerOrInfinity.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/ToIntegerOrInfinity.js"(exports2, module2) {
     "use strict";
     var ToNumber = require_ToNumber();
     var truncate = require_truncate();
@@ -9293,9 +9294,9 @@ var require_ToIntegerOrInfinity = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/ToLength.js
+// node_modules/es-abstract/2024/ToLength.js
 var require_ToLength = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/ToLength.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/ToLength.js"(exports2, module2) {
     "use strict";
     var MAX_SAFE_INTEGER = require_maxSafeInteger();
     var ToIntegerOrInfinity = require_ToIntegerOrInfinity();
@@ -9312,9 +9313,9 @@ var require_ToLength = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/LengthOfArrayLike.js
+// node_modules/es-abstract/2024/LengthOfArrayLike.js
 var require_LengthOfArrayLike = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/LengthOfArrayLike.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/LengthOfArrayLike.js"(exports2, module2) {
     "use strict";
     var $TypeError = require_type();
     var isObject3 = require_isObject();
@@ -9329,9 +9330,9 @@ var require_LengthOfArrayLike = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-abstract/2024/ToBoolean.js
+// node_modules/es-abstract/2024/ToBoolean.js
 var require_ToBoolean = __commonJS({
-  "mcp-server/node_modules/es-abstract/2024/ToBoolean.js"(exports2, module2) {
+  "node_modules/es-abstract/2024/ToBoolean.js"(exports2, module2) {
     "use strict";
     module2.exports = function ToBoolean(value) {
       return !!value;
@@ -9339,9 +9340,9 @@ var require_ToBoolean = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-object-atoms/ToObject.js
+// node_modules/es-object-atoms/ToObject.js
 var require_ToObject = __commonJS({
-  "mcp-server/node_modules/es-object-atoms/ToObject.js"(exports2, module2) {
+  "node_modules/es-object-atoms/ToObject.js"(exports2, module2) {
     "use strict";
     var $Object = require_es_object_atoms();
     var RequireObjectCoercible = require_RequireObjectCoercible();
@@ -9352,9 +9353,9 @@ var require_ToObject = __commonJS({
   }
 });
 
-// mcp-server/node_modules/array.prototype.findindex/implementation.js
+// node_modules/array.prototype.findindex/implementation.js
 var require_implementation4 = __commonJS({
-  "mcp-server/node_modules/array.prototype.findindex/implementation.js"(exports2, module2) {
+  "node_modules/array.prototype.findindex/implementation.js"(exports2, module2) {
     "use strict";
     var Call = require_Call();
     var Get = require_Get();
@@ -9385,9 +9386,9 @@ var require_implementation4 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/array.prototype.findindex/polyfill.js
+// node_modules/array.prototype.findindex/polyfill.js
 var require_polyfill2 = __commonJS({
-  "mcp-server/node_modules/array.prototype.findindex/polyfill.js"(exports2, module2) {
+  "node_modules/array.prototype.findindex/polyfill.js"(exports2, module2) {
     "use strict";
     var implementation = require_implementation4();
     module2.exports = function getPolyfill() {
@@ -9399,9 +9400,9 @@ var require_polyfill2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-shim-unscopables/index.js
+// node_modules/es-shim-unscopables/index.js
 var require_es_shim_unscopables = __commonJS({
-  "mcp-server/node_modules/es-shim-unscopables/index.js"(exports2, module2) {
+  "node_modules/es-shim-unscopables/index.js"(exports2, module2) {
     "use strict";
     var hasOwn = require_hasown();
     var hasUnscopables = typeof Symbol === "function" && typeof Symbol.unscopables === "symbol";
@@ -9421,9 +9422,9 @@ var require_es_shim_unscopables = __commonJS({
   }
 });
 
-// mcp-server/node_modules/array.prototype.findindex/shim.js
+// node_modules/array.prototype.findindex/shim.js
 var require_shim2 = __commonJS({
-  "mcp-server/node_modules/array.prototype.findindex/shim.js"(exports2, module2) {
+  "node_modules/array.prototype.findindex/shim.js"(exports2, module2) {
     "use strict";
     var define2 = require_define_properties();
     var shimUnscopables = require_es_shim_unscopables();
@@ -9445,9 +9446,9 @@ var require_shim2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/array.prototype.findindex/index.js
+// node_modules/array.prototype.findindex/index.js
 var require_array_prototype = __commonJS({
-  "mcp-server/node_modules/array.prototype.findindex/index.js"(exports2, module2) {
+  "node_modules/array.prototype.findindex/index.js"(exports2, module2) {
     "use strict";
     var define2 = require_define_properties();
     var RequireObjectCoercible = require_RequireObjectCoercible();
@@ -9472,9 +9473,9 @@ var require_array_prototype = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/lib/errors.js
+// node_modules/node-telegram-bot-api/lib/errors.js
 var require_errors2 = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/lib/errors.js"(exports2) {
+  "node_modules/node-telegram-bot-api/lib/errors.js"(exports2) {
     "use strict";
     var _createClass = /* @__PURE__ */ (function() {
       function defineProperties(target, props) {
@@ -9564,9 +9565,9 @@ var require_errors2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ms/index.js
+// node_modules/ms/index.js
 var require_ms = __commonJS({
-  "mcp-server/node_modules/ms/index.js"(exports2, module2) {
+  "node_modules/ms/index.js"(exports2, module2) {
     var s = 1e3;
     var m = s * 60;
     var h = m * 60;
@@ -9680,9 +9681,9 @@ var require_ms = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/node_modules/debug/src/common.js
+// node_modules/node-telegram-bot-api/node_modules/debug/src/common.js
 var require_common = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/node_modules/debug/src/common.js"(exports2, module2) {
+  "node_modules/node-telegram-bot-api/node_modules/debug/src/common.js"(exports2, module2) {
     "use strict";
     function setup(env2) {
       createDebug.debug = createDebug;
@@ -9827,9 +9828,9 @@ var require_common = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/node_modules/debug/src/browser.js
+// node_modules/node-telegram-bot-api/node_modules/debug/src/browser.js
 var require_browser = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/node_modules/debug/src/browser.js"(exports2, module2) {
+  "node_modules/node-telegram-bot-api/node_modules/debug/src/browser.js"(exports2, module2) {
     "use strict";
     function _typeof(obj2) {
       if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
@@ -9926,9 +9927,9 @@ var require_browser = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/node_modules/debug/src/node.js
+// node_modules/node-telegram-bot-api/node_modules/debug/src/node.js
 var require_node = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/node_modules/debug/src/node.js"(exports2, module2) {
+  "node_modules/node-telegram-bot-api/node_modules/debug/src/node.js"(exports2, module2) {
     "use strict";
     var tty = __require("tty");
     var util2 = __require("util");
@@ -10022,9 +10023,9 @@ var require_node = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/node_modules/debug/src/index.js
+// node_modules/node-telegram-bot-api/node_modules/debug/src/index.js
 var require_src = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/node_modules/debug/src/index.js"(exports2, module2) {
+  "node_modules/node-telegram-bot-api/node_modules/debug/src/index.js"(exports2, module2) {
     "use strict";
     if (typeof process === "undefined" || process.type === "renderer" || process.browser === true || process.__nwjs) {
       module2.exports = require_browser();
@@ -10034,9 +10035,9 @@ var require_src = __commonJS({
   }
 });
 
-// mcp-server/node_modules/process-nextick-args/index.js
+// node_modules/process-nextick-args/index.js
 var require_process_nextick_args = __commonJS({
-  "mcp-server/node_modules/process-nextick-args/index.js"(exports2, module2) {
+  "node_modules/process-nextick-args/index.js"(exports2, module2) {
     "use strict";
     if (typeof process === "undefined" || !process.version || process.version.indexOf("v0.") === 0 || process.version.indexOf("v1.") === 0 && process.version.indexOf("v1.8.") !== 0) {
       module2.exports = { nextTick };
@@ -10079,9 +10080,9 @@ var require_process_nextick_args = __commonJS({
   }
 });
 
-// mcp-server/node_modules/isarray/index.js
+// node_modules/isarray/index.js
 var require_isarray = __commonJS({
-  "mcp-server/node_modules/isarray/index.js"(exports2, module2) {
+  "node_modules/isarray/index.js"(exports2, module2) {
     var toString = {}.toString;
     module2.exports = Array.isArray || function(arr) {
       return toString.call(arr) == "[object Array]";
@@ -10089,16 +10090,16 @@ var require_isarray = __commonJS({
   }
 });
 
-// mcp-server/node_modules/readable-stream/lib/internal/streams/stream.js
+// node_modules/readable-stream/lib/internal/streams/stream.js
 var require_stream = __commonJS({
-  "mcp-server/node_modules/readable-stream/lib/internal/streams/stream.js"(exports2, module2) {
+  "node_modules/readable-stream/lib/internal/streams/stream.js"(exports2, module2) {
     module2.exports = __require("stream");
   }
 });
 
-// mcp-server/node_modules/readable-stream/node_modules/safe-buffer/index.js
+// node_modules/readable-stream/node_modules/safe-buffer/index.js
 var require_safe_buffer = __commonJS({
-  "mcp-server/node_modules/readable-stream/node_modules/safe-buffer/index.js"(exports2, module2) {
+  "node_modules/readable-stream/node_modules/safe-buffer/index.js"(exports2, module2) {
     var buffer = __require("buffer");
     var Buffer2 = buffer.Buffer;
     function copyProps(src, dst) {
@@ -10153,9 +10154,9 @@ var require_safe_buffer = __commonJS({
   }
 });
 
-// mcp-server/node_modules/core-util-is/lib/util.js
+// node_modules/core-util-is/lib/util.js
 var require_util2 = __commonJS({
-  "mcp-server/node_modules/core-util-is/lib/util.js"(exports2) {
+  "node_modules/core-util-is/lib/util.js"(exports2) {
     function isArray(arg) {
       if (Array.isArray) {
         return Array.isArray(arg);
@@ -10223,9 +10224,9 @@ var require_util2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/inherits/inherits_browser.js
+// node_modules/inherits/inherits_browser.js
 var require_inherits_browser = __commonJS({
-  "mcp-server/node_modules/inherits/inherits_browser.js"(exports2, module2) {
+  "node_modules/inherits/inherits_browser.js"(exports2, module2) {
     if (typeof Object.create === "function") {
       module2.exports = function inherits2(ctor, superCtor) {
         if (superCtor) {
@@ -10255,9 +10256,9 @@ var require_inherits_browser = __commonJS({
   }
 });
 
-// mcp-server/node_modules/inherits/inherits.js
+// node_modules/inherits/inherits.js
 var require_inherits = __commonJS({
-  "mcp-server/node_modules/inherits/inherits.js"(exports2, module2) {
+  "node_modules/inherits/inherits.js"(exports2, module2) {
     try {
       util2 = __require("util");
       if (typeof util2.inherits !== "function") throw "";
@@ -10269,9 +10270,9 @@ var require_inherits = __commonJS({
   }
 });
 
-// mcp-server/node_modules/readable-stream/lib/internal/streams/BufferList.js
+// node_modules/readable-stream/lib/internal/streams/BufferList.js
 var require_BufferList = __commonJS({
-  "mcp-server/node_modules/readable-stream/lib/internal/streams/BufferList.js"(exports2, module2) {
+  "node_modules/readable-stream/lib/internal/streams/BufferList.js"(exports2, module2) {
     "use strict";
     function _classCallCheck(instance, Constructor) {
       if (!(instance instanceof Constructor)) {
@@ -10347,9 +10348,9 @@ var require_BufferList = __commonJS({
   }
 });
 
-// mcp-server/node_modules/readable-stream/lib/internal/streams/destroy.js
+// node_modules/readable-stream/lib/internal/streams/destroy.js
 var require_destroy = __commonJS({
-  "mcp-server/node_modules/readable-stream/lib/internal/streams/destroy.js"(exports2, module2) {
+  "node_modules/readable-stream/lib/internal/streams/destroy.js"(exports2, module2) {
     "use strict";
     var pna = require_process_nextick_args();
     function destroy(err, cb) {
@@ -10416,16 +10417,16 @@ var require_destroy = __commonJS({
   }
 });
 
-// mcp-server/node_modules/util-deprecate/node.js
+// node_modules/util-deprecate/node.js
 var require_node2 = __commonJS({
-  "mcp-server/node_modules/util-deprecate/node.js"(exports2, module2) {
+  "node_modules/util-deprecate/node.js"(exports2, module2) {
     module2.exports = __require("util").deprecate;
   }
 });
 
-// mcp-server/node_modules/readable-stream/lib/_stream_writable.js
+// node_modules/readable-stream/lib/_stream_writable.js
 var require_stream_writable = __commonJS({
-  "mcp-server/node_modules/readable-stream/lib/_stream_writable.js"(exports2, module2) {
+  "node_modules/readable-stream/lib/_stream_writable.js"(exports2, module2) {
     "use strict";
     var pna = require_process_nextick_args();
     module2.exports = Writable;
@@ -10863,9 +10864,9 @@ var require_stream_writable = __commonJS({
   }
 });
 
-// mcp-server/node_modules/readable-stream/lib/_stream_duplex.js
+// node_modules/readable-stream/lib/_stream_duplex.js
 var require_stream_duplex = __commonJS({
-  "mcp-server/node_modules/readable-stream/lib/_stream_duplex.js"(exports2, module2) {
+  "node_modules/readable-stream/lib/_stream_duplex.js"(exports2, module2) {
     "use strict";
     var pna = require_process_nextick_args();
     var objectKeys = Object.keys || function(obj2) {
@@ -10940,9 +10941,9 @@ var require_stream_duplex = __commonJS({
   }
 });
 
-// mcp-server/node_modules/string_decoder/node_modules/safe-buffer/index.js
+// node_modules/string_decoder/node_modules/safe-buffer/index.js
 var require_safe_buffer2 = __commonJS({
-  "mcp-server/node_modules/string_decoder/node_modules/safe-buffer/index.js"(exports2, module2) {
+  "node_modules/string_decoder/node_modules/safe-buffer/index.js"(exports2, module2) {
     var buffer = __require("buffer");
     var Buffer2 = buffer.Buffer;
     function copyProps(src, dst) {
@@ -10997,9 +10998,9 @@ var require_safe_buffer2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/string_decoder/lib/string_decoder.js
+// node_modules/string_decoder/lib/string_decoder.js
 var require_string_decoder = __commonJS({
-  "mcp-server/node_modules/string_decoder/lib/string_decoder.js"(exports2) {
+  "node_modules/string_decoder/lib/string_decoder.js"(exports2) {
     "use strict";
     var Buffer2 = require_safe_buffer2().Buffer;
     var isEncoding = Buffer2.isEncoding || function(encoding) {
@@ -11235,9 +11236,9 @@ var require_string_decoder = __commonJS({
   }
 });
 
-// mcp-server/node_modules/readable-stream/lib/_stream_readable.js
+// node_modules/readable-stream/lib/_stream_readable.js
 var require_stream_readable = __commonJS({
-  "mcp-server/node_modules/readable-stream/lib/_stream_readable.js"(exports2, module2) {
+  "node_modules/readable-stream/lib/_stream_readable.js"(exports2, module2) {
     "use strict";
     var pna = require_process_nextick_args();
     module2.exports = Readable;
@@ -11921,9 +11922,9 @@ var require_stream_readable = __commonJS({
   }
 });
 
-// mcp-server/node_modules/readable-stream/lib/_stream_transform.js
+// node_modules/readable-stream/lib/_stream_transform.js
 var require_stream_transform = __commonJS({
-  "mcp-server/node_modules/readable-stream/lib/_stream_transform.js"(exports2, module2) {
+  "node_modules/readable-stream/lib/_stream_transform.js"(exports2, module2) {
     "use strict";
     module2.exports = Transform;
     var Duplex = require_stream_duplex();
@@ -12021,9 +12022,9 @@ var require_stream_transform = __commonJS({
   }
 });
 
-// mcp-server/node_modules/readable-stream/lib/_stream_passthrough.js
+// node_modules/readable-stream/lib/_stream_passthrough.js
 var require_stream_passthrough = __commonJS({
-  "mcp-server/node_modules/readable-stream/lib/_stream_passthrough.js"(exports2, module2) {
+  "node_modules/readable-stream/lib/_stream_passthrough.js"(exports2, module2) {
     "use strict";
     module2.exports = PassThrough;
     var Transform = require_stream_transform();
@@ -12040,9 +12041,9 @@ var require_stream_passthrough = __commonJS({
   }
 });
 
-// mcp-server/node_modules/readable-stream/readable.js
+// node_modules/readable-stream/readable.js
 var require_readable = __commonJS({
-  "mcp-server/node_modules/readable-stream/readable.js"(exports2, module2) {
+  "node_modules/readable-stream/readable.js"(exports2, module2) {
     var Stream = __require("stream");
     if (process.env.READABLE_STREAM === "disable" && Stream) {
       module2.exports = Stream;
@@ -12065,16 +12066,16 @@ var require_readable = __commonJS({
   }
 });
 
-// mcp-server/node_modules/readable-stream/duplex.js
+// node_modules/readable-stream/duplex.js
 var require_duplex = __commonJS({
-  "mcp-server/node_modules/readable-stream/duplex.js"(exports2, module2) {
+  "node_modules/readable-stream/duplex.js"(exports2, module2) {
     module2.exports = require_readable().Duplex;
   }
 });
 
-// mcp-server/node_modules/safe-buffer/index.js
+// node_modules/safe-buffer/index.js
 var require_safe_buffer3 = __commonJS({
-  "mcp-server/node_modules/safe-buffer/index.js"(exports2, module2) {
+  "node_modules/safe-buffer/index.js"(exports2, module2) {
     var buffer = __require("buffer");
     var Buffer2 = buffer.Buffer;
     function copyProps(src, dst) {
@@ -12130,9 +12131,9 @@ var require_safe_buffer3 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bl/bl.js
+// node_modules/bl/bl.js
 var require_bl = __commonJS({
-  "mcp-server/node_modules/bl/bl.js"(exports2, module2) {
+  "node_modules/bl/bl.js"(exports2, module2) {
     var DuplexStream = require_duplex();
     var util2 = __require("util");
     var Buffer2 = require_safe_buffer3().Buffer;
@@ -12338,9 +12339,9 @@ var require_bl = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/lib/telegramWebHook.js
+// node_modules/node-telegram-bot-api/lib/telegramWebHook.js
 var require_telegramWebHook = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/lib/telegramWebHook.js"(exports2, module2) {
+  "node_modules/node-telegram-bot-api/lib/telegramWebHook.js"(exports2, module2) {
     "use strict";
     var _createClass = /* @__PURE__ */ (function() {
       function defineProperties(target, props) {
@@ -12514,9 +12515,9 @@ var require_telegramWebHook = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/lib/utils.js
+// node_modules/node-telegram-bot-api/lib/utils.js
 var require_utils3 = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/lib/utils.js"(exports2) {
+  "node_modules/node-telegram-bot-api/lib/utils.js"(exports2) {
     "use strict";
     var util2 = __require("util");
     exports2.deprecate = function(msg) {
@@ -12526,9 +12527,9 @@ var require_utils3 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/lib/telegramPolling.js
+// node_modules/node-telegram-bot-api/lib/telegramPolling.js
 var require_telegramPolling = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/lib/telegramPolling.js"(exports2, module2) {
+  "node_modules/node-telegram-bot-api/lib/telegramPolling.js"(exports2, module2) {
     "use strict";
     var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function(obj2) {
       return typeof obj2;
@@ -12740,9 +12741,9 @@ var require_telegramPolling = __commonJS({
   }
 });
 
-// mcp-server/node_modules/eventemitter3/index.js
+// node_modules/eventemitter3/index.js
 var require_eventemitter3 = __commonJS({
-  "mcp-server/node_modules/eventemitter3/index.js"(exports2, module2) {
+  "node_modules/eventemitter3/index.js"(exports2, module2) {
     "use strict";
     var has = Object.prototype.hasOwnProperty;
     var prefix = "~";
@@ -12902,9 +12903,9 @@ var require_eventemitter3 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/file-type/index.js
+// node_modules/file-type/index.js
 var require_file_type = __commonJS({
-  "mcp-server/node_modules/file-type/index.js"(exports2, module2) {
+  "node_modules/file-type/index.js"(exports2, module2) {
     "use strict";
     module2.exports = function(buf) {
       if (!(buf && buf.length > 1)) {
@@ -13263,9 +13264,9 @@ var require_file_type = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/es5.js
+// node_modules/bluebird/js/release/es5.js
 var require_es5 = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/es5.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/es5.js"(exports2, module2) {
     var isES5 = (function() {
       "use strict";
       return this === void 0;
@@ -13348,9 +13349,9 @@ var require_es5 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/util.js
+// node_modules/bluebird/js/release/util.js
 var require_util3 = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/util.js"(exports, module) {
+  "node_modules/bluebird/js/release/util.js"(exports, module) {
     "use strict";
     var es5 = require_es5();
     var canEvaluate = typeof navigator == "undefined";
@@ -13722,9 +13723,9 @@ var require_util3 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/schedule.js
+// node_modules/bluebird/js/release/schedule.js
 var require_schedule = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/schedule.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/schedule.js"(exports2, module2) {
     "use strict";
     var util2 = require_util3();
     var schedule;
@@ -13788,9 +13789,9 @@ var require_schedule = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/queue.js
+// node_modules/bluebird/js/release/queue.js
 var require_queue = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/queue.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/queue.js"(exports2, module2) {
     "use strict";
     function arrayMove(src, srcIndex, dst, dstIndex, len) {
       for (var j = 0; j < len; ++j) {
@@ -13856,9 +13857,9 @@ var require_queue = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/async.js
+// node_modules/bluebird/js/release/async.js
 var require_async = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/async.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/async.js"(exports2, module2) {
     "use strict";
     var firstLineError;
     try {
@@ -13969,9 +13970,9 @@ var require_async = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/errors.js
+// node_modules/bluebird/js/release/errors.js
 var require_errors3 = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/errors.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/errors.js"(exports2, module2) {
     "use strict";
     var es52 = require_es5();
     var Objectfreeze = es52.freeze;
@@ -14085,9 +14086,9 @@ var require_errors3 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/thenables.js
+// node_modules/bluebird/js/release/thenables.js
 var require_thenables = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/thenables.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/thenables.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, INTERNAL) {
       var util2 = require_util3();
@@ -14168,9 +14169,9 @@ var require_thenables = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/promise_array.js
+// node_modules/bluebird/js/release/promise_array.js
 var require_promise_array = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/promise_array.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/promise_array.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, INTERNAL, tryConvertToPromise, apiRejection, Proxyable) {
       var util2 = require_util3();
@@ -14341,9 +14342,9 @@ var require_promise_array = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/context.js
+// node_modules/bluebird/js/release/context.js
 var require_context = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/context.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/context.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2) {
       var longStackTraces = false;
@@ -14417,9 +14418,9 @@ var require_context = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/debuggability.js
+// node_modules/bluebird/js/release/debuggability.js
 var require_debuggability = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/debuggability.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/debuggability.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, Context, enableAsyncHooks, disableAsyncHooks) {
       var async = Promise2._async;
@@ -15341,9 +15342,9 @@ var require_debuggability = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/catch_filter.js
+// node_modules/bluebird/js/release/catch_filter.js
 var require_catch_filter = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/catch_filter.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/catch_filter.js"(exports2, module2) {
     "use strict";
     module2.exports = function(NEXT_FILTER) {
       var util2 = require_util3();
@@ -15385,9 +15386,9 @@ var require_catch_filter = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/finally.js
+// node_modules/bluebird/js/release/finally.js
 var require_finally = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/finally.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/finally.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, tryConvertToPromise, NEXT_FILTER) {
       var util2 = require_util3();
@@ -15530,9 +15531,9 @@ var require_finally = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/nodeback.js
+// node_modules/bluebird/js/release/nodeback.js
 var require_nodeback = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/nodeback.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/nodeback.js"(exports2, module2) {
     "use strict";
     var util2 = require_util3();
     var maybeWrapAsError2 = util2.maybeWrapAsError;
@@ -15587,9 +15588,9 @@ var require_nodeback = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/method.js
+// node_modules/bluebird/js/release/method.js
 var require_method = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/method.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/method.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, INTERNAL, tryConvertToPromise, apiRejection, debug) {
       var util2 = require_util3();
@@ -15651,9 +15652,9 @@ var require_method = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/bind.js
+// node_modules/bluebird/js/release/bind.js
 var require_bind = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/bind.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/bind.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, INTERNAL, tryConvertToPromise, debug) {
       var calledBind = false;
@@ -15722,9 +15723,9 @@ var require_bind = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/cancel.js
+// node_modules/bluebird/js/release/cancel.js
 var require_cancel = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/cancel.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/cancel.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, PromiseArray, apiRejection, debug) {
       var util2 = require_util3();
@@ -15839,9 +15840,9 @@ var require_cancel = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/direct_resolve.js
+// node_modules/bluebird/js/release/direct_resolve.js
 var require_direct_resolve = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/direct_resolve.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/direct_resolve.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2) {
       function returner() {
@@ -15909,9 +15910,9 @@ var require_direct_resolve = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/synchronous_inspection.js
+// node_modules/bluebird/js/release/synchronous_inspection.js
 var require_synchronous_inspection = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/synchronous_inspection.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/synchronous_inspection.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2) {
       function PromiseInspection(promise2) {
@@ -15995,9 +15996,9 @@ var require_synchronous_inspection = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/join.js
+// node_modules/bluebird/js/release/join.js
 var require_join = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/join.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/join.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, PromiseArray, tryConvertToPromise, INTERNAL, async) {
       var util2 = require_util3();
@@ -16110,9 +16111,9 @@ var require_join = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/call_get.js
+// node_modules/bluebird/js/release/call_get.js
 var require_call_get = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/call_get.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/call_get.js"(exports2, module2) {
     "use strict";
     var cr = Object.create;
     if (cr) {
@@ -16224,9 +16225,9 @@ var require_call_get = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/generators.js
+// node_modules/bluebird/js/release/generators.js
 var require_generators = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/generators.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/generators.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, apiRejection, INTERNAL, tryConvertToPromise, Proxyable, debug) {
       var errors = require_errors3();
@@ -16440,9 +16441,9 @@ var require_generators = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/map.js
+// node_modules/bluebird/js/release/map.js
 var require_map = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/map.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/map.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, PromiseArray, apiRejection, tryConvertToPromise, INTERNAL, debug) {
       var util2 = require_util3();
@@ -16598,9 +16599,9 @@ var require_map = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/nodeify.js
+// node_modules/bluebird/js/release/nodeify.js
 var require_nodeify = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/nodeify.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/nodeify.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2) {
       var util2 = require_util3();
@@ -16655,9 +16656,9 @@ var require_nodeify = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/promisify.js
+// node_modules/bluebird/js/release/promisify.js
 var require_promisify = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/promisify.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/promisify.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, INTERNAL) {
       var THIS = {};
@@ -16925,9 +16926,9 @@ var require_promisify = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/props.js
+// node_modules/bluebird/js/release/props.js
 var require_props = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/props.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/props.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, PromiseArray, tryConvertToPromise, apiRejection) {
       var util2 = require_util3();
@@ -17040,9 +17041,9 @@ var require_props = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/race.js
+// node_modules/bluebird/js/release/race.js
 var require_race = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/race.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/race.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, INTERNAL, tryConvertToPromise, apiRejection) {
       var util2 = require_util3();
@@ -17085,9 +17086,9 @@ var require_race = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/reduce.js
+// node_modules/bluebird/js/release/reduce.js
 var require_reduce = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/reduce.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/reduce.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, PromiseArray, apiRejection, tryConvertToPromise, INTERNAL, debug) {
       var util2 = require_util3();
@@ -17250,9 +17251,9 @@ var require_reduce = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/settle.js
+// node_modules/bluebird/js/release/settle.js
 var require_settle = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/settle.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/settle.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, PromiseArray, debug) {
       var PromiseInspection = Promise2.PromiseInspection;
@@ -17296,9 +17297,9 @@ var require_settle = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/some.js
+// node_modules/bluebird/js/release/some.js
 var require_some = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/some.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/some.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, PromiseArray, apiRejection) {
       var util2 = require_util3();
@@ -17424,9 +17425,9 @@ var require_some = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/timers.js
+// node_modules/bluebird/js/release/timers.js
 var require_timers = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/timers.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/timers.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, INTERNAL, debug) {
       var util2 = require_util3();
@@ -17523,9 +17524,9 @@ var require_timers = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/using.js
+// node_modules/bluebird/js/release/using.js
 var require_using = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/using.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/using.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, apiRejection, tryConvertToPromise, createContext, INTERNAL, debug) {
       var util2 = require_util3();
@@ -17733,9 +17734,9 @@ var require_using = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/any.js
+// node_modules/bluebird/js/release/any.js
 var require_any = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/any.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/any.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2) {
       var SomePromiseArray = Promise2._SomePromiseArray;
@@ -17757,9 +17758,9 @@ var require_any = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/each.js
+// node_modules/bluebird/js/release/each.js
 var require_each = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/each.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/each.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, INTERNAL) {
       var PromiseReduce = Promise2.reduce;
@@ -17784,9 +17785,9 @@ var require_each = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/filter.js
+// node_modules/bluebird/js/release/filter.js
 var require_filter = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/filter.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/filter.js"(exports2, module2) {
     "use strict";
     module2.exports = function(Promise2, INTERNAL) {
       var PromiseMap = Promise2.map;
@@ -17800,9 +17801,9 @@ var require_filter = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/promise.js
+// node_modules/bluebird/js/release/promise.js
 var require_promise = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/promise.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/promise.js"(exports2, module2) {
     "use strict";
     module2.exports = function() {
       var makeSelfResolutionError = function() {
@@ -18529,9 +18530,9 @@ var require_promise = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bluebird/js/release/bluebird.js
+// node_modules/bluebird/js/release/bluebird.js
 var require_bluebird = __commonJS({
-  "mcp-server/node_modules/bluebird/js/release/bluebird.js"(exports2, module2) {
+  "node_modules/bluebird/js/release/bluebird.js"(exports2, module2) {
     "use strict";
     var old;
     if (typeof Promise !== "undefined") old = Promise;
@@ -18548,9 +18549,9 @@ var require_bluebird = __commonJS({
   }
 });
 
-// mcp-server/node_modules/request-promise-core/lib/errors.js
+// node_modules/request-promise-core/lib/errors.js
 var require_errors4 = __commonJS({
-  "mcp-server/node_modules/request-promise-core/lib/errors.js"(exports2, module2) {
+  "node_modules/request-promise-core/lib/errors.js"(exports2, module2) {
     "use strict";
     function RequestError(cause, options, response) {
       this.name = "RequestError";
@@ -18599,17 +18600,17 @@ var require_errors4 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/lodash/_freeGlobal.js
+// node_modules/lodash/_freeGlobal.js
 var require_freeGlobal = __commonJS({
-  "mcp-server/node_modules/lodash/_freeGlobal.js"(exports2, module2) {
+  "node_modules/lodash/_freeGlobal.js"(exports2, module2) {
     var freeGlobal = typeof global == "object" && global && global.Object === Object && global;
     module2.exports = freeGlobal;
   }
 });
 
-// mcp-server/node_modules/lodash/_root.js
+// node_modules/lodash/_root.js
 var require_root = __commonJS({
-  "mcp-server/node_modules/lodash/_root.js"(exports2, module2) {
+  "node_modules/lodash/_root.js"(exports2, module2) {
     var freeGlobal = require_freeGlobal();
     var freeSelf = typeof self == "object" && self && self.Object === Object && self;
     var root = freeGlobal || freeSelf || Function("return this")();
@@ -18617,18 +18618,18 @@ var require_root = __commonJS({
   }
 });
 
-// mcp-server/node_modules/lodash/_Symbol.js
+// node_modules/lodash/_Symbol.js
 var require_Symbol = __commonJS({
-  "mcp-server/node_modules/lodash/_Symbol.js"(exports2, module2) {
+  "node_modules/lodash/_Symbol.js"(exports2, module2) {
     var root = require_root();
     var Symbol2 = root.Symbol;
     module2.exports = Symbol2;
   }
 });
 
-// mcp-server/node_modules/lodash/_getRawTag.js
+// node_modules/lodash/_getRawTag.js
 var require_getRawTag = __commonJS({
-  "mcp-server/node_modules/lodash/_getRawTag.js"(exports2, module2) {
+  "node_modules/lodash/_getRawTag.js"(exports2, module2) {
     var Symbol2 = require_Symbol();
     var objectProto = Object.prototype;
     var hasOwnProperty = objectProto.hasOwnProperty;
@@ -18655,9 +18656,9 @@ var require_getRawTag = __commonJS({
   }
 });
 
-// mcp-server/node_modules/lodash/_objectToString.js
+// node_modules/lodash/_objectToString.js
 var require_objectToString = __commonJS({
-  "mcp-server/node_modules/lodash/_objectToString.js"(exports2, module2) {
+  "node_modules/lodash/_objectToString.js"(exports2, module2) {
     var objectProto = Object.prototype;
     var nativeObjectToString = objectProto.toString;
     function objectToString(value) {
@@ -18667,9 +18668,9 @@ var require_objectToString = __commonJS({
   }
 });
 
-// mcp-server/node_modules/lodash/_baseGetTag.js
+// node_modules/lodash/_baseGetTag.js
 var require_baseGetTag = __commonJS({
-  "mcp-server/node_modules/lodash/_baseGetTag.js"(exports2, module2) {
+  "node_modules/lodash/_baseGetTag.js"(exports2, module2) {
     var Symbol2 = require_Symbol();
     var getRawTag = require_getRawTag();
     var objectToString = require_objectToString();
@@ -18686,9 +18687,9 @@ var require_baseGetTag = __commonJS({
   }
 });
 
-// mcp-server/node_modules/lodash/isObject.js
+// node_modules/lodash/isObject.js
 var require_isObject2 = __commonJS({
-  "mcp-server/node_modules/lodash/isObject.js"(exports2, module2) {
+  "node_modules/lodash/isObject.js"(exports2, module2) {
     function isObject3(value) {
       var type = typeof value;
       return value != null && (type == "object" || type == "function");
@@ -18697,9 +18698,9 @@ var require_isObject2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/lodash/isFunction.js
+// node_modules/lodash/isFunction.js
 var require_isFunction = __commonJS({
-  "mcp-server/node_modules/lodash/isFunction.js"(exports2, module2) {
+  "node_modules/lodash/isFunction.js"(exports2, module2) {
     var baseGetTag = require_baseGetTag();
     var isObject3 = require_isObject2();
     var asyncTag = "[object AsyncFunction]";
@@ -18717,9 +18718,9 @@ var require_isFunction = __commonJS({
   }
 });
 
-// mcp-server/node_modules/lodash/isObjectLike.js
+// node_modules/lodash/isObjectLike.js
 var require_isObjectLike = __commonJS({
-  "mcp-server/node_modules/lodash/isObjectLike.js"(exports2, module2) {
+  "node_modules/lodash/isObjectLike.js"(exports2, module2) {
     function isObjectLike(value) {
       return value != null && typeof value == "object";
     }
@@ -18727,17 +18728,17 @@ var require_isObjectLike = __commonJS({
   }
 });
 
-// mcp-server/node_modules/lodash/isArray.js
+// node_modules/lodash/isArray.js
 var require_isArray = __commonJS({
-  "mcp-server/node_modules/lodash/isArray.js"(exports2, module2) {
+  "node_modules/lodash/isArray.js"(exports2, module2) {
     var isArray = Array.isArray;
     module2.exports = isArray;
   }
 });
 
-// mcp-server/node_modules/lodash/isString.js
+// node_modules/lodash/isString.js
 var require_isString = __commonJS({
-  "mcp-server/node_modules/lodash/isString.js"(exports2, module2) {
+  "node_modules/lodash/isString.js"(exports2, module2) {
     var baseGetTag = require_baseGetTag();
     var isArray = require_isArray();
     var isObjectLike = require_isObjectLike();
@@ -18749,9 +18750,9 @@ var require_isString = __commonJS({
   }
 });
 
-// mcp-server/node_modules/lodash/isUndefined.js
+// node_modules/lodash/isUndefined.js
 var require_isUndefined = __commonJS({
-  "mcp-server/node_modules/lodash/isUndefined.js"(exports2, module2) {
+  "node_modules/lodash/isUndefined.js"(exports2, module2) {
     function isUndefined(value) {
       return value === void 0;
     }
@@ -18759,9 +18760,9 @@ var require_isUndefined = __commonJS({
   }
 });
 
-// mcp-server/node_modules/request-promise-core/lib/plumbing.js
+// node_modules/request-promise-core/lib/plumbing.js
 var require_plumbing = __commonJS({
-  "mcp-server/node_modules/request-promise-core/lib/plumbing.js"(exports2, module2) {
+  "node_modules/request-promise-core/lib/plumbing.js"(exports2, module2) {
     "use strict";
     var errors = require_errors4();
     var isFunction = require_isFunction();
@@ -18879,9 +18880,9 @@ var require_plumbing = __commonJS({
   }
 });
 
-// mcp-server/node_modules/request-promise-core/configure/request2.js
+// node_modules/request-promise-core/configure/request2.js
 var require_request2 = __commonJS({
-  "mcp-server/node_modules/request-promise-core/configure/request2.js"(exports2, module2) {
+  "node_modules/request-promise-core/configure/request2.js"(exports2, module2) {
     "use strict";
     var core = require_plumbing();
     var isArray = require_isArray();
@@ -18929,9 +18930,9 @@ var require_request2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/stealthy-require/lib/index.js
+// node_modules/stealthy-require/lib/index.js
 var require_lib = __commonJS({
-  "mcp-server/node_modules/stealthy-require/lib/index.js"(exports2, module2) {
+  "node_modules/stealthy-require/lib/index.js"(exports2, module2) {
     "use strict";
     var isNative = /\.node$/;
     function forEach(obj2, callback) {
@@ -18991,9 +18992,9 @@ var require_lib = __commonJS({
   }
 });
 
-// mcp-server/node_modules/extend/index.js
+// node_modules/extend/index.js
 var require_extend = __commonJS({
-  "mcp-server/node_modules/extend/index.js"(exports2, module2) {
+  "node_modules/extend/index.js"(exports2, module2) {
     "use strict";
     var hasOwn = Object.prototype.hasOwnProperty;
     var toStr = Object.prototype.toString;
@@ -19082,9 +19083,9 @@ var require_extend = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/pathMatch.js
+// node_modules/tough-cookie/dist/pathMatch.js
 var require_pathMatch = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/pathMatch.js"(exports2) {
+  "node_modules/tough-cookie/dist/pathMatch.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.pathMatch = pathMatch;
@@ -19106,9 +19107,9 @@ var require_pathMatch = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tldts/dist/cjs/index.js
+// node_modules/tldts/dist/cjs/index.js
 var require_cjs = __commonJS({
-  "mcp-server/node_modules/tldts/dist/cjs/index.js"(exports2) {
+  "node_modules/tldts/dist/cjs/index.js"(exports2) {
     "use strict";
     function shareSameDomainSuffix(hostname3, vhost) {
       if (hostname3.endsWith(vhost)) {
@@ -19558,9 +19559,9 @@ var require_cjs = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/getPublicSuffix.js
+// node_modules/tough-cookie/dist/getPublicSuffix.js
 var require_getPublicSuffix = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/getPublicSuffix.js"(exports2) {
+  "node_modules/tough-cookie/dist/getPublicSuffix.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.getPublicSuffix = getPublicSuffix;
@@ -19598,9 +19599,9 @@ var require_getPublicSuffix = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/permuteDomain.js
+// node_modules/tough-cookie/dist/permuteDomain.js
 var require_permuteDomain = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/permuteDomain.js"(exports2) {
+  "node_modules/tough-cookie/dist/permuteDomain.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.permuteDomain = permuteDomain;
@@ -19632,9 +19633,9 @@ var require_permuteDomain = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/store.js
+// node_modules/tough-cookie/dist/store.js
 var require_store = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/store.js"(exports2) {
+  "node_modules/tough-cookie/dist/store.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.Store = void 0;
@@ -19695,9 +19696,9 @@ var require_store = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/utils.js
+// node_modules/tough-cookie/dist/utils.js
 var require_utils4 = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/utils.js"(exports2) {
+  "node_modules/tough-cookie/dist/utils.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.safeToString = exports2.objectToString = void 0;
@@ -19779,9 +19780,9 @@ var require_utils4 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/memstore.js
+// node_modules/tough-cookie/dist/memstore.js
 var require_memstore = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/memstore.js"(exports2) {
+  "node_modules/tough-cookie/dist/memstore.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.MemoryCookieStore = void 0;
@@ -19949,9 +19950,9 @@ var require_memstore = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/validators.js
+// node_modules/tough-cookie/dist/validators.js
 var require_validators = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/validators.js"(exports2) {
+  "node_modules/tough-cookie/dist/validators.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.ParameterError = void 0;
@@ -20000,9 +20001,9 @@ var require_validators = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/version.js
+// node_modules/tough-cookie/dist/version.js
 var require_version = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/version.js"(exports2) {
+  "node_modules/tough-cookie/dist/version.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.version = void 0;
@@ -20010,9 +20011,9 @@ var require_version = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/cookie/constants.js
+// node_modules/tough-cookie/dist/cookie/constants.js
 var require_constants = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/cookie/constants.js"(exports2) {
+  "node_modules/tough-cookie/dist/cookie/constants.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.IP_V6_REGEX_OBJECT = exports2.PrefixSecurityEnum = void 0;
@@ -20038,9 +20039,9 @@ var require_constants = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/cookie/canonicalDomain.js
+// node_modules/tough-cookie/dist/cookie/canonicalDomain.js
 var require_canonicalDomain = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/cookie/canonicalDomain.js"(exports2) {
+  "node_modules/tough-cookie/dist/cookie/canonicalDomain.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.canonicalDomain = canonicalDomain;
@@ -20070,9 +20071,9 @@ var require_canonicalDomain = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/cookie/formatDate.js
+// node_modules/tough-cookie/dist/cookie/formatDate.js
 var require_formatDate = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/cookie/formatDate.js"(exports2) {
+  "node_modules/tough-cookie/dist/cookie/formatDate.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.formatDate = formatDate;
@@ -20082,9 +20083,9 @@ var require_formatDate = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/cookie/parseDate.js
+// node_modules/tough-cookie/dist/cookie/parseDate.js
 var require_parseDate = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/cookie/parseDate.js"(exports2) {
+  "node_modules/tough-cookie/dist/cookie/parseDate.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.parseDate = parseDate;
@@ -20230,9 +20231,9 @@ var require_parseDate = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/cookie/cookie.js
+// node_modules/tough-cookie/dist/cookie/cookie.js
 var require_cookie = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/cookie/cookie.js"(exports2) {
+  "node_modules/tough-cookie/dist/cookie/cookie.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? (function(o, m, k, k2) {
       if (k2 === void 0) k2 = k;
@@ -20914,9 +20915,9 @@ var require_cookie = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/cookie/cookieCompare.js
+// node_modules/tough-cookie/dist/cookie/cookieCompare.js
 var require_cookieCompare = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/cookie/cookieCompare.js"(exports2) {
+  "node_modules/tough-cookie/dist/cookie/cookieCompare.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.cookieCompare = cookieCompare;
@@ -20941,9 +20942,9 @@ var require_cookieCompare = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/cookie/defaultPath.js
+// node_modules/tough-cookie/dist/cookie/defaultPath.js
 var require_defaultPath = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/cookie/defaultPath.js"(exports2) {
+  "node_modules/tough-cookie/dist/cookie/defaultPath.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.defaultPath = defaultPath;
@@ -20963,9 +20964,9 @@ var require_defaultPath = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/cookie/domainMatch.js
+// node_modules/tough-cookie/dist/cookie/domainMatch.js
 var require_domainMatch = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/cookie/domainMatch.js"(exports2) {
+  "node_modules/tough-cookie/dist/cookie/domainMatch.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.domainMatch = domainMatch;
@@ -21005,9 +21006,9 @@ var require_domainMatch = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/cookie/cookieJar.js
+// node_modules/tough-cookie/dist/cookie/cookieJar.js
 var require_cookieJar = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/cookie/cookieJar.js"(exports2) {
+  "node_modules/tough-cookie/dist/cookie/cookieJar.js"(exports2) {
     "use strict";
     var __createBinding = exports2 && exports2.__createBinding || (Object.create ? (function(o, m, k, k2) {
       if (k2 === void 0) k2 = k;
@@ -21839,9 +21840,9 @@ var require_cookieJar = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/cookie/permutePath.js
+// node_modules/tough-cookie/dist/cookie/permutePath.js
 var require_permutePath = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/cookie/permutePath.js"(exports2) {
+  "node_modules/tough-cookie/dist/cookie/permutePath.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.permutePath = permutePath;
@@ -21864,9 +21865,9 @@ var require_permutePath = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tough-cookie/dist/cookie/index.js
+// node_modules/tough-cookie/dist/cookie/index.js
 var require_cookie2 = __commonJS({
-  "mcp-server/node_modules/tough-cookie/dist/cookie/index.js"(exports2) {
+  "node_modules/tough-cookie/dist/cookie/index.js"(exports2) {
     "use strict";
     Object.defineProperty(exports2, "__esModule", { value: true });
     exports2.permutePath = exports2.parseDate = exports2.formatDate = exports2.domainMatch = exports2.defaultPath = exports2.CookieJar = exports2.cookieCompare = exports2.Cookie = exports2.PrefixSecurityEnum = exports2.canonicalDomain = exports2.version = exports2.ParameterError = exports2.Store = exports2.getPublicSuffix = exports2.permuteDomain = exports2.pathMatch = exports2.MemoryCookieStore = void 0;
@@ -21950,9 +21951,9 @@ var require_cookie2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/lib/cookies.js
+// node_modules/@cypress/request/lib/cookies.js
 var require_cookies = __commonJS({
-  "mcp-server/node_modules/@cypress/request/lib/cookies.js"(exports2) {
+  "node_modules/@cypress/request/lib/cookies.js"(exports2) {
     "use strict";
     var tough = require_cookie2();
     var Cookie = tough.Cookie;
@@ -21988,9 +21989,9 @@ var require_cookies = __commonJS({
   }
 });
 
-// mcp-server/node_modules/json-stringify-safe/stringify.js
+// node_modules/json-stringify-safe/stringify.js
 var require_stringify = __commonJS({
-  "mcp-server/node_modules/json-stringify-safe/stringify.js"(exports2, module2) {
+  "node_modules/json-stringify-safe/stringify.js"(exports2, module2) {
     exports2 = module2.exports = stringify2;
     exports2.getSerialize = serializer;
     function stringify2(obj2, replacer, spaces, cycleReplacer) {
@@ -22015,9 +22016,9 @@ var require_stringify = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/lib/helpers.js
+// node_modules/@cypress/request/lib/helpers.js
 var require_helpers = __commonJS({
-  "mcp-server/node_modules/@cypress/request/lib/helpers.js"(exports2) {
+  "node_modules/@cypress/request/lib/helpers.js"(exports2) {
     "use strict";
     var jsonSafeStringify = require_stringify();
     var crypto5 = __require("crypto");
@@ -22070,9 +22071,9 @@ var require_helpers = __commonJS({
   }
 });
 
-// mcp-server/node_modules/aws-sign2/index.js
+// node_modules/aws-sign2/index.js
 var require_aws_sign2 = __commonJS({
-  "mcp-server/node_modules/aws-sign2/index.js"(exports2, module2) {
+  "node_modules/aws-sign2/index.js"(exports2, module2) {
     var crypto5 = __require("crypto");
     var parse4 = __require("url").parse;
     var keys = [
@@ -22150,9 +22151,9 @@ var require_aws_sign2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/aws4/lru.js
+// node_modules/aws4/lru.js
 var require_lru = __commonJS({
-  "mcp-server/node_modules/aws4/lru.js"(exports2, module2) {
+  "node_modules/aws4/lru.js"(exports2, module2) {
     module2.exports = function(size) {
       return new LruCache(size);
     };
@@ -22238,9 +22239,9 @@ var require_lru = __commonJS({
   }
 });
 
-// mcp-server/node_modules/aws4/aws4.js
+// node_modules/aws4/aws4.js
 var require_aws4 = __commonJS({
-  "mcp-server/node_modules/aws4/aws4.js"(exports2) {
+  "node_modules/aws4/aws4.js"(exports2) {
     var aws4 = exports2;
     var url2 = __require("url");
     var querystring = __require("querystring");
@@ -22517,9 +22518,9 @@ var require_aws4 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/assert-plus/assert.js
+// node_modules/assert-plus/assert.js
 var require_assert = __commonJS({
-  "mcp-server/node_modules/assert-plus/assert.js"(exports2, module2) {
+  "node_modules/assert-plus/assert.js"(exports2, module2) {
     var assert2 = __require("assert");
     var Stream = __require("stream").Stream;
     var util2 = __require("util");
@@ -22713,9 +22714,9 @@ var require_assert = __commonJS({
   }
 });
 
-// mcp-server/node_modules/safer-buffer/safer.js
+// node_modules/safer-buffer/safer.js
 var require_safer = __commonJS({
-  "mcp-server/node_modules/safer-buffer/safer.js"(exports2, module2) {
+  "node_modules/safer-buffer/safer.js"(exports2, module2) {
     "use strict";
     var buffer = __require("buffer");
     var Buffer2 = buffer.Buffer;
@@ -22781,9 +22782,9 @@ var require_safer = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/algs.js
+// node_modules/sshpk/lib/algs.js
 var require_algs = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/algs.js"(exports2, module2) {
+  "node_modules/sshpk/lib/algs.js"(exports2, module2) {
     var Buffer2 = require_safer().Buffer;
     var algInfo = {
       "dsa": {
@@ -22867,9 +22868,9 @@ var require_algs = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/errors.js
+// node_modules/sshpk/lib/errors.js
 var require_errors5 = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/errors.js"(exports2, module2) {
+  "node_modules/sshpk/lib/errors.js"(exports2, module2) {
     var assert2 = require_assert();
     var util2 = __require("util");
     function FingerprintFormatError(fp, format) {
@@ -22943,9 +22944,9 @@ var require_errors5 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asn1/lib/ber/errors.js
+// node_modules/asn1/lib/ber/errors.js
 var require_errors6 = __commonJS({
-  "mcp-server/node_modules/asn1/lib/ber/errors.js"(exports2, module2) {
+  "node_modules/asn1/lib/ber/errors.js"(exports2, module2) {
     module2.exports = {
       newInvalidAsn1Error: function(msg) {
         var e = new Error();
@@ -22957,9 +22958,9 @@ var require_errors6 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asn1/lib/ber/types.js
+// node_modules/asn1/lib/ber/types.js
 var require_types2 = __commonJS({
-  "mcp-server/node_modules/asn1/lib/ber/types.js"(exports2, module2) {
+  "node_modules/asn1/lib/ber/types.js"(exports2, module2) {
     module2.exports = {
       EOC: 0,
       Boolean: 1,
@@ -22997,9 +22998,9 @@ var require_types2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asn1/lib/ber/reader.js
+// node_modules/asn1/lib/ber/reader.js
 var require_reader = __commonJS({
-  "mcp-server/node_modules/asn1/lib/ber/reader.js"(exports2, module2) {
+  "node_modules/asn1/lib/ber/reader.js"(exports2, module2) {
     var assert2 = __require("assert");
     var Buffer2 = require_safer().Buffer;
     var ASN1 = require_types2();
@@ -23162,9 +23163,9 @@ var require_reader = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asn1/lib/ber/writer.js
+// node_modules/asn1/lib/ber/writer.js
 var require_writer = __commonJS({
-  "mcp-server/node_modules/asn1/lib/ber/writer.js"(exports2, module2) {
+  "node_modules/asn1/lib/ber/writer.js"(exports2, module2) {
     var assert2 = __require("assert");
     var Buffer2 = require_safer().Buffer;
     var ASN1 = require_types2();
@@ -23405,9 +23406,9 @@ var require_writer = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asn1/lib/ber/index.js
+// node_modules/asn1/lib/ber/index.js
 var require_ber = __commonJS({
-  "mcp-server/node_modules/asn1/lib/ber/index.js"(exports2, module2) {
+  "node_modules/asn1/lib/ber/index.js"(exports2, module2) {
     var errors = require_errors6();
     var types = require_types2();
     var Reader = require_reader();
@@ -23429,9 +23430,9 @@ var require_ber = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asn1/lib/index.js
+// node_modules/asn1/lib/index.js
 var require_lib2 = __commonJS({
-  "mcp-server/node_modules/asn1/lib/index.js"(exports2, module2) {
+  "node_modules/asn1/lib/index.js"(exports2, module2) {
     var Ber = require_ber();
     module2.exports = {
       Ber,
@@ -23441,9 +23442,9 @@ var require_lib2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/jsbn/index.js
+// node_modules/jsbn/index.js
 var require_jsbn = __commonJS({
-  "mcp-server/node_modules/jsbn/index.js"(exports2, module2) {
+  "node_modules/jsbn/index.js"(exports2, module2) {
     (function() {
       var dbits;
       var canary = 244837814094590;
@@ -24708,9 +24709,9 @@ var require_jsbn = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ecc-jsbn/lib/ec.js
+// node_modules/ecc-jsbn/lib/ec.js
 var require_ec = __commonJS({
-  "mcp-server/node_modules/ecc-jsbn/lib/ec.js"(exports2, module2) {
+  "node_modules/ecc-jsbn/lib/ec.js"(exports2, module2) {
     var BigInteger = require_jsbn().BigInteger;
     var Barrett = BigInteger.prototype.Barrett;
     function ECFieldElementFp(q2, x) {
@@ -25100,9 +25101,9 @@ var require_ec = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tweetnacl/nacl-fast.js
+// node_modules/tweetnacl/nacl-fast.js
 var require_nacl_fast = __commonJS({
-  "mcp-server/node_modules/tweetnacl/nacl-fast.js"(exports2, module2) {
+  "node_modules/tweetnacl/nacl-fast.js"(exports2, module2) {
     (function(nacl) {
       "use strict";
       var gf = function(init) {
@@ -27320,9 +27321,9 @@ var require_nacl_fast = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/utils.js
+// node_modules/sshpk/lib/utils.js
 var require_utils5 = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/utils.js"(exports2, module2) {
+  "node_modules/sshpk/lib/utils.js"(exports2, module2) {
     module2.exports = {
       bufferSplit,
       addRSAMissing,
@@ -27686,9 +27687,9 @@ var require_utils5 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/ssh-buffer.js
+// node_modules/sshpk/lib/ssh-buffer.js
 var require_ssh_buffer = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/ssh-buffer.js"(exports2, module2) {
+  "node_modules/sshpk/lib/ssh-buffer.js"(exports2, module2) {
     module2.exports = SSHBuffer;
     var assert2 = require_assert();
     var Buffer2 = require_safer().Buffer;
@@ -27821,9 +27822,9 @@ var require_ssh_buffer = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/signature.js
+// node_modules/sshpk/lib/signature.js
 var require_signature = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/signature.js"(exports2, module2) {
+  "node_modules/sshpk/lib/signature.js"(exports2, module2) {
     module2.exports = Signature;
     var assert2 = require_assert();
     var Buffer2 = require_safer().Buffer;
@@ -28091,9 +28092,9 @@ var require_signature = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ecc-jsbn/lib/sec.js
+// node_modules/ecc-jsbn/lib/sec.js
 var require_sec = __commonJS({
-  "mcp-server/node_modules/ecc-jsbn/lib/sec.js"(exports2, module2) {
+  "node_modules/ecc-jsbn/lib/sec.js"(exports2, module2) {
     var BigInteger = require_jsbn().BigInteger;
     var ECCurveFp = require_ec().ECCurveFp;
     function X9ECParameters(curve, g, n, h) {
@@ -28203,9 +28204,9 @@ var require_sec = __commonJS({
   }
 });
 
-// mcp-server/node_modules/ecc-jsbn/index.js
+// node_modules/ecc-jsbn/index.js
 var require_ecc_jsbn = __commonJS({
-  "mcp-server/node_modules/ecc-jsbn/index.js"(exports2) {
+  "node_modules/ecc-jsbn/index.js"(exports2) {
     var crypto5 = __require("crypto");
     var BigInteger = require_jsbn().BigInteger;
     var ECPointFp = require_ec().ECPointFp;
@@ -28248,9 +28249,9 @@ var require_ecc_jsbn = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/dhe.js
+// node_modules/sshpk/lib/dhe.js
 var require_dhe = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/dhe.js"(exports2, module2) {
+  "node_modules/sshpk/lib/dhe.js"(exports2, module2) {
     module2.exports = {
       DiffieHellman,
       generateECDSA,
@@ -28601,9 +28602,9 @@ var require_dhe = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/ed-compat.js
+// node_modules/sshpk/lib/ed-compat.js
 var require_ed_compat = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/ed-compat.js"(exports2, module2) {
+  "node_modules/sshpk/lib/ed-compat.js"(exports2, module2) {
     module2.exports = {
       Verifier,
       Signer
@@ -28682,9 +28683,9 @@ var require_ed_compat = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/formats/pkcs8.js
+// node_modules/sshpk/lib/formats/pkcs8.js
 var require_pkcs8 = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/formats/pkcs8.js"(exports2, module2) {
+  "node_modules/sshpk/lib/formats/pkcs8.js"(exports2, module2) {
     module2.exports = {
       read,
       readPkcs8,
@@ -29212,9 +29213,9 @@ var require_pkcs8 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/formats/pkcs1.js
+// node_modules/sshpk/lib/formats/pkcs1.js
 var require_pkcs1 = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/formats/pkcs1.js"(exports2, module2) {
+  "node_modules/sshpk/lib/formats/pkcs1.js"(exports2, module2) {
     module2.exports = {
       read,
       readPkcs1,
@@ -29522,9 +29523,9 @@ var require_pkcs1 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/formats/rfc4253.js
+// node_modules/sshpk/lib/formats/rfc4253.js
 var require_rfc4253 = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/formats/rfc4253.js"(exports2, module2) {
+  "node_modules/sshpk/lib/formats/rfc4253.js"(exports2, module2) {
     module2.exports = {
       read: read.bind(void 0, false, void 0),
       readType: read.bind(void 0, false),
@@ -29664,9 +29665,9 @@ var require_rfc4253 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/bcrypt-pbkdf/index.js
+// node_modules/bcrypt-pbkdf/index.js
 var require_bcrypt_pbkdf = __commonJS({
-  "mcp-server/node_modules/bcrypt-pbkdf/index.js"(exports2, module2) {
+  "node_modules/bcrypt-pbkdf/index.js"(exports2, module2) {
     "use strict";
     var crypto_hash_sha512 = require_nacl_fast().lowlevel.crypto_hash;
     var BLF_J = 0;
@@ -30917,9 +30918,9 @@ var require_bcrypt_pbkdf = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/formats/ssh-private.js
+// node_modules/sshpk/lib/formats/ssh-private.js
 var require_ssh_private = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/formats/ssh-private.js"(exports2, module2) {
+  "node_modules/sshpk/lib/formats/ssh-private.js"(exports2, module2) {
     module2.exports = {
       read,
       readSSHPrivate,
@@ -31163,9 +31164,9 @@ var require_ssh_private = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/formats/pem.js
+// node_modules/sshpk/lib/formats/pem.js
 var require_pem = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/formats/pem.js"(exports2, module2) {
+  "node_modules/sshpk/lib/formats/pem.js"(exports2, module2) {
     module2.exports = {
       read,
       write
@@ -31423,9 +31424,9 @@ var require_pem = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/formats/ssh.js
+// node_modules/sshpk/lib/formats/ssh.js
 var require_ssh = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/formats/ssh.js"(exports2, module2) {
+  "node_modules/sshpk/lib/formats/ssh.js"(exports2, module2) {
     module2.exports = {
       read,
       write
@@ -31500,9 +31501,9 @@ var require_ssh = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/formats/dnssec.js
+// node_modules/sshpk/lib/formats/dnssec.js
 var require_dnssec = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/formats/dnssec.js"(exports2, module2) {
+  "node_modules/sshpk/lib/formats/dnssec.js"(exports2, module2) {
     module2.exports = {
       read,
       write
@@ -31753,9 +31754,9 @@ var require_dnssec = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/formats/putty.js
+// node_modules/sshpk/lib/formats/putty.js
 var require_putty = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/formats/putty.js"(exports2, module2) {
+  "node_modules/sshpk/lib/formats/putty.js"(exports2, module2) {
     module2.exports = {
       read,
       write
@@ -31934,9 +31935,9 @@ var require_putty = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/formats/auto.js
+// node_modules/sshpk/lib/formats/auto.js
 var require_auto = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/formats/auto.js"(exports2, module2) {
+  "node_modules/sshpk/lib/formats/auto.js"(exports2, module2) {
     module2.exports = {
       read,
       write
@@ -32037,9 +32038,9 @@ var require_auto = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/private-key.js
+// node_modules/sshpk/lib/private-key.js
 var require_private_key = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/private-key.js"(exports2, module2) {
+  "node_modules/sshpk/lib/private-key.js"(exports2, module2) {
     module2.exports = PrivateKey;
     var assert2 = require_assert();
     var Buffer2 = require_safer().Buffer;
@@ -32241,9 +32242,9 @@ var require_private_key = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/identity.js
+// node_modules/sshpk/lib/identity.js
 var require_identity = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/identity.js"(exports2, module2) {
+  "node_modules/sshpk/lib/identity.js"(exports2, module2) {
     module2.exports = Identity;
     var assert2 = require_assert();
     var algs = require_algs();
@@ -32549,9 +32550,9 @@ var require_identity = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/formats/openssh-cert.js
+// node_modules/sshpk/lib/formats/openssh-cert.js
 var require_openssh_cert = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/formats/openssh-cert.js"(exports2, module2) {
+  "node_modules/sshpk/lib/formats/openssh-cert.js"(exports2, module2) {
     module2.exports = {
       read,
       verify,
@@ -32835,9 +32836,9 @@ var require_openssh_cert = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/formats/x509.js
+// node_modules/sshpk/lib/formats/x509.js
 var require_x509 = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/formats/x509.js"(exports2, module2) {
+  "node_modules/sshpk/lib/formats/x509.js"(exports2, module2) {
     module2.exports = {
       read,
       verify,
@@ -33466,9 +33467,9 @@ var require_x509 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/formats/x509-pem.js
+// node_modules/sshpk/lib/formats/x509-pem.js
 var require_x509_pem = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/formats/x509-pem.js"(exports2, module2) {
+  "node_modules/sshpk/lib/formats/x509-pem.js"(exports2, module2) {
     var x509 = require_x509();
     module2.exports = {
       read,
@@ -33549,9 +33550,9 @@ var require_x509_pem = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/certificate.js
+// node_modules/sshpk/lib/certificate.js
 var require_certificate = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/certificate.js"(exports2, module2) {
+  "node_modules/sshpk/lib/certificate.js"(exports2, module2) {
     module2.exports = Certificate;
     var assert2 = require_assert();
     var Buffer2 = require_safer().Buffer;
@@ -33906,9 +33907,9 @@ var require_certificate = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/fingerprint.js
+// node_modules/sshpk/lib/fingerprint.js
 var require_fingerprint = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/fingerprint.js"(exports2, module2) {
+  "node_modules/sshpk/lib/fingerprint.js"(exports2, module2) {
     module2.exports = Fingerprint;
     var assert2 = require_assert();
     var Buffer2 = require_safer().Buffer;
@@ -34101,9 +34102,9 @@ var require_fingerprint = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/key.js
+// node_modules/sshpk/lib/key.js
 var require_key = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/key.js"(exports2, module2) {
+  "node_modules/sshpk/lib/key.js"(exports2, module2) {
     module2.exports = Key;
     var assert2 = require_assert();
     var algs = require_algs();
@@ -34340,9 +34341,9 @@ var require_key = __commonJS({
   }
 });
 
-// mcp-server/node_modules/sshpk/lib/index.js
+// node_modules/sshpk/lib/index.js
 var require_lib3 = __commonJS({
-  "mcp-server/node_modules/sshpk/lib/index.js"(exports2, module2) {
+  "node_modules/sshpk/lib/index.js"(exports2, module2) {
     var Key = require_key();
     var Fingerprint = require_fingerprint();
     var Signature = require_signature();
@@ -34382,9 +34383,9 @@ var require_lib3 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/http-signature/lib/utils.js
+// node_modules/http-signature/lib/utils.js
 var require_utils6 = __commonJS({
-  "mcp-server/node_modules/http-signature/lib/utils.js"(exports2, module2) {
+  "node_modules/http-signature/lib/utils.js"(exports2, module2) {
     var assert2 = require_assert();
     var sshpk = require_lib3();
     var util2 = __require("util");
@@ -34478,9 +34479,9 @@ var require_utils6 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/http-signature/lib/parser.js
+// node_modules/http-signature/lib/parser.js
 var require_parser = __commonJS({
-  "mcp-server/node_modules/http-signature/lib/parser.js"(exports2, module2) {
+  "node_modules/http-signature/lib/parser.js"(exports2, module2) {
     var assert2 = require_assert();
     var util2 = __require("util");
     var utils = require_utils6();
@@ -34769,9 +34770,9 @@ var require_parser = __commonJS({
   }
 });
 
-// mcp-server/node_modules/extsprintf/lib/extsprintf.js
+// node_modules/extsprintf/lib/extsprintf.js
 var require_extsprintf = __commonJS({
-  "mcp-server/node_modules/extsprintf/lib/extsprintf.js"(exports2) {
+  "node_modules/extsprintf/lib/extsprintf.js"(exports2) {
     var mod_assert = __require("assert");
     var mod_util = __require("util");
     exports2.sprintf = jsSprintf;
@@ -34904,9 +34905,9 @@ var require_extsprintf = __commonJS({
   }
 });
 
-// mcp-server/node_modules/verror/node_modules/core-util-is/lib/util.js
+// node_modules/verror/node_modules/core-util-is/lib/util.js
 var require_util4 = __commonJS({
-  "mcp-server/node_modules/verror/node_modules/core-util-is/lib/util.js"(exports2) {
+  "node_modules/verror/node_modules/core-util-is/lib/util.js"(exports2) {
     function isArray(arg) {
       if (Array.isArray) {
         return Array.isArray(arg);
@@ -34974,9 +34975,9 @@ var require_util4 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/verror/lib/verror.js
+// node_modules/verror/lib/verror.js
 var require_verror = __commonJS({
-  "mcp-server/node_modules/verror/lib/verror.js"(exports2, module2) {
+  "node_modules/verror/lib/verror.js"(exports2, module2) {
     var mod_assertplus = require_assert();
     var mod_util = __require("util");
     var mod_extsprintf = require_extsprintf();
@@ -35217,9 +35218,9 @@ var require_verror = __commonJS({
   }
 });
 
-// mcp-server/node_modules/json-schema/lib/validate.js
+// node_modules/json-schema/lib/validate.js
 var require_validate2 = __commonJS({
-  "mcp-server/node_modules/json-schema/lib/validate.js"(exports2, module2) {
+  "node_modules/json-schema/lib/validate.js"(exports2, module2) {
     (function(root, factory) {
       if (typeof define === "function" && define.amd) {
         define([], function() {
@@ -35437,9 +35438,9 @@ var require_validate2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/jsprim/lib/jsprim.js
+// node_modules/jsprim/lib/jsprim.js
 var require_jsprim = __commonJS({
-  "mcp-server/node_modules/jsprim/lib/jsprim.js"(exports2) {
+  "node_modules/jsprim/lib/jsprim.js"(exports2) {
     var mod_assert = require_assert();
     var mod_util = __require("util");
     var mod_extsprintf = require_extsprintf();
@@ -35926,9 +35927,9 @@ var require_jsprim = __commonJS({
   }
 });
 
-// mcp-server/node_modules/http-signature/lib/signer.js
+// node_modules/http-signature/lib/signer.js
 var require_signer = __commonJS({
-  "mcp-server/node_modules/http-signature/lib/signer.js"(exports2, module2) {
+  "node_modules/http-signature/lib/signer.js"(exports2, module2) {
     var assert2 = require_assert();
     var crypto5 = __require("crypto");
     var util2 = __require("util");
@@ -36306,9 +36307,9 @@ var require_signer = __commonJS({
   }
 });
 
-// mcp-server/node_modules/http-signature/lib/verify.js
+// node_modules/http-signature/lib/verify.js
 var require_verify = __commonJS({
-  "mcp-server/node_modules/http-signature/lib/verify.js"(exports2, module2) {
+  "node_modules/http-signature/lib/verify.js"(exports2, module2) {
     var assert2 = require_assert();
     var crypto5 = __require("crypto");
     var sshpk = require_lib3();
@@ -36376,9 +36377,9 @@ var require_verify = __commonJS({
   }
 });
 
-// mcp-server/node_modules/http-signature/lib/index.js
+// node_modules/http-signature/lib/index.js
 var require_lib4 = __commonJS({
-  "mcp-server/node_modules/http-signature/lib/index.js"(exports2, module2) {
+  "node_modules/http-signature/lib/index.js"(exports2, module2) {
     var parser = require_parser();
     var signer = require_signer();
     var verify = require_verify();
@@ -36400,9 +36401,9 @@ var require_lib4 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/node_modules/mime-db/db.json
+// node_modules/@cypress/request/node_modules/mime-db/db.json
 var require_db = __commonJS({
-  "mcp-server/node_modules/@cypress/request/node_modules/mime-db/db.json"(exports2, module2) {
+  "node_modules/@cypress/request/node_modules/mime-db/db.json"(exports2, module2) {
     module2.exports = {
       "application/1d-interleaved-parityfec": {
         source: "iana"
@@ -44925,16 +44926,16 @@ var require_db = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/node_modules/mime-db/index.js
+// node_modules/@cypress/request/node_modules/mime-db/index.js
 var require_mime_db = __commonJS({
-  "mcp-server/node_modules/@cypress/request/node_modules/mime-db/index.js"(exports2, module2) {
+  "node_modules/@cypress/request/node_modules/mime-db/index.js"(exports2, module2) {
     module2.exports = require_db();
   }
 });
 
-// mcp-server/node_modules/@cypress/request/node_modules/mime-types/index.js
+// node_modules/@cypress/request/node_modules/mime-types/index.js
 var require_mime_types = __commonJS({
-  "mcp-server/node_modules/@cypress/request/node_modules/mime-types/index.js"(exports2) {
+  "node_modules/@cypress/request/node_modules/mime-types/index.js"(exports2) {
     "use strict";
     var db = require_mime_db();
     var extname = __require("path").extname;
@@ -45022,9 +45023,9 @@ var require_mime_types = __commonJS({
   }
 });
 
-// mcp-server/node_modules/caseless/index.js
+// node_modules/caseless/index.js
 var require_caseless = __commonJS({
-  "mcp-server/node_modules/caseless/index.js"(exports2, module2) {
+  "node_modules/caseless/index.js"(exports2, module2) {
     function Caseless(dict) {
       this.dict = dict || {};
     }
@@ -45093,9 +45094,9 @@ var require_caseless = __commonJS({
   }
 });
 
-// mcp-server/node_modules/forever-agent/index.js
+// node_modules/forever-agent/index.js
 var require_forever_agent = __commonJS({
-  "mcp-server/node_modules/forever-agent/index.js"(exports2, module2) {
+  "node_modules/forever-agent/index.js"(exports2, module2) {
     module2.exports = ForeverAgent;
     ForeverAgent.SSL = ForeverAgentSSL;
     var util2 = __require("util");
@@ -45208,9 +45209,9 @@ var require_forever_agent = __commonJS({
   }
 });
 
-// mcp-server/node_modules/delayed-stream/lib/delayed_stream.js
+// node_modules/delayed-stream/lib/delayed_stream.js
 var require_delayed_stream = __commonJS({
-  "mcp-server/node_modules/delayed-stream/lib/delayed_stream.js"(exports2, module2) {
+  "node_modules/delayed-stream/lib/delayed_stream.js"(exports2, module2) {
     var Stream = __require("stream").Stream;
     var util2 = __require("util");
     module2.exports = DelayedStream;
@@ -45299,9 +45300,9 @@ var require_delayed_stream = __commonJS({
   }
 });
 
-// mcp-server/node_modules/combined-stream/lib/combined_stream.js
+// node_modules/combined-stream/lib/combined_stream.js
 var require_combined_stream = __commonJS({
-  "mcp-server/node_modules/combined-stream/lib/combined_stream.js"(exports2, module2) {
+  "node_modules/combined-stream/lib/combined_stream.js"(exports2, module2) {
     var util2 = __require("util");
     var Stream = __require("stream").Stream;
     var DelayedStream = require_delayed_stream();
@@ -45468,9 +45469,9 @@ var require_combined_stream = __commonJS({
   }
 });
 
-// mcp-server/node_modules/form-data/node_modules/mime-db/db.json
+// node_modules/form-data/node_modules/mime-db/db.json
 var require_db2 = __commonJS({
-  "mcp-server/node_modules/form-data/node_modules/mime-db/db.json"(exports2, module2) {
+  "node_modules/form-data/node_modules/mime-db/db.json"(exports2, module2) {
     module2.exports = {
       "application/1d-interleaved-parityfec": {
         source: "iana"
@@ -53993,16 +53994,16 @@ var require_db2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/form-data/node_modules/mime-db/index.js
+// node_modules/form-data/node_modules/mime-db/index.js
 var require_mime_db2 = __commonJS({
-  "mcp-server/node_modules/form-data/node_modules/mime-db/index.js"(exports2, module2) {
+  "node_modules/form-data/node_modules/mime-db/index.js"(exports2, module2) {
     module2.exports = require_db2();
   }
 });
 
-// mcp-server/node_modules/form-data/node_modules/mime-types/index.js
+// node_modules/form-data/node_modules/mime-types/index.js
 var require_mime_types2 = __commonJS({
-  "mcp-server/node_modules/form-data/node_modules/mime-types/index.js"(exports2) {
+  "node_modules/form-data/node_modules/mime-types/index.js"(exports2) {
     "use strict";
     var db = require_mime_db2();
     var extname = __require("path").extname;
@@ -54090,9 +54091,9 @@ var require_mime_types2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asynckit/lib/defer.js
+// node_modules/asynckit/lib/defer.js
 var require_defer = __commonJS({
-  "mcp-server/node_modules/asynckit/lib/defer.js"(exports2, module2) {
+  "node_modules/asynckit/lib/defer.js"(exports2, module2) {
     module2.exports = defer;
     function defer(fn) {
       var nextTick = typeof setImmediate == "function" ? setImmediate : typeof process == "object" && typeof process.nextTick == "function" ? process.nextTick : null;
@@ -54105,9 +54106,9 @@ var require_defer = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asynckit/lib/async.js
+// node_modules/asynckit/lib/async.js
 var require_async2 = __commonJS({
-  "mcp-server/node_modules/asynckit/lib/async.js"(exports2, module2) {
+  "node_modules/asynckit/lib/async.js"(exports2, module2) {
     var defer = require_defer();
     module2.exports = async;
     function async(callback) {
@@ -54128,9 +54129,9 @@ var require_async2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asynckit/lib/abort.js
+// node_modules/asynckit/lib/abort.js
 var require_abort = __commonJS({
-  "mcp-server/node_modules/asynckit/lib/abort.js"(exports2, module2) {
+  "node_modules/asynckit/lib/abort.js"(exports2, module2) {
     module2.exports = abort;
     function abort(state) {
       Object.keys(state.jobs).forEach(clean.bind(state));
@@ -54144,9 +54145,9 @@ var require_abort = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asynckit/lib/iterate.js
+// node_modules/asynckit/lib/iterate.js
 var require_iterate = __commonJS({
-  "mcp-server/node_modules/asynckit/lib/iterate.js"(exports2, module2) {
+  "node_modules/asynckit/lib/iterate.js"(exports2, module2) {
     var async = require_async2();
     var abort = require_abort();
     module2.exports = iterate;
@@ -54177,9 +54178,9 @@ var require_iterate = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asynckit/lib/state.js
+// node_modules/asynckit/lib/state.js
 var require_state = __commonJS({
-  "mcp-server/node_modules/asynckit/lib/state.js"(exports2, module2) {
+  "node_modules/asynckit/lib/state.js"(exports2, module2) {
     module2.exports = state;
     function state(list, sortMethod) {
       var isNamedList = !Array.isArray(list), initState = {
@@ -54199,9 +54200,9 @@ var require_state = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asynckit/lib/terminator.js
+// node_modules/asynckit/lib/terminator.js
 var require_terminator = __commonJS({
-  "mcp-server/node_modules/asynckit/lib/terminator.js"(exports2, module2) {
+  "node_modules/asynckit/lib/terminator.js"(exports2, module2) {
     var abort = require_abort();
     var async = require_async2();
     module2.exports = terminator;
@@ -54216,9 +54217,9 @@ var require_terminator = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asynckit/parallel.js
+// node_modules/asynckit/parallel.js
 var require_parallel = __commonJS({
-  "mcp-server/node_modules/asynckit/parallel.js"(exports2, module2) {
+  "node_modules/asynckit/parallel.js"(exports2, module2) {
     var iterate = require_iterate();
     var initState = require_state();
     var terminator = require_terminator();
@@ -54243,9 +54244,9 @@ var require_parallel = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asynckit/serialOrdered.js
+// node_modules/asynckit/serialOrdered.js
 var require_serialOrdered = __commonJS({
-  "mcp-server/node_modules/asynckit/serialOrdered.js"(exports2, module2) {
+  "node_modules/asynckit/serialOrdered.js"(exports2, module2) {
     var iterate = require_iterate();
     var initState = require_state();
     var terminator = require_terminator();
@@ -54277,9 +54278,9 @@ var require_serialOrdered = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asynckit/serial.js
+// node_modules/asynckit/serial.js
 var require_serial = __commonJS({
-  "mcp-server/node_modules/asynckit/serial.js"(exports2, module2) {
+  "node_modules/asynckit/serial.js"(exports2, module2) {
     var serialOrdered = require_serialOrdered();
     module2.exports = serial;
     function serial(list, iterator, callback) {
@@ -54288,9 +54289,9 @@ var require_serial = __commonJS({
   }
 });
 
-// mcp-server/node_modules/asynckit/index.js
+// node_modules/asynckit/index.js
 var require_asynckit = __commonJS({
-  "mcp-server/node_modules/asynckit/index.js"(exports2, module2) {
+  "node_modules/asynckit/index.js"(exports2, module2) {
     module2.exports = {
       parallel: require_parallel(),
       serial: require_serial(),
@@ -54299,9 +54300,9 @@ var require_asynckit = __commonJS({
   }
 });
 
-// mcp-server/node_modules/es-set-tostringtag/index.js
+// node_modules/es-set-tostringtag/index.js
 var require_es_set_tostringtag = __commonJS({
-  "mcp-server/node_modules/es-set-tostringtag/index.js"(exports2, module2) {
+  "node_modules/es-set-tostringtag/index.js"(exports2, module2) {
     "use strict";
     var GetIntrinsic = require_get_intrinsic();
     var $defineProperty = GetIntrinsic("%Object.defineProperty%", true);
@@ -54331,9 +54332,9 @@ var require_es_set_tostringtag = __commonJS({
   }
 });
 
-// mcp-server/node_modules/form-data/lib/populate.js
+// node_modules/form-data/lib/populate.js
 var require_populate = __commonJS({
-  "mcp-server/node_modules/form-data/lib/populate.js"(exports2, module2) {
+  "node_modules/form-data/lib/populate.js"(exports2, module2) {
     "use strict";
     module2.exports = function(dst, src) {
       Object.keys(src).forEach(function(prop) {
@@ -54344,9 +54345,9 @@ var require_populate = __commonJS({
   }
 });
 
-// mcp-server/node_modules/form-data/lib/form_data.js
+// node_modules/form-data/lib/form_data.js
 var require_form_data = __commonJS({
-  "mcp-server/node_modules/form-data/lib/form_data.js"(exports2, module2) {
+  "node_modules/form-data/lib/form_data.js"(exports2, module2) {
     "use strict";
     var CombinedStream = require_combined_stream();
     var util2 = __require("util");
@@ -54663,9 +54664,9 @@ var require_form_data = __commonJS({
   }
 });
 
-// mcp-server/node_modules/isstream/isstream.js
+// node_modules/isstream/isstream.js
 var require_isstream = __commonJS({
-  "mcp-server/node_modules/isstream/isstream.js"(exports2, module2) {
+  "node_modules/isstream/isstream.js"(exports2, module2) {
     var stream = __require("stream");
     function isStream(obj2) {
       return obj2 instanceof stream.Stream;
@@ -54686,9 +54687,9 @@ var require_isstream = __commonJS({
   }
 });
 
-// mcp-server/node_modules/is-typedarray/index.js
+// node_modules/is-typedarray/index.js
 var require_is_typedarray = __commonJS({
-  "mcp-server/node_modules/is-typedarray/index.js"(exports2, module2) {
+  "node_modules/is-typedarray/index.js"(exports2, module2) {
     module2.exports = isTypedArray;
     isTypedArray.strict = isStrictTypedArray;
     isTypedArray.loose = isLooseTypedArray;
@@ -54716,9 +54717,9 @@ var require_is_typedarray = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/lib/getProxyFromURI.js
+// node_modules/@cypress/request/lib/getProxyFromURI.js
 var require_getProxyFromURI = __commonJS({
-  "mcp-server/node_modules/@cypress/request/lib/getProxyFromURI.js"(exports2, module2) {
+  "node_modules/@cypress/request/lib/getProxyFromURI.js"(exports2, module2) {
     "use strict";
     function formatHostname(hostname3) {
       return hostname3.replace(/^\.*/, ".").toLowerCase();
@@ -54764,9 +54765,9 @@ var require_getProxyFromURI = __commonJS({
   }
 });
 
-// mcp-server/node_modules/side-channel-list/index.js
+// node_modules/side-channel-list/index.js
 var require_side_channel_list = __commonJS({
-  "mcp-server/node_modules/side-channel-list/index.js"(exports2, module2) {
+  "node_modules/side-channel-list/index.js"(exports2, module2) {
     "use strict";
     var inspect = require_object_inspect();
     var $TypeError = require_type();
@@ -54858,9 +54859,9 @@ var require_side_channel_list = __commonJS({
   }
 });
 
-// mcp-server/node_modules/side-channel-map/index.js
+// node_modules/side-channel-map/index.js
 var require_side_channel_map = __commonJS({
-  "mcp-server/node_modules/side-channel-map/index.js"(exports2, module2) {
+  "node_modules/side-channel-map/index.js"(exports2, module2) {
     "use strict";
     var GetIntrinsic = require_get_intrinsic();
     var callBound = require_call_bound();
@@ -54914,9 +54915,9 @@ var require_side_channel_map = __commonJS({
   }
 });
 
-// mcp-server/node_modules/side-channel-weakmap/index.js
+// node_modules/side-channel-weakmap/index.js
 var require_side_channel_weakmap = __commonJS({
-  "mcp-server/node_modules/side-channel-weakmap/index.js"(exports2, module2) {
+  "node_modules/side-channel-weakmap/index.js"(exports2, module2) {
     "use strict";
     var GetIntrinsic = require_get_intrinsic();
     var callBound = require_call_bound();
@@ -54987,9 +54988,9 @@ var require_side_channel_weakmap = __commonJS({
   }
 });
 
-// mcp-server/node_modules/side-channel/index.js
+// node_modules/side-channel/index.js
 var require_side_channel = __commonJS({
-  "mcp-server/node_modules/side-channel/index.js"(exports2, module2) {
+  "node_modules/side-channel/index.js"(exports2, module2) {
     "use strict";
     var $TypeError = require_type();
     var inspect = require_object_inspect();
@@ -55026,9 +55027,9 @@ var require_side_channel = __commonJS({
   }
 });
 
-// mcp-server/node_modules/qs/lib/formats.js
+// node_modules/qs/lib/formats.js
 var require_formats2 = __commonJS({
-  "mcp-server/node_modules/qs/lib/formats.js"(exports2, module2) {
+  "node_modules/qs/lib/formats.js"(exports2, module2) {
     "use strict";
     var replace = String.prototype.replace;
     var percentTwenties = /%20/g;
@@ -55052,9 +55053,9 @@ var require_formats2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/qs/lib/utils.js
+// node_modules/qs/lib/utils.js
 var require_utils7 = __commonJS({
-  "mcp-server/node_modules/qs/lib/utils.js"(exports2, module2) {
+  "node_modules/qs/lib/utils.js"(exports2, module2) {
     "use strict";
     var formats = require_formats2();
     var getSideChannel = require_side_channel();
@@ -55296,9 +55297,9 @@ var require_utils7 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/qs/lib/stringify.js
+// node_modules/qs/lib/stringify.js
 var require_stringify2 = __commonJS({
-  "mcp-server/node_modules/qs/lib/stringify.js"(exports2, module2) {
+  "node_modules/qs/lib/stringify.js"(exports2, module2) {
     "use strict";
     var getSideChannel = require_side_channel();
     var utils = require_utils7();
@@ -55579,9 +55580,9 @@ var require_stringify2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/qs/lib/parse.js
+// node_modules/qs/lib/parse.js
 var require_parse = __commonJS({
-  "mcp-server/node_modules/qs/lib/parse.js"(exports2, module2) {
+  "node_modules/qs/lib/parse.js"(exports2, module2) {
     "use strict";
     var utils = require_utils7();
     var has = Object.prototype.hasOwnProperty;
@@ -55864,9 +55865,9 @@ var require_parse = __commonJS({
   }
 });
 
-// mcp-server/node_modules/qs/lib/index.js
+// node_modules/qs/lib/index.js
 var require_lib5 = __commonJS({
-  "mcp-server/node_modules/qs/lib/index.js"(exports2, module2) {
+  "node_modules/qs/lib/index.js"(exports2, module2) {
     "use strict";
     var stringify2 = require_stringify2();
     var parse4 = require_parse();
@@ -55879,9 +55880,9 @@ var require_lib5 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/lib/querystring.js
+// node_modules/@cypress/request/lib/querystring.js
 var require_querystring = __commonJS({
-  "mcp-server/node_modules/@cypress/request/lib/querystring.js"(exports2) {
+  "node_modules/@cypress/request/lib/querystring.js"(exports2) {
     "use strict";
     var qs = require_lib5();
     var querystring = __require("querystring");
@@ -55927,9 +55928,9 @@ var require_querystring = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/lib/har.js
+// node_modules/@cypress/request/lib/har.js
 var require_har = __commonJS({
-  "mcp-server/node_modules/@cypress/request/lib/har.js"(exports2) {
+  "node_modules/@cypress/request/lib/har.js"(exports2) {
     "use strict";
     var fs2 = __require("fs");
     var qs = __require("querystring");
@@ -56084,7 +56085,7 @@ var require_har = __commonJS({
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/rng.js
+// node_modules/uuid/dist/esm-node/rng.js
 import crypto from "crypto";
 function rng() {
   if (poolPtr > rnds8Pool.length - 16) {
@@ -56095,33 +56096,33 @@ function rng() {
 }
 var rnds8Pool, poolPtr;
 var init_rng = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/rng.js"() {
+  "node_modules/uuid/dist/esm-node/rng.js"() {
     rnds8Pool = new Uint8Array(256);
     poolPtr = rnds8Pool.length;
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/regex.js
+// node_modules/uuid/dist/esm-node/regex.js
 var regex_default;
 var init_regex = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/regex.js"() {
+  "node_modules/uuid/dist/esm-node/regex.js"() {
     regex_default = /^(?:[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}|00000000-0000-0000-0000-000000000000)$/i;
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/validate.js
+// node_modules/uuid/dist/esm-node/validate.js
 function validate(uuid3) {
   return typeof uuid3 === "string" && regex_default.test(uuid3);
 }
 var validate_default;
 var init_validate = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/validate.js"() {
+  "node_modules/uuid/dist/esm-node/validate.js"() {
     init_regex();
     validate_default = validate;
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/stringify.js
+// node_modules/uuid/dist/esm-node/stringify.js
 function stringify(arr, offset = 0) {
   const uuid3 = (byteToHex[arr[offset + 0]] + byteToHex[arr[offset + 1]] + byteToHex[arr[offset + 2]] + byteToHex[arr[offset + 3]] + "-" + byteToHex[arr[offset + 4]] + byteToHex[arr[offset + 5]] + "-" + byteToHex[arr[offset + 6]] + byteToHex[arr[offset + 7]] + "-" + byteToHex[arr[offset + 8]] + byteToHex[arr[offset + 9]] + "-" + byteToHex[arr[offset + 10]] + byteToHex[arr[offset + 11]] + byteToHex[arr[offset + 12]] + byteToHex[arr[offset + 13]] + byteToHex[arr[offset + 14]] + byteToHex[arr[offset + 15]]).toLowerCase();
   if (!validate_default(uuid3)) {
@@ -56131,7 +56132,7 @@ function stringify(arr, offset = 0) {
 }
 var byteToHex, stringify_default;
 var init_stringify = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/stringify.js"() {
+  "node_modules/uuid/dist/esm-node/stringify.js"() {
     init_validate();
     byteToHex = [];
     for (let i = 0; i < 256; ++i) {
@@ -56141,7 +56142,7 @@ var init_stringify = __esm({
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/v1.js
+// node_modules/uuid/dist/esm-node/v1.js
 function v1(options, buf, offset) {
   let i = buf && offset || 0;
   const b = buf || new Array(16);
@@ -56192,7 +56193,7 @@ function v1(options, buf, offset) {
 }
 var _nodeId, _clockseq, _lastMSecs, _lastNSecs, v1_default;
 var init_v1 = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/v1.js"() {
+  "node_modules/uuid/dist/esm-node/v1.js"() {
     init_rng();
     init_stringify();
     _lastMSecs = 0;
@@ -56201,7 +56202,7 @@ var init_v1 = __esm({
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/parse.js
+// node_modules/uuid/dist/esm-node/parse.js
 function parse3(uuid3) {
   if (!validate_default(uuid3)) {
     throw TypeError("Invalid UUID");
@@ -56228,13 +56229,13 @@ function parse3(uuid3) {
 }
 var parse_default;
 var init_parse = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/parse.js"() {
+  "node_modules/uuid/dist/esm-node/parse.js"() {
     init_validate();
     parse_default = parse3;
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/v35.js
+// node_modules/uuid/dist/esm-node/v35.js
 function stringToBytes(str) {
   str = unescape(encodeURIComponent(str));
   const bytes = [];
@@ -56279,7 +56280,7 @@ function v35_default(name, version3, hashfunc) {
 }
 var DNS, URL2;
 var init_v35 = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/v35.js"() {
+  "node_modules/uuid/dist/esm-node/v35.js"() {
     init_stringify();
     init_parse();
     DNS = "6ba7b810-9dad-11d1-80b4-00c04fd430c8";
@@ -56287,7 +56288,7 @@ var init_v35 = __esm({
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/md5.js
+// node_modules/uuid/dist/esm-node/md5.js
 import crypto2 from "crypto";
 function md5(bytes) {
   if (Array.isArray(bytes)) {
@@ -56299,15 +56300,15 @@ function md5(bytes) {
 }
 var md5_default;
 var init_md5 = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/md5.js"() {
+  "node_modules/uuid/dist/esm-node/md5.js"() {
     md5_default = md5;
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/v3.js
+// node_modules/uuid/dist/esm-node/v3.js
 var v3, v3_default;
 var init_v3 = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/v3.js"() {
+  "node_modules/uuid/dist/esm-node/v3.js"() {
     init_v35();
     init_md5();
     v3 = v35_default("v3", 48, md5_default);
@@ -56315,7 +56316,7 @@ var init_v3 = __esm({
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/v4.js
+// node_modules/uuid/dist/esm-node/v4.js
 function v4(options, buf, offset) {
   options = options || {};
   const rnds = options.random || (options.rng || rng)();
@@ -56332,14 +56333,14 @@ function v4(options, buf, offset) {
 }
 var v4_default;
 var init_v4 = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/v4.js"() {
+  "node_modules/uuid/dist/esm-node/v4.js"() {
     init_rng();
     init_stringify();
     v4_default = v4;
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/sha1.js
+// node_modules/uuid/dist/esm-node/sha1.js
 import crypto3 from "crypto";
 function sha1(bytes) {
   if (Array.isArray(bytes)) {
@@ -56351,15 +56352,15 @@ function sha1(bytes) {
 }
 var sha1_default;
 var init_sha1 = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/sha1.js"() {
+  "node_modules/uuid/dist/esm-node/sha1.js"() {
     sha1_default = sha1;
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/v5.js
+// node_modules/uuid/dist/esm-node/v5.js
 var v5, v5_default;
 var init_v5 = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/v5.js"() {
+  "node_modules/uuid/dist/esm-node/v5.js"() {
     init_v35();
     init_sha1();
     v5 = v35_default("v5", 80, sha1_default);
@@ -56367,15 +56368,15 @@ var init_v5 = __esm({
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/nil.js
+// node_modules/uuid/dist/esm-node/nil.js
 var nil_default;
 var init_nil = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/nil.js"() {
+  "node_modules/uuid/dist/esm-node/nil.js"() {
     nil_default = "00000000-0000-0000-0000-000000000000";
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/version.js
+// node_modules/uuid/dist/esm-node/version.js
 function version2(uuid3) {
   if (!validate_default(uuid3)) {
     throw TypeError("Invalid UUID");
@@ -56384,13 +56385,13 @@ function version2(uuid3) {
 }
 var version_default;
 var init_version = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/version.js"() {
+  "node_modules/uuid/dist/esm-node/version.js"() {
     init_validate();
     version_default = version2;
   }
 });
 
-// mcp-server/node_modules/uuid/dist/esm-node/index.js
+// node_modules/uuid/dist/esm-node/index.js
 var esm_node_exports = {};
 __export(esm_node_exports, {
   NIL: () => nil_default,
@@ -56404,7 +56405,7 @@ __export(esm_node_exports, {
   version: () => version_default
 });
 var init_esm_node = __esm({
-  "mcp-server/node_modules/uuid/dist/esm-node/index.js"() {
+  "node_modules/uuid/dist/esm-node/index.js"() {
     init_v1();
     init_v3();
     init_v4();
@@ -56417,9 +56418,9 @@ var init_esm_node = __esm({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/lib/auth.js
+// node_modules/@cypress/request/lib/auth.js
 var require_auth = __commonJS({
-  "mcp-server/node_modules/@cypress/request/lib/auth.js"(exports2) {
+  "node_modules/@cypress/request/lib/auth.js"(exports2) {
     "use strict";
     var caseless = require_caseless();
     var { v4: uuid3 } = (init_esm_node(), __toCommonJS(esm_node_exports));
@@ -56551,9 +56552,9 @@ var require_auth = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/lib/hawk.js
+// node_modules/@cypress/request/lib/hawk.js
 var require_hawk = __commonJS({
-  "mcp-server/node_modules/@cypress/request/lib/hawk.js"(exports2) {
+  "node_modules/@cypress/request/lib/hawk.js"(exports2) {
     "use strict";
     var crypto5 = __require("crypto");
     function randomString2(size) {
@@ -56618,9 +56619,9 @@ var require_hawk = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/lib/multipart.js
+// node_modules/@cypress/request/lib/multipart.js
 var require_multipart = __commonJS({
-  "mcp-server/node_modules/@cypress/request/lib/multipart.js"(exports2) {
+  "node_modules/@cypress/request/lib/multipart.js"(exports2) {
     "use strict";
     var { v4: uuid3 } = (init_esm_node(), __toCommonJS(esm_node_exports));
     var CombinedStream = require_combined_stream();
@@ -56716,9 +56717,9 @@ var require_multipart = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/lib/redirect.js
+// node_modules/@cypress/request/lib/redirect.js
 var require_redirect = __commonJS({
-  "mcp-server/node_modules/@cypress/request/lib/redirect.js"(exports2) {
+  "node_modules/@cypress/request/lib/redirect.js"(exports2) {
     "use strict";
     var url2 = __require("url");
     var isUrl = /^https?:/;
@@ -56863,9 +56864,9 @@ var require_redirect = __commonJS({
   }
 });
 
-// mcp-server/node_modules/tunnel-agent/index.js
+// node_modules/tunnel-agent/index.js
 var require_tunnel_agent = __commonJS({
-  "mcp-server/node_modules/tunnel-agent/index.js"(exports2) {
+  "node_modules/tunnel-agent/index.js"(exports2) {
     "use strict";
     var net = __require("net");
     var tls = __require("tls");
@@ -57073,9 +57074,9 @@ var require_tunnel_agent = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/lib/tunnel.js
+// node_modules/@cypress/request/lib/tunnel.js
 var require_tunnel = __commonJS({
-  "mcp-server/node_modules/@cypress/request/lib/tunnel.js"(exports2) {
+  "node_modules/@cypress/request/lib/tunnel.js"(exports2) {
     "use strict";
     var url2 = __require("url");
     var tunnel = require_tunnel_agent();
@@ -57214,9 +57215,9 @@ var require_tunnel = __commonJS({
   }
 });
 
-// mcp-server/node_modules/performance-now/lib/performance-now.js
+// node_modules/performance-now/lib/performance-now.js
 var require_performance_now = __commonJS({
-  "mcp-server/node_modules/performance-now/lib/performance-now.js"(exports2, module2) {
+  "node_modules/performance-now/lib/performance-now.js"(exports2, module2) {
     (function() {
       var getNanoSeconds, hrtime, loadTime, moduleLoadTime, nodeLoadTime, upTime;
       if (typeof performance !== "undefined" && performance !== null && performance.now) {
@@ -57251,9 +57252,9 @@ var require_performance_now = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/request.js
+// node_modules/@cypress/request/request.js
 var require_request = __commonJS({
-  "mcp-server/node_modules/@cypress/request/request.js"(exports2, module2) {
+  "node_modules/@cypress/request/request.js"(exports2, module2) {
     "use strict";
     var http = __require("http");
     var https = __require("https");
@@ -58489,9 +58490,9 @@ var require_request = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request/index.js
+// node_modules/@cypress/request/index.js
 var require_request3 = __commonJS({
-  "mcp-server/node_modules/@cypress/request/index.js"(exports2, module2) {
+  "node_modules/@cypress/request/index.js"(exports2, module2) {
     "use strict";
     var extend2 = require_extend();
     var cookies = require_cookies();
@@ -58602,9 +58603,9 @@ var require_request3 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/punycode/punycode.js
+// node_modules/punycode/punycode.js
 var require_punycode = __commonJS({
-  "mcp-server/node_modules/punycode/punycode.js"(exports2, module2) {
+  "node_modules/punycode/punycode.js"(exports2, module2) {
     "use strict";
     var maxInt = 2147483647;
     var base = 36;
@@ -58841,9 +58842,9 @@ var require_punycode = __commonJS({
   }
 });
 
-// mcp-server/node_modules/requires-port/index.js
+// node_modules/requires-port/index.js
 var require_requires_port = __commonJS({
-  "mcp-server/node_modules/requires-port/index.js"(exports2, module2) {
+  "node_modules/requires-port/index.js"(exports2, module2) {
     "use strict";
     module2.exports = function required2(port, protocol) {
       protocol = protocol.split(":")[0];
@@ -58868,9 +58869,9 @@ var require_requires_port = __commonJS({
   }
 });
 
-// mcp-server/node_modules/querystringify/index.js
+// node_modules/querystringify/index.js
 var require_querystringify = __commonJS({
-  "mcp-server/node_modules/querystringify/index.js"(exports2) {
+  "node_modules/querystringify/index.js"(exports2) {
     "use strict";
     var has = Object.prototype.hasOwnProperty;
     var undef;
@@ -58920,9 +58921,9 @@ var require_querystringify = __commonJS({
   }
 });
 
-// mcp-server/node_modules/url-parse/index.js
+// node_modules/url-parse/index.js
 var require_url_parse = __commonJS({
-  "mcp-server/node_modules/url-parse/index.js"(exports2, module2) {
+  "node_modules/url-parse/index.js"(exports2, module2) {
     "use strict";
     var required2 = require_requires_port();
     var qs = require_querystringify();
@@ -59228,9 +59229,9 @@ var require_url_parse = __commonJS({
   }
 });
 
-// mcp-server/node_modules/psl/dist/psl.cjs
+// node_modules/psl/dist/psl.cjs
 var require_psl = __commonJS({
-  "mcp-server/node_modules/psl/dist/psl.cjs"(exports2) {
+  "node_modules/psl/dist/psl.cjs"(exports2) {
     "use strict";
     Object.defineProperties(exports2, { __esModule: { value: true }, [Symbol.toStringTag]: { value: "Module" } });
     function K(e) {
@@ -59395,9 +59396,9 @@ var require_psl = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/pubsuffix-psl.js
+// node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/pubsuffix-psl.js
 var require_pubsuffix_psl = __commonJS({
-  "mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/pubsuffix-psl.js"(exports2) {
+  "node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/pubsuffix-psl.js"(exports2) {
     "use strict";
     var psl = require_psl();
     var SPECIAL_USE_DOMAINS = [
@@ -59432,9 +59433,9 @@ var require_pubsuffix_psl = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/store.js
+// node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/store.js
 var require_store2 = __commonJS({
-  "mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/store.js"(exports2) {
+  "node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/store.js"(exports2) {
     "use strict";
     var Store = class {
       constructor() {
@@ -59471,9 +59472,9 @@ var require_store2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/universalify/index.js
+// node_modules/universalify/index.js
 var require_universalify = __commonJS({
-  "mcp-server/node_modules/universalify/index.js"(exports2) {
+  "node_modules/universalify/index.js"(exports2) {
     "use strict";
     exports2.fromCallback = function(fn) {
       return Object.defineProperty(function() {
@@ -59504,9 +59505,9 @@ var require_universalify = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/permuteDomain.js
+// node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/permuteDomain.js
 var require_permuteDomain2 = __commonJS({
-  "mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/permuteDomain.js"(exports2) {
+  "node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/permuteDomain.js"(exports2) {
     "use strict";
     var pubsuffix = require_pubsuffix_psl();
     function permuteDomain(domain2, allowSpecialUseDomain) {
@@ -59536,9 +59537,9 @@ var require_permuteDomain2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/pathMatch.js
+// node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/pathMatch.js
 var require_pathMatch2 = __commonJS({
-  "mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/pathMatch.js"(exports2) {
+  "node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/pathMatch.js"(exports2) {
     "use strict";
     function pathMatch(reqPath, cookiePath) {
       if (cookiePath === reqPath) {
@@ -59559,9 +59560,9 @@ var require_pathMatch2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/utilHelper.js
+// node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/utilHelper.js
 var require_utilHelper = __commonJS({
-  "mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/utilHelper.js"(exports2) {
+  "node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/utilHelper.js"(exports2) {
     function requireUtil() {
       try {
         return __require("util");
@@ -59591,9 +59592,9 @@ var require_utilHelper = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/memstore.js
+// node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/memstore.js
 var require_memstore2 = __commonJS({
-  "mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/memstore.js"(exports2) {
+  "node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/memstore.js"(exports2) {
     "use strict";
     var { fromCallback } = require_universalify();
     var Store = require_store2().Store;
@@ -59783,9 +59784,9 @@ var require_memstore2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/validators.js
+// node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/validators.js
 var require_validators2 = __commonJS({
-  "mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/validators.js"(exports2) {
+  "node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/validators.js"(exports2) {
     "use strict";
     var toString = Object.prototype.toString;
     function isFunction(data) {
@@ -59850,16 +59851,16 @@ var require_validators2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/version.js
+// node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/version.js
 var require_version2 = __commonJS({
-  "mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/version.js"(exports2, module2) {
+  "node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/version.js"(exports2, module2) {
     module2.exports = "4.1.4";
   }
 });
 
-// mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/cookie.js
+// node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/cookie.js
 var require_cookie3 = __commonJS({
-  "mcp-server/node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/cookie.js"(exports2) {
+  "node_modules/@cypress/request-promise/node_modules/tough-cookie/lib/cookie.js"(exports2) {
     "use strict";
     var punycode = require_punycode();
     var urlParse = require_url_parse();
@@ -61037,9 +61038,9 @@ var require_cookie3 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/@cypress/request-promise/lib/rp.js
+// node_modules/@cypress/request-promise/lib/rp.js
 var require_rp = __commonJS({
-  "mcp-server/node_modules/@cypress/request-promise/lib/rp.js"(exports2, module2) {
+  "node_modules/@cypress/request-promise/lib/rp.js"(exports2, module2) {
     "use strict";
     var Bluebird = require_bluebird().getNewLibraryCopy();
     var configure = require_request2();
@@ -61088,16 +61089,16 @@ var require_rp = __commonJS({
   }
 });
 
-// mcp-server/node_modules/mime/types.json
+// node_modules/mime/types.json
 var require_types3 = __commonJS({
-  "mcp-server/node_modules/mime/types.json"(exports2, module2) {
+  "node_modules/mime/types.json"(exports2, module2) {
     module2.exports = { "application/andrew-inset": ["ez"], "application/applixware": ["aw"], "application/atom+xml": ["atom"], "application/atomcat+xml": ["atomcat"], "application/atomsvc+xml": ["atomsvc"], "application/bdoc": ["bdoc"], "application/ccxml+xml": ["ccxml"], "application/cdmi-capability": ["cdmia"], "application/cdmi-container": ["cdmic"], "application/cdmi-domain": ["cdmid"], "application/cdmi-object": ["cdmio"], "application/cdmi-queue": ["cdmiq"], "application/cu-seeme": ["cu"], "application/dash+xml": ["mpd"], "application/davmount+xml": ["davmount"], "application/docbook+xml": ["dbk"], "application/dssc+der": ["dssc"], "application/dssc+xml": ["xdssc"], "application/ecmascript": ["ecma"], "application/emma+xml": ["emma"], "application/epub+zip": ["epub"], "application/exi": ["exi"], "application/font-tdpfr": ["pfr"], "application/font-woff": [], "application/font-woff2": [], "application/geo+json": ["geojson"], "application/gml+xml": ["gml"], "application/gpx+xml": ["gpx"], "application/gxf": ["gxf"], "application/gzip": ["gz"], "application/hyperstudio": ["stk"], "application/inkml+xml": ["ink", "inkml"], "application/ipfix": ["ipfix"], "application/java-archive": ["jar", "war", "ear"], "application/java-serialized-object": ["ser"], "application/java-vm": ["class"], "application/javascript": ["js", "mjs"], "application/json": ["json", "map"], "application/json5": ["json5"], "application/jsonml+json": ["jsonml"], "application/ld+json": ["jsonld"], "application/lost+xml": ["lostxml"], "application/mac-binhex40": ["hqx"], "application/mac-compactpro": ["cpt"], "application/mads+xml": ["mads"], "application/manifest+json": ["webmanifest"], "application/marc": ["mrc"], "application/marcxml+xml": ["mrcx"], "application/mathematica": ["ma", "nb", "mb"], "application/mathml+xml": ["mathml"], "application/mbox": ["mbox"], "application/mediaservercontrol+xml": ["mscml"], "application/metalink+xml": ["metalink"], "application/metalink4+xml": ["meta4"], "application/mets+xml": ["mets"], "application/mods+xml": ["mods"], "application/mp21": ["m21", "mp21"], "application/mp4": ["mp4s", "m4p"], "application/msword": ["doc", "dot"], "application/mxf": ["mxf"], "application/octet-stream": ["bin", "dms", "lrf", "mar", "so", "dist", "distz", "pkg", "bpk", "dump", "elc", "deploy", "exe", "dll", "deb", "dmg", "iso", "img", "msi", "msp", "msm", "buffer"], "application/oda": ["oda"], "application/oebps-package+xml": ["opf"], "application/ogg": ["ogx"], "application/omdoc+xml": ["omdoc"], "application/onenote": ["onetoc", "onetoc2", "onetmp", "onepkg"], "application/oxps": ["oxps"], "application/patch-ops-error+xml": ["xer"], "application/pdf": ["pdf"], "application/pgp-encrypted": ["pgp"], "application/pgp-signature": ["asc", "sig"], "application/pics-rules": ["prf"], "application/pkcs10": ["p10"], "application/pkcs7-mime": ["p7m", "p7c"], "application/pkcs7-signature": ["p7s"], "application/pkcs8": ["p8"], "application/pkix-attr-cert": ["ac"], "application/pkix-cert": ["cer"], "application/pkix-crl": ["crl"], "application/pkix-pkipath": ["pkipath"], "application/pkixcmp": ["pki"], "application/pls+xml": ["pls"], "application/postscript": ["ai", "eps", "ps"], "application/prs.cww": ["cww"], "application/pskc+xml": ["pskcxml"], "application/raml+yaml": ["raml"], "application/rdf+xml": ["rdf"], "application/reginfo+xml": ["rif"], "application/relax-ng-compact-syntax": ["rnc"], "application/resource-lists+xml": ["rl"], "application/resource-lists-diff+xml": ["rld"], "application/rls-services+xml": ["rs"], "application/rpki-ghostbusters": ["gbr"], "application/rpki-manifest": ["mft"], "application/rpki-roa": ["roa"], "application/rsd+xml": ["rsd"], "application/rss+xml": ["rss"], "application/rtf": ["rtf"], "application/sbml+xml": ["sbml"], "application/scvp-cv-request": ["scq"], "application/scvp-cv-response": ["scs"], "application/scvp-vp-request": ["spq"], "application/scvp-vp-response": ["spp"], "application/sdp": ["sdp"], "application/set-payment-initiation": ["setpay"], "application/set-registration-initiation": ["setreg"], "application/shf+xml": ["shf"], "application/smil+xml": ["smi", "smil"], "application/sparql-query": ["rq"], "application/sparql-results+xml": ["srx"], "application/srgs": ["gram"], "application/srgs+xml": ["grxml"], "application/sru+xml": ["sru"], "application/ssdl+xml": ["ssdl"], "application/ssml+xml": ["ssml"], "application/tei+xml": ["tei", "teicorpus"], "application/thraud+xml": ["tfi"], "application/timestamped-data": ["tsd"], "application/vnd.3gpp.pic-bw-large": ["plb"], "application/vnd.3gpp.pic-bw-small": ["psb"], "application/vnd.3gpp.pic-bw-var": ["pvb"], "application/vnd.3gpp2.tcap": ["tcap"], "application/vnd.3m.post-it-notes": ["pwn"], "application/vnd.accpac.simply.aso": ["aso"], "application/vnd.accpac.simply.imp": ["imp"], "application/vnd.acucobol": ["acu"], "application/vnd.acucorp": ["atc", "acutc"], "application/vnd.adobe.air-application-installer-package+zip": ["air"], "application/vnd.adobe.formscentral.fcdt": ["fcdt"], "application/vnd.adobe.fxp": ["fxp", "fxpl"], "application/vnd.adobe.xdp+xml": ["xdp"], "application/vnd.adobe.xfdf": ["xfdf"], "application/vnd.ahead.space": ["ahead"], "application/vnd.airzip.filesecure.azf": ["azf"], "application/vnd.airzip.filesecure.azs": ["azs"], "application/vnd.amazon.ebook": ["azw"], "application/vnd.americandynamics.acc": ["acc"], "application/vnd.amiga.ami": ["ami"], "application/vnd.android.package-archive": ["apk"], "application/vnd.anser-web-certificate-issue-initiation": ["cii"], "application/vnd.anser-web-funds-transfer-initiation": ["fti"], "application/vnd.antix.game-component": ["atx"], "application/vnd.apple.installer+xml": ["mpkg"], "application/vnd.apple.mpegurl": ["m3u8"], "application/vnd.apple.pkpass": ["pkpass"], "application/vnd.aristanetworks.swi": ["swi"], "application/vnd.astraea-software.iota": ["iota"], "application/vnd.audiograph": ["aep"], "application/vnd.blueice.multipass": ["mpm"], "application/vnd.bmi": ["bmi"], "application/vnd.businessobjects": ["rep"], "application/vnd.chemdraw+xml": ["cdxml"], "application/vnd.chipnuts.karaoke-mmd": ["mmd"], "application/vnd.cinderella": ["cdy"], "application/vnd.claymore": ["cla"], "application/vnd.cloanto.rp9": ["rp9"], "application/vnd.clonk.c4group": ["c4g", "c4d", "c4f", "c4p", "c4u"], "application/vnd.cluetrust.cartomobile-config": ["c11amc"], "application/vnd.cluetrust.cartomobile-config-pkg": ["c11amz"], "application/vnd.commonspace": ["csp"], "application/vnd.contact.cmsg": ["cdbcmsg"], "application/vnd.cosmocaller": ["cmc"], "application/vnd.crick.clicker": ["clkx"], "application/vnd.crick.clicker.keyboard": ["clkk"], "application/vnd.crick.clicker.palette": ["clkp"], "application/vnd.crick.clicker.template": ["clkt"], "application/vnd.crick.clicker.wordbank": ["clkw"], "application/vnd.criticaltools.wbs+xml": ["wbs"], "application/vnd.ctc-posml": ["pml"], "application/vnd.cups-ppd": ["ppd"], "application/vnd.curl.car": ["car"], "application/vnd.curl.pcurl": ["pcurl"], "application/vnd.dart": ["dart"], "application/vnd.data-vision.rdz": ["rdz"], "application/vnd.dece.data": ["uvf", "uvvf", "uvd", "uvvd"], "application/vnd.dece.ttml+xml": ["uvt", "uvvt"], "application/vnd.dece.unspecified": ["uvx", "uvvx"], "application/vnd.dece.zip": ["uvz", "uvvz"], "application/vnd.denovo.fcselayout-link": ["fe_launch"], "application/vnd.dna": ["dna"], "application/vnd.dolby.mlp": ["mlp"], "application/vnd.dpgraph": ["dpg"], "application/vnd.dreamfactory": ["dfac"], "application/vnd.ds-keypoint": ["kpxx"], "application/vnd.dvb.ait": ["ait"], "application/vnd.dvb.service": ["svc"], "application/vnd.dynageo": ["geo"], "application/vnd.ecowin.chart": ["mag"], "application/vnd.enliven": ["nml"], "application/vnd.epson.esf": ["esf"], "application/vnd.epson.msf": ["msf"], "application/vnd.epson.quickanime": ["qam"], "application/vnd.epson.salt": ["slt"], "application/vnd.epson.ssf": ["ssf"], "application/vnd.eszigno3+xml": ["es3", "et3"], "application/vnd.ezpix-album": ["ez2"], "application/vnd.ezpix-package": ["ez3"], "application/vnd.fdf": ["fdf"], "application/vnd.fdsn.mseed": ["mseed"], "application/vnd.fdsn.seed": ["seed", "dataless"], "application/vnd.flographit": ["gph"], "application/vnd.fluxtime.clip": ["ftc"], "application/vnd.framemaker": ["fm", "frame", "maker", "book"], "application/vnd.frogans.fnc": ["fnc"], "application/vnd.frogans.ltf": ["ltf"], "application/vnd.fsc.weblaunch": ["fsc"], "application/vnd.fujitsu.oasys": ["oas"], "application/vnd.fujitsu.oasys2": ["oa2"], "application/vnd.fujitsu.oasys3": ["oa3"], "application/vnd.fujitsu.oasysgp": ["fg5"], "application/vnd.fujitsu.oasysprs": ["bh2"], "application/vnd.fujixerox.ddd": ["ddd"], "application/vnd.fujixerox.docuworks": ["xdw"], "application/vnd.fujixerox.docuworks.binder": ["xbd"], "application/vnd.fuzzysheet": ["fzs"], "application/vnd.genomatix.tuxedo": ["txd"], "application/vnd.geogebra.file": ["ggb"], "application/vnd.geogebra.tool": ["ggt"], "application/vnd.geometry-explorer": ["gex", "gre"], "application/vnd.geonext": ["gxt"], "application/vnd.geoplan": ["g2w"], "application/vnd.geospace": ["g3w"], "application/vnd.gmx": ["gmx"], "application/vnd.google-apps.document": ["gdoc"], "application/vnd.google-apps.presentation": ["gslides"], "application/vnd.google-apps.spreadsheet": ["gsheet"], "application/vnd.google-earth.kml+xml": ["kml"], "application/vnd.google-earth.kmz": ["kmz"], "application/vnd.grafeq": ["gqf", "gqs"], "application/vnd.groove-account": ["gac"], "application/vnd.groove-help": ["ghf"], "application/vnd.groove-identity-message": ["gim"], "application/vnd.groove-injector": ["grv"], "application/vnd.groove-tool-message": ["gtm"], "application/vnd.groove-tool-template": ["tpl"], "application/vnd.groove-vcard": ["vcg"], "application/vnd.hal+xml": ["hal"], "application/vnd.handheld-entertainment+xml": ["zmm"], "application/vnd.hbci": ["hbci"], "application/vnd.hhe.lesson-player": ["les"], "application/vnd.hp-hpgl": ["hpgl"], "application/vnd.hp-hpid": ["hpid"], "application/vnd.hp-hps": ["hps"], "application/vnd.hp-jlyt": ["jlt"], "application/vnd.hp-pcl": ["pcl"], "application/vnd.hp-pclxl": ["pclxl"], "application/vnd.hydrostatix.sof-data": ["sfd-hdstx"], "application/vnd.ibm.minipay": ["mpy"], "application/vnd.ibm.modcap": ["afp", "listafp", "list3820"], "application/vnd.ibm.rights-management": ["irm"], "application/vnd.ibm.secure-container": ["sc"], "application/vnd.iccprofile": ["icc", "icm"], "application/vnd.igloader": ["igl"], "application/vnd.immervision-ivp": ["ivp"], "application/vnd.immervision-ivu": ["ivu"], "application/vnd.insors.igm": ["igm"], "application/vnd.intercon.formnet": ["xpw", "xpx"], "application/vnd.intergeo": ["i2g"], "application/vnd.intu.qbo": ["qbo"], "application/vnd.intu.qfx": ["qfx"], "application/vnd.ipunplugged.rcprofile": ["rcprofile"], "application/vnd.irepository.package+xml": ["irp"], "application/vnd.is-xpr": ["xpr"], "application/vnd.isac.fcs": ["fcs"], "application/vnd.jam": ["jam"], "application/vnd.jcp.javame.midlet-rms": ["rms"], "application/vnd.jisp": ["jisp"], "application/vnd.joost.joda-archive": ["joda"], "application/vnd.kahootz": ["ktz", "ktr"], "application/vnd.kde.karbon": ["karbon"], "application/vnd.kde.kchart": ["chrt"], "application/vnd.kde.kformula": ["kfo"], "application/vnd.kde.kivio": ["flw"], "application/vnd.kde.kontour": ["kon"], "application/vnd.kde.kpresenter": ["kpr", "kpt"], "application/vnd.kde.kspread": ["ksp"], "application/vnd.kde.kword": ["kwd", "kwt"], "application/vnd.kenameaapp": ["htke"], "application/vnd.kidspiration": ["kia"], "application/vnd.kinar": ["kne", "knp"], "application/vnd.koan": ["skp", "skd", "skt", "skm"], "application/vnd.kodak-descriptor": ["sse"], "application/vnd.las.las+xml": ["lasxml"], "application/vnd.llamagraphics.life-balance.desktop": ["lbd"], "application/vnd.llamagraphics.life-balance.exchange+xml": ["lbe"], "application/vnd.lotus-1-2-3": ["123"], "application/vnd.lotus-approach": ["apr"], "application/vnd.lotus-freelance": ["pre"], "application/vnd.lotus-notes": ["nsf"], "application/vnd.lotus-organizer": ["org"], "application/vnd.lotus-screencam": ["scm"], "application/vnd.lotus-wordpro": ["lwp"], "application/vnd.macports.portpkg": ["portpkg"], "application/vnd.mcd": ["mcd"], "application/vnd.medcalcdata": ["mc1"], "application/vnd.mediastation.cdkey": ["cdkey"], "application/vnd.mfer": ["mwf"], "application/vnd.mfmp": ["mfm"], "application/vnd.micrografx.flo": ["flo"], "application/vnd.micrografx.igx": ["igx"], "application/vnd.mif": ["mif"], "application/vnd.mobius.daf": ["daf"], "application/vnd.mobius.dis": ["dis"], "application/vnd.mobius.mbk": ["mbk"], "application/vnd.mobius.mqy": ["mqy"], "application/vnd.mobius.msl": ["msl"], "application/vnd.mobius.plc": ["plc"], "application/vnd.mobius.txf": ["txf"], "application/vnd.mophun.application": ["mpn"], "application/vnd.mophun.certificate": ["mpc"], "application/vnd.mozilla.xul+xml": ["xul"], "application/vnd.ms-artgalry": ["cil"], "application/vnd.ms-cab-compressed": ["cab"], "application/vnd.ms-excel": ["xls", "xlm", "xla", "xlc", "xlt", "xlw"], "application/vnd.ms-excel.addin.macroenabled.12": ["xlam"], "application/vnd.ms-excel.sheet.binary.macroenabled.12": ["xlsb"], "application/vnd.ms-excel.sheet.macroenabled.12": ["xlsm"], "application/vnd.ms-excel.template.macroenabled.12": ["xltm"], "application/vnd.ms-fontobject": ["eot"], "application/vnd.ms-htmlhelp": ["chm"], "application/vnd.ms-ims": ["ims"], "application/vnd.ms-lrm": ["lrm"], "application/vnd.ms-officetheme": ["thmx"], "application/vnd.ms-outlook": ["msg"], "application/vnd.ms-pki.seccat": ["cat"], "application/vnd.ms-pki.stl": ["stl"], "application/vnd.ms-powerpoint": ["ppt", "pps", "pot"], "application/vnd.ms-powerpoint.addin.macroenabled.12": ["ppam"], "application/vnd.ms-powerpoint.presentation.macroenabled.12": ["pptm"], "application/vnd.ms-powerpoint.slide.macroenabled.12": ["sldm"], "application/vnd.ms-powerpoint.slideshow.macroenabled.12": ["ppsm"], "application/vnd.ms-powerpoint.template.macroenabled.12": ["potm"], "application/vnd.ms-project": ["mpp", "mpt"], "application/vnd.ms-word.document.macroenabled.12": ["docm"], "application/vnd.ms-word.template.macroenabled.12": ["dotm"], "application/vnd.ms-works": ["wps", "wks", "wcm", "wdb"], "application/vnd.ms-wpl": ["wpl"], "application/vnd.ms-xpsdocument": ["xps"], "application/vnd.mseq": ["mseq"], "application/vnd.musician": ["mus"], "application/vnd.muvee.style": ["msty"], "application/vnd.mynfc": ["taglet"], "application/vnd.neurolanguage.nlu": ["nlu"], "application/vnd.nitf": ["ntf", "nitf"], "application/vnd.noblenet-directory": ["nnd"], "application/vnd.noblenet-sealer": ["nns"], "application/vnd.noblenet-web": ["nnw"], "application/vnd.nokia.n-gage.data": ["ngdat"], "application/vnd.nokia.n-gage.symbian.install": ["n-gage"], "application/vnd.nokia.radio-preset": ["rpst"], "application/vnd.nokia.radio-presets": ["rpss"], "application/vnd.novadigm.edm": ["edm"], "application/vnd.novadigm.edx": ["edx"], "application/vnd.novadigm.ext": ["ext"], "application/vnd.oasis.opendocument.chart": ["odc"], "application/vnd.oasis.opendocument.chart-template": ["otc"], "application/vnd.oasis.opendocument.database": ["odb"], "application/vnd.oasis.opendocument.formula": ["odf"], "application/vnd.oasis.opendocument.formula-template": ["odft"], "application/vnd.oasis.opendocument.graphics": ["odg"], "application/vnd.oasis.opendocument.graphics-template": ["otg"], "application/vnd.oasis.opendocument.image": ["odi"], "application/vnd.oasis.opendocument.image-template": ["oti"], "application/vnd.oasis.opendocument.presentation": ["odp"], "application/vnd.oasis.opendocument.presentation-template": ["otp"], "application/vnd.oasis.opendocument.spreadsheet": ["ods"], "application/vnd.oasis.opendocument.spreadsheet-template": ["ots"], "application/vnd.oasis.opendocument.text": ["odt"], "application/vnd.oasis.opendocument.text-master": ["odm"], "application/vnd.oasis.opendocument.text-template": ["ott"], "application/vnd.oasis.opendocument.text-web": ["oth"], "application/vnd.olpc-sugar": ["xo"], "application/vnd.oma.dd2+xml": ["dd2"], "application/vnd.openofficeorg.extension": ["oxt"], "application/vnd.openxmlformats-officedocument.presentationml.presentation": ["pptx"], "application/vnd.openxmlformats-officedocument.presentationml.slide": ["sldx"], "application/vnd.openxmlformats-officedocument.presentationml.slideshow": ["ppsx"], "application/vnd.openxmlformats-officedocument.presentationml.template": ["potx"], "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet": ["xlsx"], "application/vnd.openxmlformats-officedocument.spreadsheetml.template": ["xltx"], "application/vnd.openxmlformats-officedocument.wordprocessingml.document": ["docx"], "application/vnd.openxmlformats-officedocument.wordprocessingml.template": ["dotx"], "application/vnd.osgeo.mapguide.package": ["mgp"], "application/vnd.osgi.dp": ["dp"], "application/vnd.osgi.subsystem": ["esa"], "application/vnd.palm": ["pdb", "pqa", "oprc"], "application/vnd.pawaafile": ["paw"], "application/vnd.pg.format": ["str"], "application/vnd.pg.osasli": ["ei6"], "application/vnd.picsel": ["efif"], "application/vnd.pmi.widget": ["wg"], "application/vnd.pocketlearn": ["plf"], "application/vnd.powerbuilder6": ["pbd"], "application/vnd.previewsystems.box": ["box"], "application/vnd.proteus.magazine": ["mgz"], "application/vnd.publishare-delta-tree": ["qps"], "application/vnd.pvi.ptid1": ["ptid"], "application/vnd.quark.quarkxpress": ["qxd", "qxt", "qwd", "qwt", "qxl", "qxb"], "application/vnd.realvnc.bed": ["bed"], "application/vnd.recordare.musicxml": ["mxl"], "application/vnd.recordare.musicxml+xml": ["musicxml"], "application/vnd.rig.cryptonote": ["cryptonote"], "application/vnd.rim.cod": ["cod"], "application/vnd.rn-realmedia": ["rm"], "application/vnd.rn-realmedia-vbr": ["rmvb"], "application/vnd.route66.link66+xml": ["link66"], "application/vnd.sailingtracker.track": ["st"], "application/vnd.seemail": ["see"], "application/vnd.sema": ["sema"], "application/vnd.semd": ["semd"], "application/vnd.semf": ["semf"], "application/vnd.shana.informed.formdata": ["ifm"], "application/vnd.shana.informed.formtemplate": ["itp"], "application/vnd.shana.informed.interchange": ["iif"], "application/vnd.shana.informed.package": ["ipk"], "application/vnd.simtech-mindmapper": ["twd", "twds"], "application/vnd.smaf": ["mmf"], "application/vnd.smart.teacher": ["teacher"], "application/vnd.solent.sdkm+xml": ["sdkm", "sdkd"], "application/vnd.spotfire.dxp": ["dxp"], "application/vnd.spotfire.sfs": ["sfs"], "application/vnd.stardivision.calc": ["sdc"], "application/vnd.stardivision.draw": ["sda"], "application/vnd.stardivision.impress": ["sdd"], "application/vnd.stardivision.math": ["smf"], "application/vnd.stardivision.writer": ["sdw", "vor"], "application/vnd.stardivision.writer-global": ["sgl"], "application/vnd.stepmania.package": ["smzip"], "application/vnd.stepmania.stepchart": ["sm"], "application/vnd.sun.wadl+xml": ["wadl"], "application/vnd.sun.xml.calc": ["sxc"], "application/vnd.sun.xml.calc.template": ["stc"], "application/vnd.sun.xml.draw": ["sxd"], "application/vnd.sun.xml.draw.template": ["std"], "application/vnd.sun.xml.impress": ["sxi"], "application/vnd.sun.xml.impress.template": ["sti"], "application/vnd.sun.xml.math": ["sxm"], "application/vnd.sun.xml.writer": ["sxw"], "application/vnd.sun.xml.writer.global": ["sxg"], "application/vnd.sun.xml.writer.template": ["stw"], "application/vnd.sus-calendar": ["sus", "susp"], "application/vnd.svd": ["svd"], "application/vnd.symbian.install": ["sis", "sisx"], "application/vnd.syncml+xml": ["xsm"], "application/vnd.syncml.dm+wbxml": ["bdm"], "application/vnd.syncml.dm+xml": ["xdm"], "application/vnd.tao.intent-module-archive": ["tao"], "application/vnd.tcpdump.pcap": ["pcap", "cap", "dmp"], "application/vnd.tmobile-livetv": ["tmo"], "application/vnd.trid.tpt": ["tpt"], "application/vnd.triscape.mxs": ["mxs"], "application/vnd.trueapp": ["tra"], "application/vnd.ufdl": ["ufd", "ufdl"], "application/vnd.uiq.theme": ["utz"], "application/vnd.umajin": ["umj"], "application/vnd.unity": ["unityweb"], "application/vnd.uoml+xml": ["uoml"], "application/vnd.vcx": ["vcx"], "application/vnd.visio": ["vsd", "vst", "vss", "vsw"], "application/vnd.visionary": ["vis"], "application/vnd.vsf": ["vsf"], "application/vnd.wap.wbxml": ["wbxml"], "application/vnd.wap.wmlc": ["wmlc"], "application/vnd.wap.wmlscriptc": ["wmlsc"], "application/vnd.webturbo": ["wtb"], "application/vnd.wolfram.player": ["nbp"], "application/vnd.wordperfect": ["wpd"], "application/vnd.wqd": ["wqd"], "application/vnd.wt.stf": ["stf"], "application/vnd.xara": ["xar"], "application/vnd.xfdl": ["xfdl"], "application/vnd.yamaha.hv-dic": ["hvd"], "application/vnd.yamaha.hv-script": ["hvs"], "application/vnd.yamaha.hv-voice": ["hvp"], "application/vnd.yamaha.openscoreformat": ["osf"], "application/vnd.yamaha.openscoreformat.osfpvg+xml": ["osfpvg"], "application/vnd.yamaha.smaf-audio": ["saf"], "application/vnd.yamaha.smaf-phrase": ["spf"], "application/vnd.yellowriver-custom-menu": ["cmp"], "application/vnd.zul": ["zir", "zirz"], "application/vnd.zzazz.deck+xml": ["zaz"], "application/voicexml+xml": ["vxml"], "application/wasm": ["wasm"], "application/widget": ["wgt"], "application/winhlp": ["hlp"], "application/wsdl+xml": ["wsdl"], "application/wspolicy+xml": ["wspolicy"], "application/x-7z-compressed": ["7z"], "application/x-abiword": ["abw"], "application/x-ace-compressed": ["ace"], "application/x-apple-diskimage": [], "application/x-arj": ["arj"], "application/x-authorware-bin": ["aab", "x32", "u32", "vox"], "application/x-authorware-map": ["aam"], "application/x-authorware-seg": ["aas"], "application/x-bcpio": ["bcpio"], "application/x-bdoc": [], "application/x-bittorrent": ["torrent"], "application/x-blorb": ["blb", "blorb"], "application/x-bzip": ["bz"], "application/x-bzip2": ["bz2", "boz"], "application/x-cbr": ["cbr", "cba", "cbt", "cbz", "cb7"], "application/x-cdlink": ["vcd"], "application/x-cfs-compressed": ["cfs"], "application/x-chat": ["chat"], "application/x-chess-pgn": ["pgn"], "application/x-chrome-extension": ["crx"], "application/x-cocoa": ["cco"], "application/x-conference": ["nsc"], "application/x-cpio": ["cpio"], "application/x-csh": ["csh"], "application/x-debian-package": ["udeb"], "application/x-dgc-compressed": ["dgc"], "application/x-director": ["dir", "dcr", "dxr", "cst", "cct", "cxt", "w3d", "fgd", "swa"], "application/x-doom": ["wad"], "application/x-dtbncx+xml": ["ncx"], "application/x-dtbook+xml": ["dtb"], "application/x-dtbresource+xml": ["res"], "application/x-dvi": ["dvi"], "application/x-envoy": ["evy"], "application/x-eva": ["eva"], "application/x-font-bdf": ["bdf"], "application/x-font-ghostscript": ["gsf"], "application/x-font-linux-psf": ["psf"], "application/x-font-pcf": ["pcf"], "application/x-font-snf": ["snf"], "application/x-font-type1": ["pfa", "pfb", "pfm", "afm"], "application/x-freearc": ["arc"], "application/x-futuresplash": ["spl"], "application/x-gca-compressed": ["gca"], "application/x-glulx": ["ulx"], "application/x-gnumeric": ["gnumeric"], "application/x-gramps-xml": ["gramps"], "application/x-gtar": ["gtar"], "application/x-hdf": ["hdf"], "application/x-httpd-php": ["php"], "application/x-install-instructions": ["install"], "application/x-iso9660-image": [], "application/x-java-archive-diff": ["jardiff"], "application/x-java-jnlp-file": ["jnlp"], "application/x-latex": ["latex"], "application/x-lua-bytecode": ["luac"], "application/x-lzh-compressed": ["lzh", "lha"], "application/x-makeself": ["run"], "application/x-mie": ["mie"], "application/x-mobipocket-ebook": ["prc", "mobi"], "application/x-ms-application": ["application"], "application/x-ms-shortcut": ["lnk"], "application/x-ms-wmd": ["wmd"], "application/x-ms-wmz": ["wmz"], "application/x-ms-xbap": ["xbap"], "application/x-msaccess": ["mdb"], "application/x-msbinder": ["obd"], "application/x-mscardfile": ["crd"], "application/x-msclip": ["clp"], "application/x-msdos-program": [], "application/x-msdownload": ["com", "bat"], "application/x-msmediaview": ["mvb", "m13", "m14"], "application/x-msmetafile": ["wmf", "emf", "emz"], "application/x-msmoney": ["mny"], "application/x-mspublisher": ["pub"], "application/x-msschedule": ["scd"], "application/x-msterminal": ["trm"], "application/x-mswrite": ["wri"], "application/x-netcdf": ["nc", "cdf"], "application/x-ns-proxy-autoconfig": ["pac"], "application/x-nzb": ["nzb"], "application/x-perl": ["pl", "pm"], "application/x-pilot": [], "application/x-pkcs12": ["p12", "pfx"], "application/x-pkcs7-certificates": ["p7b", "spc"], "application/x-pkcs7-certreqresp": ["p7r"], "application/x-rar-compressed": ["rar"], "application/x-redhat-package-manager": ["rpm"], "application/x-research-info-systems": ["ris"], "application/x-sea": ["sea"], "application/x-sh": ["sh"], "application/x-shar": ["shar"], "application/x-shockwave-flash": ["swf"], "application/x-silverlight-app": ["xap"], "application/x-sql": ["sql"], "application/x-stuffit": ["sit"], "application/x-stuffitx": ["sitx"], "application/x-subrip": ["srt"], "application/x-sv4cpio": ["sv4cpio"], "application/x-sv4crc": ["sv4crc"], "application/x-t3vm-image": ["t3"], "application/x-tads": ["gam"], "application/x-tar": ["tar"], "application/x-tcl": ["tcl", "tk"], "application/x-tex": ["tex"], "application/x-tex-tfm": ["tfm"], "application/x-texinfo": ["texinfo", "texi"], "application/x-tgif": ["obj"], "application/x-ustar": ["ustar"], "application/x-virtualbox-hdd": ["hdd"], "application/x-virtualbox-ova": ["ova"], "application/x-virtualbox-ovf": ["ovf"], "application/x-virtualbox-vbox": ["vbox"], "application/x-virtualbox-vbox-extpack": ["vbox-extpack"], "application/x-virtualbox-vdi": ["vdi"], "application/x-virtualbox-vhd": ["vhd"], "application/x-virtualbox-vmdk": ["vmdk"], "application/x-wais-source": ["src"], "application/x-web-app-manifest+json": ["webapp"], "application/x-x509-ca-cert": ["der", "crt", "pem"], "application/x-xfig": ["fig"], "application/x-xliff+xml": ["xlf"], "application/x-xpinstall": ["xpi"], "application/x-xz": ["xz"], "application/x-zmachine": ["z1", "z2", "z3", "z4", "z5", "z6", "z7", "z8"], "application/xaml+xml": ["xaml"], "application/xcap-diff+xml": ["xdf"], "application/xenc+xml": ["xenc"], "application/xhtml+xml": ["xhtml", "xht"], "application/xml": ["xml", "xsl", "xsd", "rng"], "application/xml-dtd": ["dtd"], "application/xop+xml": ["xop"], "application/xproc+xml": ["xpl"], "application/xslt+xml": ["xslt"], "application/xspf+xml": ["xspf"], "application/xv+xml": ["mxml", "xhvml", "xvml", "xvm"], "application/yang": ["yang"], "application/yin+xml": ["yin"], "application/zip": ["zip"], "audio/3gpp": [], "audio/adpcm": ["adp"], "audio/basic": ["au", "snd"], "audio/midi": ["mid", "midi", "kar", "rmi"], "audio/mp3": [], "audio/mp4": ["m4a", "mp4a"], "audio/mpeg": ["mpga", "mp2", "mp2a", "mp3", "m2a", "m3a"], "audio/ogg": ["oga", "ogg", "spx"], "audio/s3m": ["s3m"], "audio/silk": ["sil"], "audio/vnd.dece.audio": ["uva", "uvva"], "audio/vnd.digital-winds": ["eol"], "audio/vnd.dra": ["dra"], "audio/vnd.dts": ["dts"], "audio/vnd.dts.hd": ["dtshd"], "audio/vnd.lucent.voice": ["lvp"], "audio/vnd.ms-playready.media.pya": ["pya"], "audio/vnd.nuera.ecelp4800": ["ecelp4800"], "audio/vnd.nuera.ecelp7470": ["ecelp7470"], "audio/vnd.nuera.ecelp9600": ["ecelp9600"], "audio/vnd.rip": ["rip"], "audio/wav": ["wav"], "audio/wave": [], "audio/webm": ["weba"], "audio/x-aac": ["aac"], "audio/x-aiff": ["aif", "aiff", "aifc"], "audio/x-caf": ["caf"], "audio/x-flac": ["flac"], "audio/x-m4a": [], "audio/x-matroska": ["mka"], "audio/x-mpegurl": ["m3u"], "audio/x-ms-wax": ["wax"], "audio/x-ms-wma": ["wma"], "audio/x-pn-realaudio": ["ram", "ra"], "audio/x-pn-realaudio-plugin": ["rmp"], "audio/x-realaudio": [], "audio/x-wav": [], "audio/xm": ["xm"], "chemical/x-cdx": ["cdx"], "chemical/x-cif": ["cif"], "chemical/x-cmdf": ["cmdf"], "chemical/x-cml": ["cml"], "chemical/x-csml": ["csml"], "chemical/x-xyz": ["xyz"], "font/collection": ["ttc"], "font/otf": ["otf"], "font/ttf": ["ttf"], "font/woff": ["woff"], "font/woff2": ["woff2"], "image/apng": ["apng"], "image/bmp": ["bmp"], "image/cgm": ["cgm"], "image/g3fax": ["g3"], "image/gif": ["gif"], "image/ief": ["ief"], "image/jp2": ["jp2", "jpg2"], "image/jpeg": ["jpeg", "jpg", "jpe"], "image/jpm": ["jpm"], "image/jpx": ["jpx", "jpf"], "image/ktx": ["ktx"], "image/png": ["png"], "image/prs.btif": ["btif"], "image/sgi": ["sgi"], "image/svg+xml": ["svg", "svgz"], "image/tiff": ["tiff", "tif"], "image/vnd.adobe.photoshop": ["psd"], "image/vnd.dece.graphic": ["uvi", "uvvi", "uvg", "uvvg"], "image/vnd.djvu": ["djvu", "djv"], "image/vnd.dvb.subtitle": [], "image/vnd.dwg": ["dwg"], "image/vnd.dxf": ["dxf"], "image/vnd.fastbidsheet": ["fbs"], "image/vnd.fpx": ["fpx"], "image/vnd.fst": ["fst"], "image/vnd.fujixerox.edmics-mmr": ["mmr"], "image/vnd.fujixerox.edmics-rlc": ["rlc"], "image/vnd.ms-modi": ["mdi"], "image/vnd.ms-photo": ["wdp"], "image/vnd.net-fpx": ["npx"], "image/vnd.wap.wbmp": ["wbmp"], "image/vnd.xiff": ["xif"], "image/webp": ["webp"], "image/x-3ds": ["3ds"], "image/x-cmu-raster": ["ras"], "image/x-cmx": ["cmx"], "image/x-freehand": ["fh", "fhc", "fh4", "fh5", "fh7"], "image/x-icon": ["ico"], "image/x-jng": ["jng"], "image/x-mrsid-image": ["sid"], "image/x-ms-bmp": [], "image/x-pcx": ["pcx"], "image/x-pict": ["pic", "pct"], "image/x-portable-anymap": ["pnm"], "image/x-portable-bitmap": ["pbm"], "image/x-portable-graymap": ["pgm"], "image/x-portable-pixmap": ["ppm"], "image/x-rgb": ["rgb"], "image/x-tga": ["tga"], "image/x-xbitmap": ["xbm"], "image/x-xpixmap": ["xpm"], "image/x-xwindowdump": ["xwd"], "message/rfc822": ["eml", "mime"], "model/gltf+json": ["gltf"], "model/gltf-binary": ["glb"], "model/iges": ["igs", "iges"], "model/mesh": ["msh", "mesh", "silo"], "model/vnd.collada+xml": ["dae"], "model/vnd.dwf": ["dwf"], "model/vnd.gdl": ["gdl"], "model/vnd.gtw": ["gtw"], "model/vnd.mts": ["mts"], "model/vnd.vtu": ["vtu"], "model/vrml": ["wrl", "vrml"], "model/x3d+binary": ["x3db", "x3dbz"], "model/x3d+vrml": ["x3dv", "x3dvz"], "model/x3d+xml": ["x3d", "x3dz"], "text/cache-manifest": ["appcache", "manifest"], "text/calendar": ["ics", "ifb"], "text/coffeescript": ["coffee", "litcoffee"], "text/css": ["css"], "text/csv": ["csv"], "text/hjson": ["hjson"], "text/html": ["html", "htm", "shtml"], "text/jade": ["jade"], "text/jsx": ["jsx"], "text/less": ["less"], "text/markdown": ["markdown", "md"], "text/mathml": ["mml"], "text/n3": ["n3"], "text/plain": ["txt", "text", "conf", "def", "list", "log", "in", "ini"], "text/prs.lines.tag": ["dsc"], "text/richtext": ["rtx"], "text/rtf": [], "text/sgml": ["sgml", "sgm"], "text/slim": ["slim", "slm"], "text/stylus": ["stylus", "styl"], "text/tab-separated-values": ["tsv"], "text/troff": ["t", "tr", "roff", "man", "me", "ms"], "text/turtle": ["ttl"], "text/uri-list": ["uri", "uris", "urls"], "text/vcard": ["vcard"], "text/vnd.curl": ["curl"], "text/vnd.curl.dcurl": ["dcurl"], "text/vnd.curl.mcurl": ["mcurl"], "text/vnd.curl.scurl": ["scurl"], "text/vnd.dvb.subtitle": ["sub"], "text/vnd.fly": ["fly"], "text/vnd.fmi.flexstor": ["flx"], "text/vnd.graphviz": ["gv"], "text/vnd.in3d.3dml": ["3dml"], "text/vnd.in3d.spot": ["spot"], "text/vnd.sun.j2me.app-descriptor": ["jad"], "text/vnd.wap.wml": ["wml"], "text/vnd.wap.wmlscript": ["wmls"], "text/vtt": ["vtt"], "text/x-asm": ["s", "asm"], "text/x-c": ["c", "cc", "cxx", "cpp", "h", "hh", "dic"], "text/x-component": ["htc"], "text/x-fortran": ["f", "for", "f77", "f90"], "text/x-handlebars-template": ["hbs"], "text/x-java-source": ["java"], "text/x-lua": ["lua"], "text/x-markdown": ["mkd"], "text/x-nfo": ["nfo"], "text/x-opml": ["opml"], "text/x-org": [], "text/x-pascal": ["p", "pas"], "text/x-processing": ["pde"], "text/x-sass": ["sass"], "text/x-scss": ["scss"], "text/x-setext": ["etx"], "text/x-sfv": ["sfv"], "text/x-suse-ymp": ["ymp"], "text/x-uuencode": ["uu"], "text/x-vcalendar": ["vcs"], "text/x-vcard": ["vcf"], "text/xml": [], "text/yaml": ["yaml", "yml"], "video/3gpp": ["3gp", "3gpp"], "video/3gpp2": ["3g2"], "video/h261": ["h261"], "video/h263": ["h263"], "video/h264": ["h264"], "video/jpeg": ["jpgv"], "video/jpm": ["jpgm"], "video/mj2": ["mj2", "mjp2"], "video/mp2t": ["ts"], "video/mp4": ["mp4", "mp4v", "mpg4"], "video/mpeg": ["mpeg", "mpg", "mpe", "m1v", "m2v"], "video/ogg": ["ogv"], "video/quicktime": ["qt", "mov"], "video/vnd.dece.hd": ["uvh", "uvvh"], "video/vnd.dece.mobile": ["uvm", "uvvm"], "video/vnd.dece.pd": ["uvp", "uvvp"], "video/vnd.dece.sd": ["uvs", "uvvs"], "video/vnd.dece.video": ["uvv", "uvvv"], "video/vnd.dvb.file": ["dvb"], "video/vnd.fvt": ["fvt"], "video/vnd.mpegurl": ["mxu", "m4u"], "video/vnd.ms-playready.media.pyv": ["pyv"], "video/vnd.uvvu.mp4": ["uvu", "uvvu"], "video/vnd.vivo": ["viv"], "video/webm": ["webm"], "video/x-f4v": ["f4v"], "video/x-fli": ["fli"], "video/x-flv": ["flv"], "video/x-m4v": ["m4v"], "video/x-matroska": ["mkv", "mk3d", "mks"], "video/x-mng": ["mng"], "video/x-ms-asf": ["asf", "asx"], "video/x-ms-vob": ["vob"], "video/x-ms-wm": ["wm"], "video/x-ms-wmv": ["wmv"], "video/x-ms-wmx": ["wmx"], "video/x-ms-wvx": ["wvx"], "video/x-msvideo": ["avi"], "video/x-sgi-movie": ["movie"], "video/x-smv": ["smv"], "x-conference/x-cooltalk": ["ice"] };
   }
 });
 
-// mcp-server/node_modules/mime/mime.js
+// node_modules/mime/mime.js
 var require_mime = __commonJS({
-  "mcp-server/node_modules/mime/mime.js"(exports2, module2) {
+  "node_modules/mime/mime.js"(exports2, module2) {
     var path2 = __require("path");
     var fs2 = __require("fs");
     function Mime() {
@@ -61149,9 +61150,9 @@ var require_mime = __commonJS({
   }
 });
 
-// mcp-server/node_modules/wrappy/wrappy.js
+// node_modules/wrappy/wrappy.js
 var require_wrappy = __commonJS({
-  "mcp-server/node_modules/wrappy/wrappy.js"(exports2, module2) {
+  "node_modules/wrappy/wrappy.js"(exports2, module2) {
     module2.exports = wrappy;
     function wrappy(fn, cb) {
       if (fn && cb) return wrappy(fn)(cb);
@@ -61179,9 +61180,9 @@ var require_wrappy = __commonJS({
   }
 });
 
-// mcp-server/node_modules/once/once.js
+// node_modules/once/once.js
 var require_once = __commonJS({
-  "mcp-server/node_modules/once/once.js"(exports2, module2) {
+  "node_modules/once/once.js"(exports2, module2) {
     var wrappy = require_wrappy();
     module2.exports = wrappy(once);
     module2.exports.strict = wrappy(onceStrict);
@@ -61223,9 +61224,9 @@ var require_once = __commonJS({
   }
 });
 
-// mcp-server/node_modules/end-of-stream/index.js
+// node_modules/end-of-stream/index.js
 var require_end_of_stream = __commonJS({
-  "mcp-server/node_modules/end-of-stream/index.js"(exports2, module2) {
+  "node_modules/end-of-stream/index.js"(exports2, module2) {
     var once = require_once();
     var noop = function() {
     };
@@ -61306,9 +61307,9 @@ var require_end_of_stream = __commonJS({
   }
 });
 
-// mcp-server/node_modules/pump/index.js
+// node_modules/pump/index.js
 var require_pump = __commonJS({
-  "mcp-server/node_modules/pump/index.js"(exports2, module2) {
+  "node_modules/pump/index.js"(exports2, module2) {
     var once = require_once();
     var eos = require_end_of_stream();
     var fs2 = __require("fs");
@@ -61377,9 +61378,9 @@ var require_pump = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/lib/telegram.js
+// node_modules/node-telegram-bot-api/lib/telegram.js
 var require_telegram = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/lib/telegram.js"(exports2, module2) {
+  "node_modules/node-telegram-bot-api/lib/telegram.js"(exports2, module2) {
     "use strict";
     var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol" ? function(obj2) {
       return typeof obj2;
@@ -64754,9 +64755,9 @@ var require_telegram = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/src/errors.js
+// node_modules/node-telegram-bot-api/src/errors.js
 var require_errors7 = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/src/errors.js"(exports2) {
+  "node_modules/node-telegram-bot-api/src/errors.js"(exports2) {
     exports2.BaseError = class BaseError extends Error {
       /**
        * @class BaseError
@@ -64819,9 +64820,9 @@ var require_errors7 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/src/telegramWebHook.js
+// node_modules/node-telegram-bot-api/src/telegramWebHook.js
 var require_telegramWebHook2 = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/src/telegramWebHook.js"(exports2, module2) {
+  "node_modules/node-telegram-bot-api/src/telegramWebHook.js"(exports2, module2) {
     var errors = require_errors7();
     var debug = require_src()("node-telegram-bot-api");
     var https = __require("https");
@@ -64963,9 +64964,9 @@ var require_telegramWebHook2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/src/telegramPolling.js
+// node_modules/node-telegram-bot-api/src/telegramPolling.js
 var require_telegramPolling2 = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/src/telegramPolling.js"(exports2, module2) {
+  "node_modules/node-telegram-bot-api/src/telegramPolling.js"(exports2, module2) {
     var errors = require_errors7();
     var debug = require_src()("node-telegram-bot-api");
     var deprecate = require_utils2().deprecate;
@@ -65136,9 +65137,9 @@ var require_telegramPolling2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/src/telegram.js
+// node_modules/node-telegram-bot-api/src/telegram.js
 var require_telegram2 = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/src/telegram.js"(exports2, module2) {
+  "node_modules/node-telegram-bot-api/src/telegram.js"(exports2, module2) {
     require_array_prototype().shim();
     var errors = require_errors7();
     var TelegramBotWebHook = require_telegramWebHook2();
@@ -67999,9 +68000,9 @@ var require_telegram2 = __commonJS({
   }
 });
 
-// mcp-server/node_modules/node-telegram-bot-api/index.js
+// node_modules/node-telegram-bot-api/index.js
 var require_node_telegram_bot_api = __commonJS({
-  "mcp-server/node_modules/node-telegram-bot-api/index.js"(exports2, module2) {
+  "node_modules/node-telegram-bot-api/index.js"(exports2, module2) {
     var majorVersion = parseInt(process.versions.node.split(".")[0], 10);
     if (majorVersion <= 5) {
       const deprecate = require_utils2().deprecate;
@@ -68013,7 +68014,7 @@ var require_node_telegram_bot_api = __commonJS({
   }
 });
 
-// mcp-server/node_modules/zod/v3/helpers/util.js
+// node_modules/zod/v3/helpers/util.js
 var util;
 (function(util2) {
   util2.assertEqual = (_) => {
@@ -68147,7 +68148,7 @@ var getParsedType = (data) => {
   }
 };
 
-// mcp-server/node_modules/zod/v3/ZodError.js
+// node_modules/zod/v3/ZodError.js
 var ZodIssueCode = util.arrayToEnum([
   "invalid_type",
   "invalid_literal",
@@ -68261,7 +68262,7 @@ ZodError.create = (issues) => {
   return error2;
 };
 
-// mcp-server/node_modules/zod/v3/locales/en.js
+// node_modules/zod/v3/locales/en.js
 var errorMap = (issue2, _ctx) => {
   let message;
   switch (issue2.code) {
@@ -68364,13 +68365,13 @@ var errorMap = (issue2, _ctx) => {
 };
 var en_default = errorMap;
 
-// mcp-server/node_modules/zod/v3/errors.js
+// node_modules/zod/v3/errors.js
 var overrideErrorMap = en_default;
 function getErrorMap() {
   return overrideErrorMap;
 }
 
-// mcp-server/node_modules/zod/v3/helpers/parseUtil.js
+// node_modules/zod/v3/helpers/parseUtil.js
 var makeIssue = (params) => {
   const { data, path: path2, errorMaps, issueData } = params;
   const fullPath = [...path2, ...issueData.path || []];
@@ -68479,14 +68480,14 @@ var isDirty = (x) => x.status === "dirty";
 var isValid = (x) => x.status === "valid";
 var isAsync = (x) => typeof Promise !== "undefined" && x instanceof Promise;
 
-// mcp-server/node_modules/zod/v3/helpers/errorUtil.js
+// node_modules/zod/v3/helpers/errorUtil.js
 var errorUtil;
 (function(errorUtil2) {
   errorUtil2.errToObj = (message) => typeof message === "string" ? { message } : message || {};
   errorUtil2.toString = (message) => typeof message === "string" ? message : message?.message;
 })(errorUtil || (errorUtil = {}));
 
-// mcp-server/node_modules/zod/v3/types.js
+// node_modules/zod/v3/types.js
 var ParseInputLazyPath = class {
   constructor(parent, value, path2, key) {
     this._cachedPath = [];
@@ -71889,7 +71890,7 @@ var nullableType = ZodNullable.create;
 var preprocessType = ZodEffects.createWithPreprocess;
 var pipelineType = ZodPipeline.create;
 
-// mcp-server/node_modules/zod/v4/core/core.js
+// node_modules/zod/v4/core/core.js
 var NEVER = Object.freeze({
   status: "aborted"
 });
@@ -71963,7 +71964,7 @@ function config(newConfig) {
   return globalConfig;
 }
 
-// mcp-server/node_modules/zod/v4/core/util.js
+// node_modules/zod/v4/core/util.js
 var util_exports = {};
 __export(util_exports, {
   BIGINT_FORMAT_RANGES: () => BIGINT_FORMAT_RANGES,
@@ -72642,7 +72643,7 @@ var Class = class {
   }
 };
 
-// mcp-server/node_modules/zod/v4/core/errors.js
+// node_modules/zod/v4/core/errors.js
 var initializer = (inst, def) => {
   inst.name = "$ZodError";
   Object.defineProperty(inst, "_zod", {
@@ -72708,7 +72709,7 @@ function formatError(error2, mapper = (issue2) => issue2.message) {
   return fieldErrors;
 }
 
-// mcp-server/node_modules/zod/v4/core/parse.js
+// node_modules/zod/v4/core/parse.js
 var _parse = (_Err) => (schema, value, _ctx, _params) => {
   const ctx = _ctx ? Object.assign(_ctx, { async: false }) : { async: false };
   const result = schema._zod.run({ value, issues: [] }, ctx);
@@ -72788,7 +72789,7 @@ var _safeDecodeAsync = (_Err) => async (schema, value, _ctx) => {
   return _safeParseAsync(_Err)(schema, value, _ctx);
 };
 
-// mcp-server/node_modules/zod/v4/core/regexes.js
+// node_modules/zod/v4/core/regexes.js
 var regexes_exports = {};
 __export(regexes_exports, {
   base64: () => base64,
@@ -72945,7 +72946,7 @@ var sha512_hex = /^[0-9a-fA-F]{128}$/;
 var sha512_base64 = /* @__PURE__ */ fixedBase64(86, "==");
 var sha512_base64url = /* @__PURE__ */ fixedBase64url(86);
 
-// mcp-server/node_modules/zod/v4/core/checks.js
+// node_modules/zod/v4/core/checks.js
 var $ZodCheck = /* @__PURE__ */ $constructor("$ZodCheck", (inst, def) => {
   var _a2;
   inst._zod ?? (inst._zod = {});
@@ -73493,7 +73494,7 @@ var $ZodCheckOverwrite = /* @__PURE__ */ $constructor("$ZodCheckOverwrite", (ins
   };
 });
 
-// mcp-server/node_modules/zod/v4/core/doc.js
+// node_modules/zod/v4/core/doc.js
 var Doc = class {
   constructor(args = []) {
     this.content = [];
@@ -73529,14 +73530,14 @@ var Doc = class {
   }
 };
 
-// mcp-server/node_modules/zod/v4/core/versions.js
+// node_modules/zod/v4/core/versions.js
 var version = {
   major: 4,
   minor: 3,
   patch: 5
 };
 
-// mcp-server/node_modules/zod/v4/core/schemas.js
+// node_modules/zod/v4/core/schemas.js
 var $ZodType = /* @__PURE__ */ $constructor("$ZodType", (inst, def) => {
   var _a2;
   inst ?? (inst = {});
@@ -75507,7 +75508,7 @@ function handleRefineResult(result, payload, input, inst) {
   }
 }
 
-// mcp-server/node_modules/zod/v4/locales/en.js
+// node_modules/zod/v4/locales/en.js
 var error = () => {
   const Sizable = {
     string: { unit: "characters", verb: "to have" },
@@ -75616,7 +75617,7 @@ function en_default2() {
   };
 }
 
-// mcp-server/node_modules/zod/v4/core/registries.js
+// node_modules/zod/v4/core/registries.js
 var _a;
 var $ZodRegistry = class {
   constructor() {
@@ -75664,7 +75665,7 @@ function registry() {
 (_a = globalThis).__zod_globalRegistry ?? (_a.__zod_globalRegistry = registry());
 var globalRegistry = globalThis.__zod_globalRegistry;
 
-// mcp-server/node_modules/zod/v4/core/api.js
+// node_modules/zod/v4/core/api.js
 // @__NO_SIDE_EFFECTS__
 function _string(Class2, params) {
   return new Class2({
@@ -76468,7 +76469,7 @@ function _stringFormat(Class2, format, fnOrRegex, _params = {}) {
   return inst;
 }
 
-// mcp-server/node_modules/zod/v4/core/to-json-schema.js
+// node_modules/zod/v4/core/to-json-schema.js
 function initializeContext(params) {
   let target = params?.target ?? "draft-2020-12";
   if (target === "draft-4")
@@ -76820,7 +76821,7 @@ var createStandardJSONSchemaMethod = (schema, io, processors = {}) => (params) =
   return finalize(ctx, schema);
 };
 
-// mcp-server/node_modules/zod/v4/core/json-schema-processors.js
+// node_modules/zod/v4/core/json-schema-processors.js
 var formatMap = {
   guid: "uuid",
   url: "uri",
@@ -77296,7 +77297,7 @@ var lazyProcessor = (schema, ctx, _json, params) => {
   seen.ref = innerType;
 };
 
-// mcp-server/node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-compat.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-compat.js
 function isZ4Schema(s) {
   const schema = s;
   return !!schema._zod;
@@ -77359,7 +77360,7 @@ function getLiteralValue(schema) {
   return void 0;
 }
 
-// mcp-server/node_modules/zod/v4/classic/schemas.js
+// node_modules/zod/v4/classic/schemas.js
 var schemas_exports3 = {};
 __export(schemas_exports3, {
   ZodAny: () => ZodAny2,
@@ -77528,7 +77529,7 @@ __export(schemas_exports3, {
   xor: () => xor
 });
 
-// mcp-server/node_modules/zod/v4/classic/checks.js
+// node_modules/zod/v4/classic/checks.js
 var checks_exports2 = {};
 __export(checks_exports2, {
   endsWith: () => _endsWith,
@@ -77562,7 +77563,7 @@ __export(checks_exports2, {
   uppercase: () => _uppercase
 });
 
-// mcp-server/node_modules/zod/v4/classic/iso.js
+// node_modules/zod/v4/classic/iso.js
 var iso_exports2 = {};
 __export(iso_exports2, {
   ZodISODate: () => ZodISODate,
@@ -77603,7 +77604,7 @@ function duration2(params) {
   return _isoDuration(ZodISODuration, params);
 }
 
-// mcp-server/node_modules/zod/v4/classic/errors.js
+// node_modules/zod/v4/classic/errors.js
 var initializer2 = (inst, issues) => {
   $ZodError.init(inst, issues);
   inst.name = "ZodError";
@@ -77643,7 +77644,7 @@ var ZodRealError = $constructor("ZodError", initializer2, {
   Parent: Error
 });
 
-// mcp-server/node_modules/zod/v4/classic/parse.js
+// node_modules/zod/v4/classic/parse.js
 var parse2 = /* @__PURE__ */ _parse(ZodRealError);
 var parseAsync2 = /* @__PURE__ */ _parseAsync(ZodRealError);
 var safeParse3 = /* @__PURE__ */ _safeParse(ZodRealError);
@@ -77657,7 +77658,7 @@ var safeDecode2 = /* @__PURE__ */ _safeDecode(ZodRealError);
 var safeEncodeAsync2 = /* @__PURE__ */ _safeEncodeAsync(ZodRealError);
 var safeDecodeAsync2 = /* @__PURE__ */ _safeDecodeAsync(ZodRealError);
 
-// mcp-server/node_modules/zod/v4/classic/schemas.js
+// node_modules/zod/v4/classic/schemas.js
 var ZodType2 = /* @__PURE__ */ $constructor("ZodType", (inst, def) => {
   $ZodType.init(inst, def);
   Object.assign(inst["~standard"], {
@@ -78736,22 +78737,22 @@ function preprocess(fn, schema) {
   return pipe(transform(fn), schema);
 }
 
-// mcp-server/node_modules/zod/v4/classic/compat.js
+// node_modules/zod/v4/classic/compat.js
 var ZodFirstPartyTypeKind2;
 /* @__PURE__ */ (function(ZodFirstPartyTypeKind3) {
 })(ZodFirstPartyTypeKind2 || (ZodFirstPartyTypeKind2 = {}));
 
-// mcp-server/node_modules/zod/v4/classic/from-json-schema.js
+// node_modules/zod/v4/classic/from-json-schema.js
 var z = {
   ...schemas_exports3,
   ...checks_exports2,
   iso: iso_exports2
 };
 
-// mcp-server/node_modules/zod/v4/classic/external.js
+// node_modules/zod/v4/classic/external.js
 config(en_default2());
 
-// mcp-server/node_modules/@modelcontextprotocol/sdk/dist/esm/types.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/types.js
 var LATEST_PROTOCOL_VERSION = "2025-11-25";
 var SUPPORTED_PROTOCOL_VERSIONS = [LATEST_PROTOCOL_VERSION, "2025-06-18", "2025-03-26", "2024-11-05", "2024-10-07"];
 var RELATED_TASK_META_KEY = "io.modelcontextprotocol/related-task";
@@ -80257,15 +80258,15 @@ var UrlElicitationRequiredError = class extends McpError {
   }
 };
 
-// mcp-server/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/interfaces.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/interfaces.js
 function isTerminal(status) {
   return status === "completed" || status === "failed" || status === "cancelled";
 }
 
-// mcp-server/node_modules/zod-to-json-schema/dist/esm/parsers/string.js
+// node_modules/zod-to-json-schema/dist/esm/parsers/string.js
 var ALPHA_NUMERIC = new Set("ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvxyz0123456789");
 
-// mcp-server/node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-json-schema-compat.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/zod-json-schema-compat.js
 function getMethodLiteral(schema) {
   const shape = getObjectShape(schema);
   const methodSchema = shape?.method;
@@ -80286,7 +80287,7 @@ function parseWithCompat(schema, data) {
   return result.data;
 }
 
-// mcp-server/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/shared/protocol.js
 var DEFAULT_REQUEST_TIMEOUT_MSEC = 6e4;
 var Protocol = class {
   constructor(_options) {
@@ -81222,7 +81223,7 @@ function mergeCapabilities(base, additional) {
   return result;
 }
 
-// mcp-server/node_modules/@modelcontextprotocol/sdk/dist/esm/validation/ajv-provider.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/validation/ajv-provider.js
 var import_ajv = __toESM(require_ajv(), 1);
 var import_ajv_formats = __toESM(require_dist(), 1);
 function createDefaultAjvInstance() {
@@ -81290,7 +81291,7 @@ var AjvJsonSchemaValidator = class {
   }
 };
 
-// mcp-server/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/server.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/server.js
 var ExperimentalServerTasks = class {
   constructor(_server) {
     this._server = _server;
@@ -81362,7 +81363,7 @@ var ExperimentalServerTasks = class {
   }
 };
 
-// mcp-server/node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/helpers.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/experimental/tasks/helpers.js
 function assertToolsCallTaskCapability(requests, method, entityName) {
   if (!requests) {
     throw new Error(`${entityName} does not support task creation (required for ${method})`);
@@ -81397,7 +81398,7 @@ function assertClientRequestTaskCapability(requests, method, entityName) {
   }
 }
 
-// mcp-server/node_modules/@modelcontextprotocol/sdk/dist/esm/server/index.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/index.js
 var Server = class extends Protocol {
   /**
    * Initializes this server with the given name and version information.
@@ -81777,10 +81778,10 @@ var Server = class extends Protocol {
   }
 };
 
-// mcp-server/node_modules/@modelcontextprotocol/sdk/dist/esm/server/stdio.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/stdio.js
 import process3 from "node:process";
 
-// mcp-server/node_modules/@modelcontextprotocol/sdk/dist/esm/shared/stdio.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/shared/stdio.js
 var ReadBuffer = class {
   append(chunk) {
     this._buffer = this._buffer ? Buffer.concat([this._buffer, chunk]) : chunk;
@@ -81808,7 +81809,7 @@ function serializeMessage(message) {
   return JSON.stringify(message) + "\n";
 }
 
-// mcp-server/node_modules/@modelcontextprotocol/sdk/dist/esm/server/stdio.js
+// node_modules/@modelcontextprotocol/sdk/dist/esm/server/stdio.js
 var StdioServerTransport = class {
   constructor(_stdin = process3.stdin, _stdout = process3.stdout) {
     this._stdin = _stdin;
@@ -81869,7 +81870,7 @@ var StdioServerTransport = class {
   }
 };
 
-// mcp-server/server.js
+// server.js
 var import_node_telegram_bot_api = __toESM(require_node_telegram_bot_api(), 1);
 import fs from "fs";
 import path from "path";
@@ -81884,7 +81885,10 @@ function getSessionDir(cwd) {
   return path.join(os.homedir(), ".claude-telegram", `${basename}-${hash2}`);
 }
 function loadCredentials() {
-  const configPath = path.join(process.cwd(), ".claude", "telegram.json");
+  const pluginRoot = path.resolve(__dirname, "..", "..");
+  const pluginConfigPath = path.join(pluginRoot, ".claude", "telegram.json");
+  const cwdConfigPath = path.join(process.cwd(), ".claude", "telegram.json");
+  const configPath = fs.existsSync(pluginConfigPath) ? pluginConfigPath : cwdConfigPath;
   if (fs.existsSync(configPath)) {
     try {
       const config2 = JSON.parse(fs.readFileSync(configPath, "utf-8"));

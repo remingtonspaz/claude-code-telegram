@@ -26,9 +26,15 @@ function getSessionDir(cwd) {
 // Load credentials from project-specific config or environment variables
 // Priority: .claude/telegram.json > environment variables
 function loadCredentials() {
-  const configPath = path.join(process.cwd(), '.claude', 'telegram.json');
+  // Try multiple locations for .claude/telegram.json
+  // 1. Plugin root (relative to this script: ../. )
+  const pluginRoot = path.resolve(__dirname, '..', '..');
+  const pluginConfigPath = path.join(pluginRoot, '.claude', 'telegram.json');
+  // 2. Current working directory
+  const cwdConfigPath = path.join(process.cwd(), '.claude', 'telegram.json');
 
-  // Try project-specific config first
+  const configPath = fs.existsSync(pluginConfigPath) ? pluginConfigPath : cwdConfigPath;
+
   if (fs.existsSync(configPath)) {
     try {
       const config = JSON.parse(fs.readFileSync(configPath, 'utf-8'));

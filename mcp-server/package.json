@@ -6,7 +6,7 @@
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "build": "npx esbuild server.js --bundle --platform=node --outfile=dist/server.js --format=esm"
+    "build": "npx esbuild server.js --bundle --platform=node --outfile=dist/server.js --format=esm --banner:js=\"import { createRequire } from 'module'; const require = createRequire(import.meta.url);\""
   },
   "dependencies": {
     "@modelcontextprotocol/sdk": "^1.0.0",

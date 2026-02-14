@@ -10,7 +10,8 @@ param(
     [int]$TargetPid = 0,
     [string]$MatchTitle = "",
     [long]$WindowHandle = 0,
-    [string]$SessionDir = ""
+    [string]$SessionDir = "",
+    [int]$ClaudePid = 0
 )
 
 Add-Type @"
@@ -141,9 +142,26 @@ if ($hwnd -ne [IntPtr]::Zero) {
 }
 Log "  SessionDir=$sessionPath"
 Log "  TriggerFile=$triggerFile"
+Log "  ClaudePid=$ClaudePid"
 Log "  Method=PostMessage WM_CHAR (focus-independent)"
 
+$claudeCheckCounter = 0
+$CLAUDE_CHECK_INTERVAL = 25  # Check every 25 iterations (~5 seconds at 200ms poll)
+
 while ($true) {
+    # Periodically check if claude.exe is still alive — exit if session ended
+    if ($ClaudePid -gt 0) {
+        $claudeCheckCounter++
+        if ($claudeCheckCounter -ge $CLAUDE_CHECK_INTERVAL) {
+            $claudeCheckCounter = 0
+            $claudeProc = Get-Process -Id $ClaudePid -ErrorAction SilentlyContinue
+            if (-not $claudeProc) {
+                Log "Claude.exe (PID $ClaudePid) is no longer running. Exiting watcher."
+                exit 0
+            }
+        }
+    }
+
     # Periodically validate window handle
     if ($hwnd -ne [IntPtr]::Zero -and -not [Win32]::IsWindow($hwnd)) {
         Log "Target window closed. Will re-resolve on next trigger."

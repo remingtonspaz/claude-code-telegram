@@ -58,7 +58,7 @@ function isWatcherRunning() {
 // Walk up process tree using WMIC to find the persistent cmd.exe ancestor
 // The process tree is: explorer → cmd.exe (persistent) → claude.exe → cmd.exe (transient) → node (hook)
 // We want the persistent cmd.exe (parent of claude.exe), NOT the transient one (child of claude.exe)
-// Returns { pid, hwnd } or null
+// Returns { pid, hwnd, claudePid } or null
 function findCmdAncestor() {
   if (os.platform() !== 'win32') return null;
 
@@ -113,15 +113,16 @@ function findCmdAncestor() {
     for (let i = 0; i < chain.length; i++) {
       if (chain[i].name === 'cmd.exe' && i > 0 && chain[i - 1].name === 'claude.exe') {
         const pid = chain[i].pid;
+        const claudePid = chain[i - 1].pid;
         try {
           const hwndResult = execSync(
             `powershell -NoProfile -Command "(Get-Process -Id ${pid}).MainWindowHandle.ToInt64()"`,
             { encoding: 'utf-8', windowsHide: true, timeout: 5000 }
           );
           const hwnd = parseInt(hwndResult.trim(), 10);
-          return { pid, hwnd: hwnd > 0 ? hwnd : null };
+          return { pid, hwnd: hwnd > 0 ? hwnd : null, claudePid };
         } catch {
-          return { pid, hwnd: null };
+          return { pid, hwnd: null, claudePid };
         }
       }
     }
@@ -205,6 +206,9 @@ function ensureWatcherRunning() {
     watcherArgs.push('-WindowHandle', cmdInfo.hwnd.toString());
   } else if (cmdInfo?.pid) {
     watcherArgs.push('-TargetPid', cmdInfo.pid.toString());
+  }
+  if (cmdInfo?.claudePid) {
+    watcherArgs.push('-ClaudePid', cmdInfo.claudePid.toString());
   }
 
   // Use Start-Process to spawn a truly detached background process
